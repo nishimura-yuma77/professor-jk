@@ -1,0 +1,42 @@
+:root {
+  // color
+  --color-background: #11100E;
+  --color-surface: #191816;
+  --color-text: #EAD3BB;
+  --color-border: #3A3833;
+  --color-accent: #E8923A;
+  --color-accent-dark: #8A684F;
+  --color-accent-online: #00B200;
+
+  // z-index
+  --z-content: 10;
+  --z-header: 100;
+  --z-effect: 9999;
+
+  // font-family
+  --font-family-base: var(--font-family-base), sans-serif;
+  --font-family-mono: var(--font-ibm-plex-mono);
+  // font-size
+  --font-size-absolute-base: 16px;
+  --font-size-base: 0.875rem; // 14px
+  --font-size-small: 0.75rem; // 12px
+  --font-size-title: 1.125rem // 18px
+  // font-weight
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+}
+
+html {
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-absolute-base);
+  font-weight: var(--font-weight-regular);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-size-base);
+}
