@@ -39,7 +39,7 @@ export default function DataSection() {
         <tbody>
           {PROFILE_DATA.map((profile) => {
             return (
-              <tr>
+              <tr key={profile.header}>
                 <th scope="row"><TypewriterText text={profile.header} isVisible={isVisible}/></th>
                 <td><TypewriterText text={profile.content} isVisible={isVisible}/></td>
               </tr>
