@@ -2,14 +2,17 @@
   // color
   --color-background: #11100E;
   --color-surface: #191816;
+  --color-dialog-backdrop: #3A383399;
   --color-text: #EAD3BB;
   --color-border: #3A3833;
   --color-accent: #E8923A;
   --color-accent-dark: #8A684F;
   --color-accent-online: #00B200;
+  --color-accent-offline: #ff4444;
 
   // z-index
   --z-content: 10;
+  --z-menu: 50;
   --z-header: 100;
   --z-effect: 9999;
 
@@ -20,23 +23,48 @@
   --font-size-absolute-base: 16px;
   --font-size-base: 0.875rem; // 14px
   --font-size-small: 0.75rem; // 12px
-  --font-size-title: 1.125rem // 18px
+  --font-size-medium: 1.125rem; // 18px
+  --font-size-title: 1.5rem; // 24px
+  --font-size-large: 2.5rem; // 32px
   // font-weight
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
+
+  // screen setting
+  --min-width: 360px;
+  --breakpoint-sp: --min-width;
+  --breakpoint-tablet: 768px;
+  --breakpoint-pc: 1024px;
+
+  // spacing
+  --padding-small: 0.5rem; // 8px
+  --padding-medium: 0.75rem; // 12px
+  --padding-large: 1.5rem; // 24px
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--color-text);
+  font-size: var(--font-size-absolute-base);
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-regular);
 }
 
 html {
   background: var(--color-background);
-  color: var(--color-text);
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-absolute-base);
-  font-weight: var(--font-weight-regular);
+  width: 100%;
+  height: 100%;
 }
 
 body {
-  margin: 0;
-  padding: 0;
   font-size: var(--font-size-base);
+  width: 100%;
+  height: 100%;
+  min-width: var(--min-width);
+  z-index: var(--z-content);
 }

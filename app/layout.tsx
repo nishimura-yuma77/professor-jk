@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { Zen_Kaku_Gothic_New, IBM_Plex_Mono } from "next/font/google"
-import "./globals.scss"
+import "@/app/globals.scss"
 
 const zenKakuGothicNew = Zen_Kaku_Gothic_New({
   weight: ["400", "500", "700"],
