@@ -1,17 +1,5 @@
-.container {
-  display: flex;
-  justify-content: center;
-  .bar {
-    margin-right: 0.75rem;
-    display: inline-block;
-    width: 4px;
-    height: var(--font-size-large);
-    background-color: var(--color-accent);
-    transform: translateY(-4px)
-  }
-  .text {
-    color: var(--color-accent);
-    font-family: var(--font-family-mono);
-    font-size: var(--font-size-title);
-  }
+.text {
+  color: var(--color-accent);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-title);
 }

@@ -3,8 +3,6 @@ import Link from "next/link"
 
 export default function Logo(){
   return (
-    <div className={style.container}>
-      <span className={style.bar} /><span className={style.text}>PROF.J.K.</span>
-    </div>
+    <span className={style.text}>PROF.J.K.</span>
   )
 }
