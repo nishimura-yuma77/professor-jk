@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from "react";
 type UseIntersectionObserverProps = {
   threshold?: number
 }
-export default function useIntersectionObserver<T>({
+export default function useIntersectionObserver<T extends HTMLElement>({
   threshold = 0.3
 }: UseIntersectionObserverProps) {
-  const ref = useRef<HTMLElement | null>(null)
+  const ref = useRef<T>(null)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {

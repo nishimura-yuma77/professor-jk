@@ -3,14 +3,20 @@ import { ReactNode, Ref } from "react"
 
 type SectionContainerProps = {
   children: ReactNode
-  ref?: Ref<HTMLElement>
+  ref?: Ref<HTMLDivElement>
+  className?: string
 }
 
 export default function SectionContainer({
   children,
   ref = null,
+  className = undefined
 }: SectionContainerProps) {
   return (
-    <section ref={ref} className={style.container}>{children}</section>
+    <div ref={ref} className={`${style.container} ${className ? className : ""}`}>
+      <section className={style.section}>
+        {children}
+      </section>
+    </div>
   )
 }

@@ -35,7 +35,7 @@ export default function DataSection() {
   const {
     ref,
     isVisible
-  } = useIntersectionObserver({})
+  } = useIntersectionObserver<HTMLDivElement>({})
   return (
     <SectionContainer ref={ref}>
       <SectionTitle title={"003_DATA"} isVisible={isVisible} />

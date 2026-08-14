@@ -1,5 +1,18 @@
+@use "@/styles/variables/_breakpoint.scss" as breakpoint;
+
 .container {
   width: 100%;
   background-color: var(--color-surface);
   padding: var(--padding-medium);
+  .section {
+
+  }
+}
+
+
+@media screen and (min-width: breakpoint.$breakpoint-tablet) {
+  .section {
+    max-width: breakpoint.$breakpoint-tablet;
+    margin-inline: auto;
+  }
 }
