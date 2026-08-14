@@ -1,0 +1,16 @@
+.container {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: var(--z-header);
+  background-color: color-mix(
+    in srgb,
+    var(--color-surface) 80%,
+    transparent
+  );
+  .inner {
+    padding: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+  }
+}
