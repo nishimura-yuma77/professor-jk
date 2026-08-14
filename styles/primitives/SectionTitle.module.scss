@@ -1,0 +1,19 @@
+.container {
+  .prompt_symbol {
+    padding-right: 0.5rem;
+    color: var(--color-accent-online);
+    animation: pulse 2s linear infinite;
+  }
+  .title {
+    font-family: var(--font-family-mono);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-title);
+    color: var(--color-accent);
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.8;
+  }
+}
