@@ -1,14 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 
 type UseIntersectionObserverProps = {
-  threshold: number
+  threshold?: number
 }
-export default function useIntersectionObserver<T>(props: UseIntersectionObserverProps) {
+export default function useIntersectionObserver<T>({
+  threshold = 0.3
+}: UseIntersectionObserverProps) {
   const ref = useRef<HTMLElement | null>(null)
   const [isVisible, setIsVisible] = useState(false)
-  const {
-    threshold
-  } = props
 
   useEffect(() => {
     const element = ref.current

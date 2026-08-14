@@ -9,7 +9,7 @@ export default function MediaSection() {
   const {
     ref,
     isVisible
-  } = useIntersectionObserver({threshold: 0})
+  } = useIntersectionObserver({})
   return (
     <SectionContainer ref={ref}>
       <SectionTitle title={"002_MEDIA"} isVisible={isVisible} />

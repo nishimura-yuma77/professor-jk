@@ -31,7 +31,7 @@ export default function DataSection() {
   const {
     ref,
     isVisible
-  } = useIntersectionObserver({threshold: 0})
+  } = useIntersectionObserver({})
   return (
     <SectionContainer ref={ref}>
       <SectionTitle title={"003_DATA"} isVisible={isVisible} />

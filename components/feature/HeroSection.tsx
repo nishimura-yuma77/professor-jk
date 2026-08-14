@@ -13,7 +13,7 @@ export default function HeroSection() {
   const {
     ref,
     isVisible
-  } = useIntersectionObserver({threshold: 0})
+  } = useIntersectionObserver({})
   return (
     <SectionContainer ref={ref}>
       <div className={style.title_area}>

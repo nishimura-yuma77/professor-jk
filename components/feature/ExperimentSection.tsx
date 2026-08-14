@@ -8,7 +8,7 @@ export default function ExperimentSection() {
   const {
     ref,
     isVisible
-  } = useIntersectionObserver({threshold: 0});
+  } = useIntersectionObserver({});
   return (
     <SectionContainer ref={ref}>
       <SectionTitle title={"001_EXPERIMENTS"} isVisible={isVisible} />
