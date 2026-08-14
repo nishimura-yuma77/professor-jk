@@ -17,7 +17,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Welcome",
+    default: "Welcome | J.K. Lab",
     template: "%s | J.K. Lab"
   },
   description: "J.K.教授の開発ラボ"
