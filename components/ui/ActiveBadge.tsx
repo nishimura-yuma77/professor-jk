@@ -20,7 +20,7 @@ export default function ActiveBadge({
   return (
     <div className={style.container}>
       <span className={isOnline ? style.green_dot : style.red_dot} />
-      <span className={style.text}>{isOnline ? "online" : "offline"}</span>
+      <span className={`${style.text} ${isOnline ? style.online : ""}`}>{isOnline ? "online" : "offline"}</span>
     </div>
   )
 }
