@@ -13,33 +13,10 @@
     font-size: var(--font-size-title);
     color: var(--color-accent);
   }
-  .prompt_cursor {
-    display: inline-block;
-    width: 0.5rem;
-    height: 1.25rem;
-    margin-left: var(--font-size-base);
-
-    background-color: currentColor;
-    vertical-align: -0.15em;
-
-    animation: blink 1s step-end infinite;
-  }
 }
 
 @keyframes pulse {
   50% {
     opacity: 0.8;
-  }
-}
-
-@keyframes blink {
-  0%,
-  50% {
-    opacity: 1;
-  }
-
-  51%,
-  100% {
-    opacity: 0;
   }
 }

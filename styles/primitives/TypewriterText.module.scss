@@ -6,6 +6,17 @@
   .char_active {
     animation: appear 0.01s forwards;
   }
+  .cursor {
+    display: inline-block;
+    width: 0.5rem;
+    height: 1.25rem;
+    margin-left: 0.15rem;
+
+    background-color: currentColor;
+    vertical-align: -0.15em;
+
+    animation: blink 1s step-end infinite;
+  }
 }
 
 @keyframes appear {
@@ -14,5 +25,17 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
   }
 }

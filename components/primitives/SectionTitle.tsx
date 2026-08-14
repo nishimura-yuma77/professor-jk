@@ -10,11 +10,6 @@ export default function SectionTitle({
   title,
   isVisible
 }: SectionTitleProps) {
-  const [isAnimationEnd, setIsAnimationEnd] = useState<Boolean>(false);
-  useEffect(() => {
-    if (isVisible) return
-    setIsAnimationEnd(false)
-  }, [isVisible])
   return (
     <h2 className={style.container}>
       <span className={style.prompt_symbol}>{">"}</span>
@@ -22,9 +17,8 @@ export default function SectionTitle({
         text={title}
         isVisible={isVisible}
         className={style.title}
-        onAnimationEnd={() => setIsAnimationEnd(true)}
+        displayCursor={true}
       />
-      <span className={style.prompt_cursor} />
     </h2>
   )
 }
