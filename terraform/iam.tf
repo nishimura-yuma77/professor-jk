@@ -79,6 +79,20 @@ data "aws_iam_policy_document" "codebuild_permissions" {
       "*"
     ]
   }
+  
+  // Github CodeConnectionへのアクセス権限
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "codeconnections:GetConnection",
+      "codeconnections:GetConnectionToken"
+    ]
+
+    resources = [
+      aws_codeconnections_connection.github.arn
+    ]
+  }
 }
 
 // ロールを作成し、codebuildに割り当て
