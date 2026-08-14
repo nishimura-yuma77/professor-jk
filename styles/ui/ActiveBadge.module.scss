@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  .green_dot {
+    width: var(--font-size-small);
+    height: var(--font-size-small);
+    border-radius: 50%;
+    background: var(--color-accent-online);
+    flex-shrink: 0;
+  }
+  .red_dot {
+    width: var(--font-size-small);
+    height: var(--font-size-small);
+    border-radius: 50%;
+    background: var(--color-accent-offline);
+    flex-shrink: 0;
+  }
+  .text {
+    color: white;
+    font-family: var(--font-family-mono);
+  }
+}
