@@ -4,6 +4,7 @@ import style from "@/app/page.module.scss"
 import ExperimentSection from "@/components/feature/ExperimentSection";
 import MediaSection from "@/components/feature/MediaSection";
 import DataSection from "@/components/feature/DataSection";
+import Footer from "@/components/feature/Footer";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <MediaSection />
         <DataSection />
       </main>
+      <Footer />
     </>
   );
 }

@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  gap: 1.5rem;
+  .icon {
+    width: var(--font-size-title);
+    height: var(--font-size-title);
+  }
+}
