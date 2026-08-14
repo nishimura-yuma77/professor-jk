@@ -1,0 +1,22 @@
+.profile_table {
+  width: 100%;
+  margin-top: var(--padding-large);
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: var(--padding-small) var(--padding-large);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  th {
+    width: 6rem;
+    text-align: left;
+    font-weight: var(--font-weight-regular);
+  }
+
+  td {
+    text-align: left;
+    color: var(--color-text);
+  }
+}
