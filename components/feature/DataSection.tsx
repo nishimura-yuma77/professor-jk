@@ -11,6 +11,10 @@ const PROFILE_DATA = [
     content: "7月7日"
   },
   {
+    header: "CODE",
+    content: "PROFESSOR. J.K."
+  },
+  {
     header: "HEIGHT",
     content: "167cm"
   },
