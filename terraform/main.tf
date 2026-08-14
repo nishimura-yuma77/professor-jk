@@ -55,8 +55,14 @@ resource "aws_cloudfront_distribution" "site" {
     }
   }
 
+  aliases = [
+    "professor-jk.net"
+  ]
+
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn = aws_acm_certificate_validation.site.certificate_arn
+    ssl_support_method = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
 
   // !! 存在しないURLへのアクセス時、S3が403を返す場合がある。これを拾い、index.htmlへリダイレクトする !!
