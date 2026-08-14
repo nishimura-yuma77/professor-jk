@@ -6,7 +6,7 @@ import style from "@/styles/feature/HeroSection.module.scss"
 import ActiveBadge from "@/components/ui/ActiveBadge";
 import TachieImage from "@/components/ui/TachieImage";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
-import TypewriterText from "../primitives/TypewriterText";
+import TypewriterText from "@/components/primitives/TypewriterText";
 
 const PROFILE_TEXT = "イカれたエンジニア。\nシャーロック・ホームズのモリアーティ教授に憧れ、教授（Professor）を自称している。\n目の下のクマは恋人に振られた時に泣きすぎて取れなくなった。睡眠時間は8時間。"
 export default function HeroSection() {
