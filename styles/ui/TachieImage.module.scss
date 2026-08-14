@@ -1,0 +1,96 @@
+.container {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 832 / 1216;
+  overflow: hidden;
+
+  .surprised {
+    position: relative;
+    width: 100%;
+
+    .image {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+
+      width: 100%;
+      height: 1px;
+
+      background-color: var(--color-accent-online);
+      z-index: 2;
+
+      opacity: 0;
+    }
+  }
+
+  .visible {
+    .image {
+      animation: appear var(--appear-duration) linear forwards;
+    }
+
+    &::after {
+      opacity: 1;
+      animation: scan var(--appear-duration) linear forwards;
+    }
+  }
+
+  .thumbs_up {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    width: 100%;
+    height: auto;
+  }
+  .fade_in {
+    animation: fade-in 0.5s linear forwards;
+  }
+  .fade_out {
+    animation: fade-out 0.5s linear forwards;
+  }
+}
+
+@keyframes appear {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  to {
+    clip-path: inset(0);
+  }
+}
+
+@keyframes scan {
+  from {
+    top: 0;
+  }
+
+  to {
+    top: 100%;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
