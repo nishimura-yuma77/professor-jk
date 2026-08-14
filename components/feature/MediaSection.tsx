@@ -13,7 +13,7 @@ export default function MediaSection() {
   return (
     <SectionContainer ref={ref}>
       <SectionTitle title={"002_MEDIA"} isVisible={isVisible} />
-      <ComingSoon />
+      <ComingSoon isVisible={isVisible} />
     </SectionContainer>
   )
 }

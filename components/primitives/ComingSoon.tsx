@@ -1,7 +1,15 @@
 import style from "@/styles/primitives/ComingSoon.module.scss"
+import TypewriterText from "./TypewriterText"
 
-export default function ComingSoon() {
+type ComingSoonProps = {
+  isVisible: boolean
+}
+export default function ComingSoon({
+  isVisible
+}: ComingSoonProps) {
   return (
-    <p className={`${style.container} ${style.coming_soon}`}>coming soon...</p>
+    <div className={style.container}>
+      <TypewriterText text={"Coming Soon..."} isVisible={isVisible} className={style.coming_soon} />
+    </div>
   )
 }

@@ -12,7 +12,7 @@ export default function ExperimentSection() {
   return (
     <SectionContainer ref={ref}>
       <SectionTitle title={"001_EXPERIMENTS"} isVisible={isVisible} />
-      <ComingSoon />
+      <ComingSoon isVisible={isVisible} />
     </SectionContainer>
   )
 }
