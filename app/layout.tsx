@@ -18,11 +18,15 @@ const ibmPlexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://professor-jk.net"),
   title: {
-    default: "Welcome | J.K. Lab",
+    default: "J.K.教授の開発ラボ | J.K. Lab",
     template: "%s | J.K. Lab"
   },
-  description: "J.K.教授の開発ラボ"
+  description: "エンジニアとして活動するJ.K.教授のキャラクター紹介と、開発実験・プロジェクトを掲載するポートフォリオサイトです。",
+  alternates: {
+    canonical: "/"
+  }
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
