@@ -36,3 +36,15 @@ resource "aws_route53_record" "site" {
     evaluate_target_health = false
   }
 }
+
+// Google Search Consoleのドメイン所有権確認用TXTレコード
+resource "aws_route53_record" "google_site_verification" {
+  zone_id = data.aws_route53_zone.site.zone_id
+  name    = "professor-jk.net"
+  type    = "TXT"
+  ttl     = 300
+
+  records = [
+    "google-site-verification=4NQ3mGddTd9lGjmkZ1sxSdG7njJrM9lBqbsQqBBGDqU"
+  ]
+}
