@@ -13,15 +13,20 @@ type ExperimentStatusBadgeProps = {
   status: ExperimentStatus
   isVisible?: boolean
   className?: string
+  animationDelay?: string
 }
 export default function ExperimentStatusBadge({
   status,
   isVisible = true,
-  className = undefined
+  className = undefined,
+  animationDelay = undefined
 }: ExperimentStatusBadgeProps) {
   return (
-    <p className={style.container}>
-      <GlowDot color={dotColor[status]} className={style.dot} /><span className={`${style.text} ${className ? className : ""}`}>{status}</span>
+    <p 
+      className={`${style.container} ${className ? className : ""}`}
+      style={{animationDelay: animationDelay}}
+    >
+      <GlowDot color={dotColor[status]} className={style.dot} /><span className={`${style.text}`}>{status}</span>
     </p>
   )
 }

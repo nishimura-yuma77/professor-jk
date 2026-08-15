@@ -1,63 +1,166 @@
 .card {
   height: auto;
   padding: 2rem;
+
   border: 1px solid var(--color-accent);
   border-radius: 0.75rem;
-  transition: transform 0.5s ease;
+
+  opacity: 0;
+  transform: translateY(30%);
+
+  transition:
+    transform 0.5s ease-in,
+    opacity 0.5s ease-in;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   &:hover {
     transform: translateY(-0.5rem);
     cursor: pointer;
   }
+
   .code_and_status {
     display: flex;
     justify-content: space-between;
+
     .code {
       font-size: var(--font-size-small);
     }
+
     .status {
       color: var(--color-accent-white);
       font-size: var(--font-size-small);
+
+      animation: dying-flicker 2.2s infinite;
     }
   }
+
   .title_area {
     margin: var(--padding-medium) var(--padding-small);
+
     .title_and_media {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
       .title {
         color: var(--color-accent-white);
         font-size: var(--font-size-title);
         font-weight: var(--font-weight-bold);
       }
+
       .media_icon {
         font-size: 1.5rem;
         color: var(--color-accent-white);
-        transition: scale 1s ease;
+
+        transition: transform 0.3s ease;
+
         &:hover {
           transform: scale(1.1);
         }
       }
     }
+
     .subtitle {
       font-size: var(--font-size-exsmall);
       padding-left: 0.25rem;
     }
   }
+
   .description {
     padding-bottom: var(--padding-medium);
     font-size: var(--font-size-small);
   }
+
   .stack_area {
+    opacity: 0;
+
+    transition: opacity 0.5s ease;
+
+    &.visible {
+      opacity: 1;
+    }
+
     .stack_title {
       color: var(--color-accent-white);
       font-weight: var(--font-weight-medium);
     }
+
     .stack_list {
       display: flex;
       flex-wrap: wrap;
       gap: 0.125rem;
+
       padding: 0.25rem;
     }
+  }
+}
+
+@keyframes dying-flicker {
+  0% {
+    opacity: 1;
+  }
+
+  4% {
+    opacity: 0.4;
+  }
+
+  6% {
+    opacity: 1;
+  }
+
+  7% {
+    opacity: 0.2;
+  }
+
+  9% {
+    opacity: 0.9;
+  }
+
+  11% {
+    opacity: 0.35;
+  }
+
+  13% {
+    opacity: 1;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  21% {
+    opacity: 0.55;
+  }
+
+  23% {
+    opacity: 1;
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  36% {
+    opacity: 0.15;
+  }
+
+  38% {
+    opacity: 0.8;
+  }
+
+  40% {
+    opacity: 0.3;
+  }
+
+  42% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
   }
 }

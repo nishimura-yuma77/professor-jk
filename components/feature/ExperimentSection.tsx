@@ -17,7 +17,7 @@ export default function ExperimentSection() {
       <div className={style.experiment_area}>
         {EXPERIMENTS.map((ex, index) => {
           return (
-            <ExperimentCard key={index} experiment={ex} />
+            <ExperimentCard key={index} experiment={ex} isVisible={isVisible} />
           )
         })}
       </div>
