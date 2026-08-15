@@ -3,6 +3,7 @@
 import { useCallback, useState, type ReactNode } from "react"
 import { ErrorContext, ErrorType } from "@/contexts/ErrorContext"
 import ErrorToast from "@/components/ui/ErrorToast"
+import { ERROR_DISPLAY_TIME } from "@/const/error"
 
 type ErrorToast = {
   id: number
@@ -28,7 +29,7 @@ export default function ErrorProvider({
       setErrors((prev) =>
         prev.filter((error) => error.id !== id)
       )
-    }, 3000)
+    }, ERROR_DISPLAY_TIME)
   }, [])
 
   return (
