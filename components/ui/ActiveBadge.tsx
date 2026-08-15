@@ -1,5 +1,6 @@
 import style from "@/styles/ui/ActiveBadge.module.scss"
 import { useEffect, useState } from "react";
+import GlowDot from "@/components/primitives/GlowDot";
 
 type ActiveBadgeProps = {
   isVisible: boolean
@@ -16,11 +17,14 @@ export default function ActiveBadge({
     const timer = setTimeout(() => {
       setIsOnline(true)
     }, activeTransitionDelay)
+    return () => {
+      clearTimeout(timer)
+    }
   }, [isVisible])
   return (
     <div className={style.container}>
-      <span className={isOnline ? style.green_dot : style.red_dot} />
-      <span className={`${style.text} ${isOnline ? style.online : ""}`}>{isOnline ? "online" : "offline"}</span>
+      <GlowDot color={`${isOnline ? "var(--color-accent-online)" : "var(--color-accent-offline)"}`} className={style.dot}/>
+      <span className={`${style.text} ${isOnline ? style.online : ""}`}>{isOnline ? "ONLINE" : "OFFLINE"}</span>
     </div>
   )
 }
