@@ -1,4 +1,7 @@
 .main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-large);
   width: 100%;
   height: auto;
   margin-bottom: 3rem;
