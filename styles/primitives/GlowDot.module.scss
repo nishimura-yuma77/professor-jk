@@ -1,0 +1,11 @@
+.dot {
+  display: inline-block;
+
+  border-radius: 50%;
+  background-color: currentColor;
+
+  box-shadow:
+    0 0 4px currentColor,
+    0 0 8px currentColor,
+    0 0 14px currentColor;
+}

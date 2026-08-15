@@ -2,7 +2,9 @@
 import SectionContainer from "@/components/primitives/SectionContainer";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import SectionTitle from "@/components/primitives/SectionTitle";
-import ComingSoon from "@/components/primitives/ComingSoon";
+import { EXPERIMENTS } from "@/const/experiments";
+import ExperimentCard from "@/components/ui/ExperimentCard";
+import style from "@/styles/feature/ExperimentSection.module.scss"
 
 export default function ExperimentSection() {
   const {
@@ -12,7 +14,13 @@ export default function ExperimentSection() {
   return (
     <SectionContainer ref={ref}>
       <SectionTitle title={"001_EXPERIMENTS"} isVisible={isVisible} />
-      <ComingSoon isVisible={isVisible} />
+      <div className={style.experiment_area}>
+        {EXPERIMENTS.map((ex, index) => {
+          return (
+            <ExperimentCard key={index} experiment={ex} isVisible={isVisible} />
+          )
+        })}
+      </div>
     </SectionContainer>
   )
 }
