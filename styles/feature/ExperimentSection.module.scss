@@ -1,7 +1,7 @@
 @use "@/styles/variables/_breakpoint.scss" as breakpoint;
 
 .experiment_area {
-  padding: var(--padding-small);
+  padding: var(--padding-large) var(--padding-small);
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--padding-large);
