@@ -1,0 +1,13 @@
+.container {
+  position: fixed;
+  top: 2rem;
+  left: 0;
+  width: 100%;
+  z-index: var(--z-header);
+  display: flex;
+  justify-content: center;
+  .toast {
+    padding: var(--padding-large);
+    background-color: var(--color-surface);
+  }
+}

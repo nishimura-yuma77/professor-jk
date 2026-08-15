@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import { Zen_Kaku_Gothic_New, IBM_Plex_Mono } from "next/font/google"
 import "@/app/globals.scss"
+import "@/components/providers/ErrorProvider"
+import ErrorProvider from "@/components/providers/ErrorProvider"
 
 const zenKakuGothicNew = Zen_Kaku_Gothic_New({
   weight: ["400", "500", "700"],
@@ -29,7 +31,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="ja"
       className={`${zenKakuGothicNew.variable} ${ibmPlexMono.variable}`}
     >
-      <body className="">{children}</body>
+      <body className="">
+        <ErrorProvider>
+          {children}
+        </ErrorProvider>
+      </body>
     </html>
   );
 }

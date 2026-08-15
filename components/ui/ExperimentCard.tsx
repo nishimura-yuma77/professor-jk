@@ -3,6 +3,8 @@ import style from "@/styles/ui/ExperimentCard.module.scss"
 import ExperimentStatusBadge from "../primitives/ExperimentStatusBadge";
 import StackChip from "../primitives/StackChip";
 import MediaLinkIcon from "./MediaLInkIcon";
+import useError from "@/hooks/useError";
+import { EXPERIMENT_DETAIL_NOT_IMPLEMENTED_ERROR } from "@/const/error";
 
 type ExperimentCardProps = {
   experiment: Experiment
@@ -19,8 +21,15 @@ export default function ExperimentCard({
     stacks,
     media
   } = experiment
+  const { showError } = useError();
+  // TODO: 今後クリックしたらプロジェクト詳細ページに遷移するようにするが、今はエラーとしてメッセージを表示するのみ
+  const handleClick = () => {
+    showError({ message: EXPERIMENT_DETAIL_NOT_IMPLEMENTED_ERROR})
+  }
   return (
-    <div className={style.card}>
+    <div className={style.card}
+      onClick={handleClick}
+    >
       <div className={style.code_and_status}>
         <p className={style.code}>{code}</p>
         <ExperimentStatusBadge status={status} className={style.status} />

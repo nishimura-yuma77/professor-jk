@@ -1,0 +1,1 @@
+export const EXPERIMENT_DETAIL_NOT_IMPLEMENTED_ERROR = "悪いな。まだプロジェクト詳細ページは未実装なんだ。詳細気になるならXにDMくれていいよ。"
