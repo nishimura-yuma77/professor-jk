@@ -1,3 +1,15 @@
-.container {
-  padding: var(--padding-large);
+@use "@/styles/variables/_breakpoint.scss" as breakpoint;
+
+.experiment_area {
+  padding: var(--padding-large) var(--padding-small);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--padding-large);
+  justify-content: center;
+}
+
+@media screen and (min-width: breakpoint.$breakpoint_tablet) {
+  .experiment_area {
+    grid-template-columns: repeat(2, minmax(0, 350px));
+  }
 }
