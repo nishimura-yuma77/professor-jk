@@ -98,6 +98,7 @@ export default function HeroSection() {
       className={style.hero_container}
       sectionClassName={style.hero_section}
     >
+      <h1 className={style.page_title}>J.K.教授の開発ラボ</h1>
       <div className={style.title_area}>
         <SectionTitle
           title={HERO_TITLE}
@@ -171,7 +172,7 @@ export default function HeroSection() {
         </div>
         <div className={style.description_area}>
           <div className={style.name_area}>
-            <h1 className={style.chara_name}>J.K.</h1>
+            <p className={style.chara_name}>J.K.</p>
             <p className={style.chara_title}>Prof. J.K.</p>
           </div>
           <p className={style.profile_text}>
