@@ -14,19 +14,18 @@ const TRANSFER_TEXT = "START TRANSFER PROTOCOL..."
 const PROFILE_TEXT = "イカれたエンジニア。\nシャーロック・ホームズのモリアーティ教授に憧れ、教授（Professor）を自称している。\n目の下のクマは恋人に振られた時に泣きすぎて取れなくなった。睡眠時間は8時間。"
 
 const HERO_PHASE_DURATION = {
-  title: 700,
   observer: 600,
-  protocol: 1500,
+  protocol: 800,
   transferring: 800,
   posing: 200
 } as const
 
 const HERO_PHASE_INTERVAL = {
-  titleToObserver: 500,
+  titleToObserver: 200,
   observerToProtocol: 400,
-  protocolToTransferring: 700,
-  transferringToPosing: 1000,
-  posingToCompleted: 500
+  protocolToTransferring: 500,
+  transferringToPosing: 800,
+  posingToCompleted: 200
 } as const
 
 // アニメーションのフェーズ制御。この6フェーズにあわせてアニメーションを発生させる。
@@ -103,7 +102,6 @@ export default function HeroSection() {
         <SectionTitle
           title={HERO_TITLE}
           isVisible={isVisible}
-          animationDelay={getCharacterDelay(HERO_TITLE, HERO_PHASE_DURATION.title)}
           onAnimationEnd={() => {
             schedulePhaseTransition(
               "title",

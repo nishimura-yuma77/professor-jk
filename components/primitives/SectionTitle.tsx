@@ -1,5 +1,6 @@
 import style from "@/styles/primitives/SectionTitle.module.scss"
 import TypewriterText from "@/components/primitives/TypewriterText"
+import { SECTION_TITLE_CHARACTER_DELAY_MS } from "@/const/animation"
 
 type SectionTitleProps = {
   title: string,
@@ -10,7 +11,7 @@ type SectionTitleProps = {
 export default function SectionTitle({
   title,
   isVisible,
-  animationDelay,
+  animationDelay = SECTION_TITLE_CHARACTER_DELAY_MS,
   onAnimationEnd
 }: SectionTitleProps) {
   return (
