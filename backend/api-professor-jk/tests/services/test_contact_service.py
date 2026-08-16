@@ -32,11 +32,11 @@ def test_send_contact_お問い合わせ内容から通知メールを作成す�
 
 def test_send_contact_リポジトリの失敗をサービス例外へ変換する(monkeypatch):
     def raise_error(**_request):
-        raise ses_repository.ContactRepositoryError
+        raise ses_repository.ContactRepositoryError("SES delivery failed")
 
     monkeypatch.setattr(contact_service.ses_repository, "send_email", raise_error)
 
-    with pytest.raises(contact_service.ContactDeliveryError):
+    with pytest.raises(contact_service.ContactDeliveryError, match="SES delivery failed"):
         contact_service.send_contact(
             {
                 "name": "J.K.",
