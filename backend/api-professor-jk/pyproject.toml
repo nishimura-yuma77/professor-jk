@@ -1,0 +1,25 @@
+[project]
+name = "api-professor-jk"
+version = "0.1.0"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+  "boto3>=1.40,<2",
+  "email-validator>=2.2,<3",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.4,<9",
+  "ruff>=0.12,<1",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
