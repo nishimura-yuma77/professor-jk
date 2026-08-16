@@ -9,6 +9,15 @@
 ```text
 .
 ├── app/                  # ページ、レイアウト、メタデータを管理
+├── backend/              # バックエンドAPI
+│   └── api-professor-jk/
+│       ├── src/
+│       │   ├── handler.py       # Lambdaエントリポイント
+│       │   ├── router/          # パスとHTTPメソッドによるルーティング
+│       │   ├── controllers/     # HTTP入出力とバリデーション
+│       │   ├── services/        # ユースケースとドメイン固有処理
+│       │   └── repositories/    # AWS SDKと外部サービスへのアクセス
+│       └── tests/               # src/の構成に対応する仕様テスト
 ├── components/           # Reactコンポーネント
 │   ├── feature/          # 機能単位のまとまり。将来はAPI通信や関連ロジックも管理
 │   ├── primitives/       # Propsを広く公開した、細かく調整可能な低レベル部品
@@ -27,6 +36,23 @@
 │   └── variables/        # ブレークポイントなどの共通SCSS変数
 └── terraform/            # AWSインフラのTerraform定義
 ```
+
+## バックエンドの配置規則
+
+バックエンドは以下の依存方向を守ります。
+
+```text
+handler -> router -> controllers -> services -> repositories
+```
+
+| ディレクトリ | 配置する処理 |
+| --- | --- |
+| `router/` | URLパスとHTTPメソッドの判定、Controllerの呼び出し |
+| `controllers/` | リクエスト解析、入力値検証、HTTPレスポンス生成 |
+| `services/` | ユースケース、通知内容などのドメイン固有処理 |
+| `repositories/` | boto3や外部APIを利用した入出力処理 |
+
+`tests/`は`src/`のディレクトリ構成を踏襲します。テスト関数は仕様書として読めるよう、`test_<テスト対象の関数名>_<日本語の仕様名>`の形式で命名します。
 
 ## スタイルの配置規則
 
