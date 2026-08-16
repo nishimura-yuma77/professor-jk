@@ -29,6 +29,7 @@ const HERO_PHASE_INTERVAL = {
   posingToCompleted: 500
 } as const
 
+// アニメーションのフェーズ制御。この6フェーズにあわせてアニメーションを発生させる。
 type HeroPhase = "title" | "observer" | "protocol" | "transferring" | "posing" | "completed"
 
 const getCharacterDelay = (text: string, duration: number) => (
@@ -51,6 +52,7 @@ export default function HeroSection() {
     }
   }, [])
 
+  // observer　-> transferのフェーズだけ、タイマーで制御する必要がある。そのためのeffect
   useEffect(() => {
     if (phase !== "observer") return
 
