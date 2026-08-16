@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import style from "@/styles/primitives/TypewriterText.module.scss"
 
 type TypewriterTextProps = {
@@ -8,6 +8,7 @@ type TypewriterTextProps = {
   isVisible: boolean
   className?: string
   animationDelay?: number
+  startDelay?: number
   onAnimationEnd?: () => void
   displayCursor?: boolean
 }
@@ -15,18 +16,28 @@ type TypewriterTextProps = {
 export default function TypewriterText({
   text,
   isVisible,
+  ...props
+}: TypewriterTextProps) {
+  return (
+    <TypewriterAnimation
+      key={isVisible ? "visible" : "hidden"}
+      text={text}
+      isVisible={isVisible}
+      {...props}
+    />
+  )
+}
+
+function TypewriterAnimation({
+  text,
+  isVisible,
   className,
   animationDelay = 80,
+  startDelay = 0,
   onAnimationEnd,
   displayCursor = false
 }: TypewriterTextProps) {
   const [currentIndex, setCurrentIndex] = useState(-1)
-
-  useEffect(() => {
-    if (!isVisible) {
-      setCurrentIndex(-1)
-    }
-  }, [isVisible])
 
   return (
     <span className={style.text}>
@@ -41,7 +52,7 @@ export default function TypewriterText({
           <span key={index}>
             <span
               style={{
-                animationDelay: `${animationDelay * index}ms`
+                animationDelay: `${startDelay + animationDelay * index}ms`
               }}
               className={`${style.char} ${
                 isVisible ? style.char_active : ""
