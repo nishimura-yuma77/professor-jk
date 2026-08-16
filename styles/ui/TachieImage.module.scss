@@ -8,6 +8,7 @@
   .surprised {
     position: relative;
     width: 100%;
+    clip-path: inset(0 0 100% 0);
 
     .image {
       display: block;
@@ -31,14 +32,12 @@
     }
   }
 
-  .visible {
-    .image {
-      animation: appear var(--appear-duration) linear forwards;
-    }
+  .transferring {
+    animation: appear var(--transfer-duration) linear forwards;
 
     &::after {
       opacity: 1;
-      animation: scan var(--appear-duration) linear forwards;
+      animation: scan var(--transfer-duration) linear forwards;
     }
   }
 
@@ -50,10 +49,11 @@
     height: auto;
   }
   .fade_in {
-    animation: fade-in 0.5s linear forwards;
+    animation: fade-in var(--pose-duration) linear forwards;
   }
   .fade_out {
-    animation: fade-out 0.5s linear forwards;
+    clip-path: inset(0);
+    animation: fade-out var(--pose-duration) linear forwards;
   }
 }
 
@@ -92,5 +92,16 @@
   }
   to {
     opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container {
+    .transferring,
+    .transferring::after,
+    .fade_in,
+    .fade_out {
+      animation-duration: 0.01ms;
+    }
   }
 }

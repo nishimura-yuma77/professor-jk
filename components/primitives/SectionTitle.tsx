@@ -1,14 +1,17 @@
 import style from "@/styles/primitives/SectionTitle.module.scss"
 import TypewriterText from "@/components/primitives/TypewriterText"
-import { useEffect, useState } from "react"
 
 type SectionTitleProps = {
   title: string,
   isVisible: boolean
+  animationDelay?: number
+  onAnimationEnd?: () => void
 }
 export default function SectionTitle({
   title,
-  isVisible
+  isVisible,
+  animationDelay,
+  onAnimationEnd
 }: SectionTitleProps) {
   return (
     <h2 className={style.container}>
@@ -18,6 +21,8 @@ export default function SectionTitle({
         isVisible={isVisible}
         className={style.title}
         displayCursor={true}
+        animationDelay={animationDelay}
+        onAnimationEnd={onAnimationEnd}
       />
     </h2>
   )

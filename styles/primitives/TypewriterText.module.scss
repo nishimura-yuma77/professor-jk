@@ -39,3 +39,16 @@
     opacity: 0;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .text {
+    .char_active {
+      animation-delay: 0ms !important;
+      animation-duration: 0.01ms;
+    }
+
+    .cursor {
+      animation: none;
+    }
+  }
+}

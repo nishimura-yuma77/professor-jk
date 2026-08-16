@@ -6,6 +6,56 @@
 }
 
 .profile_content {
+  .tachie_area {
+    position: relative;
+    width: 100%;
+  }
+
+  .transfer_console {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--padding-small);
+    padding: var(--padding-large);
+
+    color: var(--color-accent-online);
+    font-family: var(--font-family-mono);
+    opacity: 1;
+    transition: none;
+    pointer-events: none;
+
+    .detection_text,
+    .transfer_text {
+      display: flex;
+      align-items: baseline;
+      color: var(--color-accent);
+    }
+
+    .transfer_text {
+      visibility: hidden;
+    }
+
+    .prompt_symbol {
+      flex: 0 0 auto;
+      padding-right: 0.5rem;
+      color: var(--color-accent-online);
+    }
+
+    .transfer_text_visible {
+      visibility: visible;
+    }
+  }
+
+  .transfer_console_hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 120ms linear, visibility 0s 120ms;
+  }
+
   .description_area {
     width: 100%;
     .name_area {
@@ -72,5 +122,17 @@
   .profile_content {
     display: flex;
     align-items: center;
+
+    .tachie_area,
+    .description_area {
+      flex: 1 1 50%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile_content .transfer_console,
+  .profile_content .transfer_console_hidden {
+    transition: none;
   }
 }
