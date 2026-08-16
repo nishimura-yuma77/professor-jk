@@ -155,7 +155,8 @@ data "aws_iam_policy_document" "api_lambda_permissions" {
     actions = ["ses:SendEmail"]
 
     resources = [
-      aws_sesv2_email_identity.site.arn
+      aws_sesv2_email_identity.site.arn,
+      aws_sesv2_email_identity.contact_recipient.arn,
     ]
 
     condition {
