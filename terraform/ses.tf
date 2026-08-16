@@ -14,3 +14,8 @@ resource "aws_sesv2_email_identity_mail_from_attributes" "site" {
   behavior_on_mx_failure = "REJECT_MESSAGE"
   mail_from_domain       = "mail.${aws_sesv2_email_identity.site.email_identity}"
 }
+
+// Sandbox中の送信テストに使用する宛先メールアドレス
+resource "aws_sesv2_email_identity" "contact_recipient" {
+  email_identity = var.contact_recipient_email
+}
