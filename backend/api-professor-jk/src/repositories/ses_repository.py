@@ -41,4 +41,4 @@ def send_email(reply_to: str, subject: str, body: str) -> None:
             },
         )
     except (BotoCoreError, ClientError, KeyError) as error:
-        raise ContactRepositoryError from error
+        raise ContactRepositoryError(str(error)) from error

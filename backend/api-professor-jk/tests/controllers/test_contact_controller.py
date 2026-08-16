@@ -131,7 +131,7 @@ def test_handle_contact_正しい入力をサービスへ渡して202を返す(m
 
 def test_handle_contact_通知に失敗した場合は詳細を隠して500を返す(monkeypatch):
     def raise_error(_values):
-        raise contact_controller.contact_service.ContactDeliveryError
+        raise contact_controller.contact_service.ContactDeliveryError("SES delivery failed")
 
     monkeypatch.setattr(contact_controller.contact_service, "send_contact", raise_error)
 

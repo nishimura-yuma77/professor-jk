@@ -23,4 +23,4 @@ def send_contact(values: dict[str, str]) -> None:
             body=body,
         )
     except ses_repository.ContactRepositoryError as error:
-        raise ContactDeliveryError from error
+        raise ContactDeliveryError(str(error)) from error

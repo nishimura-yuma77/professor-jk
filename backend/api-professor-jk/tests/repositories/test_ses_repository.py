@@ -53,7 +53,10 @@ def test_send_email_固定宛先へ返信先付きのメールを送信する():
 def test_send_email_SESの失敗をリポジトリ例外へ変換する():
     ses_repository._ses_client = FakeSesClient(error=True)
 
-    with pytest.raises(ses_repository.ContactRepositoryError):
+    with pytest.raises(
+        ses_repository.ContactRepositoryError,
+        match="MessageRejected.*Rejected",
+    ):
         ses_repository.send_email(
             reply_to="visitor@example.com",
             subject="Contact subject",
