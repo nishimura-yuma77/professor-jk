@@ -25,6 +25,6 @@ phases:
   post_build:
     commands:
       - aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --zip-file fileb://backend/api-professor-jk/build/function.zip
-      - aws lambda wait function-updated-v2 --function-name $LAMBDA_FUNCTION_NAME
+      - aws lambda wait function-updated --function-name $LAMBDA_FUNCTION_NAME
       - aws s3 sync out/ s3://$S3_BUCKET_NAME --delete
       - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
