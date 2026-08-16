@@ -1,11 +1,88 @@
 @use "@/styles/variables/breakpoint" as breakpoint;
 
+.hero_container {
+  display: flex;
+  min-height: calc(100svh - var(--header-height));
+  flex-direction: column;
+}
+
+.hero_section {
+  display: grid;
+  flex: 1;
+  width: 100%;
+  grid-template-rows: auto 1fr;
+}
+
+.page_title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .title_area {
   display: flex;
   justify-content: space-between;
 }
 
 .profile_content {
+  align-self: center;
+
+  .tachie_area {
+    position: relative;
+    width: 100%;
+  }
+
+  .transfer_console {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--padding-small);
+    padding: var(--padding-large);
+
+    color: var(--color-accent-online);
+    font-family: var(--font-family-mono);
+    opacity: 1;
+    transition: none;
+    pointer-events: none;
+
+    .detection_text,
+    .transfer_text {
+      display: flex;
+      align-items: baseline;
+      color: var(--color-accent);
+    }
+
+    .transfer_text {
+      visibility: hidden;
+    }
+
+    .prompt_symbol {
+      flex: 0 0 auto;
+      padding-right: 0.5rem;
+      color: var(--color-accent-online);
+    }
+
+    .transfer_text_visible {
+      visibility: visible;
+    }
+  }
+
+  .transfer_console_hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 120ms linear, visibility 0s 120ms;
+  }
+
   .description_area {
     width: 100%;
     .name_area {
@@ -69,8 +146,55 @@
 }
 
 @media screen and (min-width: breakpoint.$breakpoint-tablet) {
+  .hero_container {
+    min-height: calc(100svh - var(--header-height));
+  }
+
   .profile_content {
     display: flex;
     align-items: center;
+    flex-direction: column;
+
+    .tachie_area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 24rem;
+      margin-inline: auto;
+    }
+
+    .description_area {
+      max-width: 36rem;
+      margin-inline: auto;
+    }
+  }
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-pc) {
+  .hero_container {
+    min-height: calc(100dvh - var(--header-height));
+  }
+
+  .profile_content {
+    flex-direction: row;
+
+    .tachie_area {
+      max-width: none;
+      margin-inline: 0;
+      flex: 0 1 44%;
+    }
+
+    .description_area {
+      max-width: none;
+      margin-inline: 0;
+      flex: 1 1 56%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile_content .transfer_console,
+  .profile_content .transfer_console_hidden {
+    transition: none;
   }
 }

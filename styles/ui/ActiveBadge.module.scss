@@ -12,10 +12,31 @@
   .online {
     animation: pulse 2s linear infinite;
   }
+  &.active {
+    animation: power-on 250ms ease-out;
+  }
+}
+
+@keyframes power-on {
+  0% {
+    opacity: 0.4;
+    filter: brightness(2.5);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
 }
 
 @keyframes pulse {
   50% {
     opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .container .online {
+    animation: none;
   }
 }
