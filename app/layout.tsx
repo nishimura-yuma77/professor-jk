@@ -20,7 +20,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://professor-jk.net"),
   title: {
-    default: "J.K.教授の開発ラボ | J.K. Lab",
+    default: "J.K. Lab",
     template: "%s | J.K. Lab"
   },
   description: "エンジニアとして活動するJ.K.教授のキャラクター紹介と、開発実験・プロジェクトを掲載するポートフォリオサイトです。",
