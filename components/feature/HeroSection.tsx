@@ -172,7 +172,7 @@ export default function HeroSection() {
             <TypewriterText
               text={PROFILE_TEXT}
               isVisible={phase === "completed"}
-              animationDelay={20}
+              animationDelay={1}
             />
           </p>
         </div>
