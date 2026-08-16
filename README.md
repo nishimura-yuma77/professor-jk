@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# J.K. Lab
 
-## Getting Started
+J.K.教授のキャラクター紹介と、彼が担当したプロジェクト・メディアなどを掲載するポートフォリオサイトです。
 
-First, run the development server:
+Next.jsで静的サイトとして構築し、インフラの構成管理からデプロイまでをTerraformとAWSで行っています。
+
+将来的にはLambdaで簡単なPublic API追加とCMS化を図ります。
+
+## 本番サイト
+
+https://professor-jk.net
+
+## 技術スタック
+
+### フロントエンド
+
+- Next.js 16
+- React 19
+- TypeScript
+- SCSS
+
+### インフラ・CI/CD
+
+- Terraform
+- AWS
+  - S3
+  - CloudFront
+  - CodeBuild
+  - Route 53
+  - ACM
+
+## 開発環境
+
+ローカルでの開発には、以下が必要です。
+
+- Node.js 24
+- npm
+- Git
+
+アプリケーションの起動に環境変数は必要ありません。
+
+## 環境構築
+
+リポジトリをクローンします。
+
+```bash
+git clone https://github.com/nishimura-yuma77/professor-jk.git
+cd professor-jk
+```
+
+依存パッケージをインストールします。
+
+```bash
+npm ci
+```
+
+開発サーバーを起動します。
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ブラウザで http://localhost:3000 を開いてください。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 主要コマンド
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| コマンド | 説明 |
+| --- | --- |
+| `npm run dev` | 開発サーバーを起動します |
+| `npm run build` | 静的サイトをビルドし、`out/`へ出力します |
+| `npm run lint` | ESLintによる静的解析を実行します |
 
-## Learn More
+## ディレクトリ構成
 
-To learn more about Next.js, take a look at the following resources:
+```text
+.
+├── app/          # URLに対応して表示するページ
+├── components/   # UIコンポーネント
+├── const/        # サイト内で使用するデータと定数
+├── contexts/     # React Context
+├── hooks/        # カスタムフック
+├── public/       # 画像などの静的ファイル
+├── styles/       # 共通スタイル
+└── terraform/    # AWSインフラのTerraform定義
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+サブディレクトリの構成と各ディレクトリの設計意図は、[DIRMAP.md](./DIRMAP.md)を参照してください。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## デプロイ構成
 
-## Deploy on Vercel
+`npm run build`で生成した静的ファイルを、AWS CodeBuildからS3へ同期しています。サイトはCloudFront経由で配信し、デプロイ後にCloudFrontのキャッシュを無効化します。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+独自ドメイン、TLS証明書、配信基盤などのAWSリソースは、`terraform/`内のTerraform定義で管理しています。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Next.jsを用いてStatic Site Generationを採用しており、将来的にはビルドプロセスに外部のデータ(Youtubeやブログ記事など)を取り込めるように修正する予定です。
