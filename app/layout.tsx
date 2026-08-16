@@ -4,6 +4,9 @@ import "@/app/globals.scss"
 import "@/components/providers/ErrorProvider"
 import ErrorProvider from "@/components/providers/ErrorProvider"
 
+const SITE_TITLE = "J.K.教授の開発ラボ | J.K. Lab"
+const SITE_DESCRIPTION = "エンジニアとして活動するJ.K.教授のキャラクター紹介と、開発実験・プロジェクトを掲載するポートフォリオサイトです。"
+
 const zenKakuGothicNew = Zen_Kaku_Gothic_New({
   weight: ["400", "500", "700"],
   display: "swap",
@@ -23,9 +26,32 @@ export const metadata: Metadata = {
     default: "J.K. Lab",
     template: "%s | J.K. Lab"
   },
-  description: "エンジニアとして活動するJ.K.教授のキャラクター紹介と、開発実験・プロジェクトを掲載するポートフォリオサイトです。",
+  description: SITE_DESCRIPTION,
   alternates: {
     canonical: "/"
+  },
+  openGraph: {
+    type: "website",
+    locale: "ja_JP",
+    url: "/",
+    siteName: "J.K. Lab",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: "/images/ogp.png",
+        width: 1200,
+        height: 630,
+        alt: SITE_TITLE
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: "@jkdeb__",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/images/ogp.png"]
   }
 }
 
