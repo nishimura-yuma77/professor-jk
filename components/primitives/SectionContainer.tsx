@@ -5,16 +5,18 @@ type SectionContainerProps = {
   children: ReactNode
   ref?: Ref<HTMLDivElement>
   className?: string
+  sectionClassName?: string
 }
 
 export default function SectionContainer({
   children,
   ref = null,
-  className = undefined
+  className = undefined,
+  sectionClassName = undefined
 }: SectionContainerProps) {
   return (
     <div ref={ref} className={`${style.container} ${className ? className : ""}`}>
-      <section className={style.section}>
+      <section className={`${style.section} ${sectionClassName ? sectionClassName : ""}`}>
         {children}
       </section>
     </div>

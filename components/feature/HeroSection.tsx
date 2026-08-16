@@ -25,7 +25,7 @@ const HERO_PHASE_INTERVAL = {
   titleToObserver: 500,
   observerToProtocol: 400,
   protocolToTransferring: 700,
-  transferringToPosing: 500,
+  transferringToPosing: 1000,
   posingToCompleted: 500
 } as const
 
@@ -93,7 +93,11 @@ export default function HeroSection() {
   }
 
   return (
-    <SectionContainer ref={ref}>
+    <SectionContainer
+      ref={ref}
+      className={style.hero_container}
+      sectionClassName={style.hero_section}
+    >
       <div className={style.title_area}>
         <SectionTitle
           title={HERO_TITLE}
