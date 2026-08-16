@@ -1,45 +1,55 @@
 import Image from "next/image"
 import style from "@/styles/ui/TachieImage.module.scss"
-import { useEffect, useState } from "react"
+import type { AnimationEvent, CSSProperties } from "react"
 
 const TACHIE_PROPS = {
   width: 832,
   height: 1216
 }
 
+export type TachieImagePhase = "title" | "observer" | "protocol" | "transferring" | "posing" | "completed"
+
 type TachieImageProps = {
-  isVisible: boolean
-  appearDuration?: number
+  phase: TachieImagePhase
+  transferDuration: number
+  poseDuration: number
+  onTransferEnd: () => void
+  onPoseEnd: () => void
 }
 
 export default function TachieImage({
-  isVisible,
-  appearDuration = 1500
+  phase,
+  transferDuration,
+  poseDuration,
+  onTransferEnd,
+  onPoseEnd
 }: TachieImageProps) {
-  const [isThumbsUp, setIsThumbsUp] = useState(false)
-  useEffect(() => {
-    if (!isVisible) {
-      setIsThumbsUp(false)
-      return
+  const isPoseVisible = phase === "posing" || phase === "completed"
+
+  const handleAnimationEnd = (event: AnimationEvent<HTMLDivElement>) => {
+    if (event.target !== event.currentTarget || event.pseudoElement) return
+
+    if (phase === "transferring") {
+      onTransferEnd()
+    } else if (phase === "posing") {
+      onPoseEnd()
     }
-    const timer = setTimeout(() => {
-      setIsThumbsUp(true)
-    }, appearDuration)
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [isVisible, appearDuration])
+  }
+
   return (
-    <div className={style.container}>
+    <div
+      className={style.container}
+      style={{
+        "--transfer-duration": `${transferDuration}ms`,
+        "--pose-duration": `${poseDuration}ms`
+      } as CSSProperties}
+    >
       <div
         className={`${style.surprised} ${
-          isVisible ? style.visible : ""
-        } ${
-          isThumbsUp ? style.fade_out : ""
+          phase === "transferring" ? style.transferring : ""
+        } ${isPoseVisible ? style.fade_out : ""
         }`}
-        style={{
-          "--appear-duration": `${appearDuration}ms`
-        } as React.CSSProperties}
+        onAnimationEnd={handleAnimationEnd}
       >
         <Image
           src="/images/character/tachie_surprised.png"
@@ -56,7 +66,7 @@ export default function TachieImage({
         width={TACHIE_PROPS.width}
         height={TACHIE_PROPS.height}
         loading="eager"
-        className={`${style.image} ${style.thumbs_up} ${isThumbsUp ? style.fade_in : ""}`}
+        className={`${style.image} ${style.thumbs_up} ${isPoseVisible ? style.fade_in : ""}`}
       />
     </div>
   )
