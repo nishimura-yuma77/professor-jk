@@ -1,0 +1,1 @@
+export const SECTION_TITLE_CHARACTER_DELAY_MS = 30
