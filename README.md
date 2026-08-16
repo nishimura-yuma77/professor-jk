@@ -90,6 +90,6 @@ npm run dev
 
 `npm run build`で生成した静的ファイルを、AWS CodeBuildからS3へ同期しています。サイトはCloudFront経由で配信し、デプロイ後にCloudFrontのキャッシュを無効化します。
 
-独自ドメイン、TLS証明書、配信基盤などのAWSリソースは、`terraform/`内のTerraform定義で管理しています。
+独自ドメイン、TLS証明書、配信基盤などのAWSリソースは、`terraform/`内のTerraform定義で管理しています。初期化とstate管理については、[terraform/README.md](./terraform/README.md)を参照してください。
 
 Next.jsを用いてStatic Site Generationを採用しており、将来的にはビルドプロセスに外部のデータ(Youtubeやブログ記事など)を取り込めるように修正する予定です。
