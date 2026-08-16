@@ -4,14 +4,27 @@ phases:
   install:
     runtime-versions:
       nodejs: 24
+      python: 3.13
     commands:
       - npm ci
+      - python -m pip install uv==0.12.1
+      - uv sync --frozen --project backend/api-professor-jk
 
   build:
     commands:
       - npm run build
+      - uv run --directory backend/api-professor-jk --frozen ruff check src tests
+      - uv run --directory backend/api-professor-jk --frozen pytest
+      - rm -rf backend/api-professor-jk/build
+      - mkdir -p backend/api-professor-jk/build/package
+      - uv export --frozen --no-dev --no-editable --no-emit-project --project backend/api-professor-jk --output-file backend/api-professor-jk/build/requirements.txt
+      - uv pip install --no-installer-metadata --no-compile-bytecode --python-platform x86_64-manylinux2014 --python 3.13 --target backend/api-professor-jk/build/package --requirements backend/api-professor-jk/build/requirements.txt
+      - cp -R backend/api-professor-jk/src/. backend/api-professor-jk/build/package/
+      - python -c "import shutil; shutil.make_archive('backend/api-professor-jk/build/function', 'zip', 'backend/api-professor-jk/build/package')"
 
   post_build:
     commands:
+      - aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --zip-file fileb://backend/api-professor-jk/build/function.zip
+      - aws lambda wait function-updated-v2 --function-name $LAMBDA_FUNCTION_NAME
       - aws s3 sync out/ s3://$S3_BUCKET_NAME --delete
       - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
