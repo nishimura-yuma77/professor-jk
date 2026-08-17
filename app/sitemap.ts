@@ -6,6 +6,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: "https://professor-jk.net/"
+    },
+    {
+      url: "https://professor-jk.net/contact"
     }
   ]
 }
