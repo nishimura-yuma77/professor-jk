@@ -1,5 +1,6 @@
 import Header from "@/components/feature/Header"
 import HeroSection from "@/components/feature/HeroSection"
+import PlayWithJkFeatureSection from "@/components/feature/PlayWithJkFeatureSection"
 import style from "@/app/page.module.scss"
 import ExperimentSection from "@/components/feature/ExperimentSection";
 import MediaSection from "@/components/feature/MediaSection";
@@ -13,6 +14,7 @@ export default function Home() {
       <Header />
       <PageBackground className={style.main}>
         <HeroSection />
+        <PlayWithJkFeatureSection />
         <ExperimentSection />
         <MediaSection />
         <DataSection />
