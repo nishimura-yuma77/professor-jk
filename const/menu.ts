@@ -6,6 +6,11 @@ export const MENU = {
     subLabel: null,
     href: "/",
   },
+  play: {
+    label: "PLAY",
+    subLabel: "with J.K.",
+    href: "/play-with-jk",
+  },
   contact: {
     label: "CONTACT",
     subLabel: "or FAN LETTER",

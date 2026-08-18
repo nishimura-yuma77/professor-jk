@@ -8,6 +8,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: "https://professor-jk.net/"
     },
     {
+      url: "https://professor-jk.net/play-with-jk"
+    },
+    {
       url: "https://professor-jk.net/contact"
     }
   ]

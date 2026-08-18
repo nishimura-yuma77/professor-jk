@@ -14,9 +14,12 @@ export type ContactGuide = {
 export const CONTACT_GUIDES: ContactGuide[] = [
   {
     id: "create-together",
-    label: "J.K.教授と一緒に作りたい",
-    guidance:
-      "一緒に作りたい？ 面白そうじゃないか。完成した企画書はいらない。何を作りたいか、誰に使ってほしいか、今どこまで考えているか。この3つがあると話が早い。",
+    label: PLAY_AVAILABILITY.status === "CLOSED"
+      ? "J.K.教授と一緒に作りたい（順番待ち）"
+      : "J.K.教授と一緒に作りたい",
+    guidance: PLAY_AVAILABILITY.status === "CLOSED"
+      ? `${CURRENT_PLAY_AVAILABILITY.title} 新しい制作をすぐに始めることはできず、開始時期も約束できない。それでもよければ、順番待ちとしてアイデアを置いていってくれ。何を作りたいか、誰に使ってほしいか、今どこまで考えているか。この3つがあると話が早い。`
+      : "一緒に作りたい？ 面白そうじゃないか。完成した企画書はいらない。何を作りたいか、誰に使ってほしいか、今どこまで考えているか。この3つがあると話が早い。",
     hints: [
       "作りたいもの・解決したいこと",
       "誰に使ってほしいか",
@@ -237,3 +240,4 @@ export const CONTACT_GUIDE_CONVERSATION = {
     ],
   },
 } as const satisfies Record<ContactGuideStage, ContactGuideConversationStep>
+import { CURRENT_PLAY_AVAILABILITY, PLAY_AVAILABILITY } from "@/const/playWithJk"

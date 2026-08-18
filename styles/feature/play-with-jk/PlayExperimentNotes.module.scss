@@ -1,0 +1,153 @@
+@use "@/styles/variables/_breakpoint.scss" as breakpoint;
+@use "@/styles/feature/play-with-jk/paper";
+
+.kicker {
+  @include paper.kicker;
+}
+
+.note {
+  @include paper.pencil-note;
+
+  margin-top: 0.8rem;
+  line-height: 1.7;
+}
+
+.notes {
+  margin-top: 2rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.card {
+  scroll-margin-top: calc(var(--header-height) + 1.5rem);
+  padding: 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--paper-ink) 28%, transparent);
+  background: var(--paper-light);
+  box-shadow: 0.45rem 0.5rem 0 rgba(48, 37, 25, 0.13);
+}
+
+.card:first-child { transform: rotate(-0.8deg); }
+.card:last-child { transform: rotate(0.9deg) translateY(0.5rem); }
+
+.card header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--paper-muted);
+  font-family: var(--font-family-mono);
+  font-size: 0.68rem;
+}
+
+.active,
+.paused {
+  padding: 0.25rem 0.4rem;
+  border: 2px solid currentColor;
+  font-weight: var(--font-weight-bold);
+  transform: rotate(3deg);
+}
+
+.active {
+  color: color-mix(in srgb, var(--color-accent-online) 78%, var(--paper-ink));
+}
+
+.paused {
+  color: color-mix(in srgb, var(--color-accent-yellow) 72%, var(--paper-ink));
+}
+
+.card h3 {
+  margin-top: 1.2rem;
+  color: color-mix(in srgb, var(--color-accent) 78%, var(--paper-ink));
+  font-size: clamp(1.4rem, 4vw, 2rem);
+}
+
+.subtitle {
+  margin-top: 0.2rem;
+  color: var(--paper-muted);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-small);
+}
+
+.description {
+  margin-top: 1rem;
+  line-height: 1.75;
+  white-space: pre-line;
+}
+
+.stacks {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  list-style: none;
+}
+
+.stacks li {
+  padding: 0.25rem 0.45rem;
+  border: 1px solid color-mix(in srgb, var(--paper-ink) 42%, transparent);
+  font-family: var(--font-family-mono);
+  font-size: 0.68rem;
+  transform: rotate(-1deg);
+}
+
+.stacks li:nth-child(even) {
+  transform: rotate(1deg);
+}
+
+.links {
+  margin-top: 1.25rem;
+}
+
+.links a {
+  color: color-mix(in srgb, var(--color-accent) 76%, var(--paper-ink));
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-bold);
+  text-underline-offset: 0.25rem;
+}
+
+.links a:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 0.25rem;
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-tablet) {
+  .notes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-pc) {
+  .notes {
+    margin-top: clamp(1.25rem, 3svh, 2rem);
+  }
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-pc) and (max-height: 800px) {
+  .note {
+    margin-top: 0.5rem;
+    line-height: 1.55;
+  }
+
+  .notes {
+    margin-top: 1rem;
+    gap: 1rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .card h3 {
+    margin-top: 0.75rem;
+  }
+
+  .description {
+    margin-top: 0.65rem;
+    line-height: 1.55;
+  }
+
+  .stacks {
+    margin-top: 0.8rem;
+  }
+}

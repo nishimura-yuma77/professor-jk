@@ -1,0 +1,51 @@
+@mixin surface {
+  position: relative;
+  isolation: isolate;
+  color: var(--paper-ink);
+  background-color: var(--paper);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(56, 43, 30, 0.025) 0 1px, transparent 1px 4px),
+    linear-gradient(115deg, rgba(255, 255, 255, 0.045), transparent 35%);
+  box-shadow:
+    0.85rem 0.9rem 0 rgba(0, 0, 0, 0.34),
+    inset 0 0 0 1px rgba(216, 194, 163, 0.06);
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    opacity: 0.14;
+    background-image: radial-gradient(var(--paper-ink) 0.45px, transparent 0.45px);
+    background-size: 5px 5px;
+    pointer-events: none;
+  }
+
+}
+
+@mixin tape {
+  position: absolute;
+  z-index: 4;
+  display: block;
+  width: 7rem;
+  height: 1.8rem;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 0.2rem, rgba(255, 255, 255, 0.08) 0.2rem 0.3rem),
+    var(--tape);
+  box-shadow: 0 0.2rem 0.35rem rgba(0, 0, 0, 0.12);
+  pointer-events: none;
+}
+
+@mixin kicker {
+  color: var(--paper-muted);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.15em;
+}
+
+@mixin pencil-note {
+  color: var(--paper-muted);
+  font-weight: var(--font-weight-bold);
+  transform: rotate(-1.5deg);
+}

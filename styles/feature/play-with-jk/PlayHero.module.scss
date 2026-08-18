@@ -1,0 +1,266 @@
+@use "@/styles/variables/_breakpoint.scss" as breakpoint;
+@use "@/styles/feature/play-with-jk/paper";
+
+.hero {
+  padding: 1rem 0 4rem;
+}
+
+.poster {
+  @include paper.surface;
+
+  min-height: 38rem;
+  padding: 3rem 1.4rem 15rem;
+  clip-path: polygon(0.5% 1.5%, 18% 0.4%, 37% 1.1%, 58% 0, 79% 1%, 99.4% 0.5%, 98.8% 22%, 100% 43%, 99% 66%, 100% 84%, 98.8% 99%, 78% 98.6%, 57% 100%, 36% 98.8%, 17% 100%, 0.6% 98.5%, 1.2% 78%, 0 57%, 1% 35%);
+  transform: rotate(-0.35deg);
+}
+
+.copy {
+  max-width: 36rem;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+}
+
+.label {
+  width: fit-content;
+  padding-bottom: 0.25rem;
+  border-bottom: 0.2rem solid var(--color-accent);
+  font-family: var(--font-family-mono);
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.15em;
+}
+
+.hero h1 {
+  position: relative;
+  z-index: 0;
+  margin-top: 1.25rem;
+}
+
+.wanted {
+  position: relative;
+  display: block;
+  width: fit-content;
+  color: var(--paper-ink);
+  font-family: var(--font-family-mono);
+  font-size: clamp(3.6rem, 11vw, 8.5rem);
+  font-weight: var(--font-weight-bold);
+  line-height: 0.82;
+  letter-spacing: -0.08em;
+  text-shadow:
+    0.08em 0.08em 0 var(--paper-dark),
+    0.11em 0.11em 0 color-mix(in srgb, var(--color-accent) 30%, transparent);
+  transform: rotate(-1deg);
+}
+
+.wanted::after {
+  content: "";
+  position: absolute;
+  right: -0.08em;
+  bottom: 0.13em;
+  left: 0;
+  height: 0.055em;
+  background: color-mix(in srgb, var(--color-accent) 82%, transparent);
+  transform: rotate(1.5deg);
+}
+
+.title {
+  position: relative;
+  z-index: 0;
+  display: block;
+  max-width: 9.5em;
+  margin-top: 1.5rem;
+  font-size: clamp(2.2rem, 8vw, 4.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.07em;
+  text-wrap: balance;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -0.1em;
+  bottom: 0.06em;
+  left: -0.05em;
+  height: 0.24em;
+  background: color-mix(in srgb, var(--color-accent) 72%, transparent);
+  transform: rotate(-1deg);
+}
+
+.title_line {
+  display: inline;
+}
+
+.description {
+  margin-top: 2rem;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.9;
+}
+
+.description p + p {
+  margin-top: 0.1rem;
+}
+
+.note {
+  @include paper.pencil-note;
+
+  width: fit-content;
+  margin: 1.8rem 0 0 0.5rem;
+  padding-bottom: 0.15rem;
+  border-bottom: 1px dashed currentColor;
+}
+
+.character {
+  position: absolute;
+  z-index: 3;
+  right: -0.5rem;
+  bottom: -1rem;
+  width: 13rem;
+  aspect-ratio: 1 / 1.08;
+  filter: drop-shadow(0.45rem 0.65rem 0.45rem rgba(0, 0, 0, 0.28));
+}
+
+.character_image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: opacity 140ms ease;
+}
+
+.character_default {
+  transform: translateY(2.5%);
+}
+
+.character_blink,
+.character_closed {
+  opacity: 0;
+  transform-origin: top center;
+}
+
+.character_blink {
+  transform: translateY(1%) scaleX(0.8) scaleY(0.86);
+  -webkit-mask-image: radial-gradient(ellipse 40% 13% at 50% 37%, #000 72%, transparent 100%);
+  mask-image: radial-gradient(ellipse 40% 13% at 50% 37%, #000 72%, transparent 100%);
+  animation: double-blink 5s steps(1, end) infinite;
+}
+
+.character_closed {
+  transform: translateY(-5%) scaleX(0.88);
+}
+
+.tape {
+  @include paper.tape;
+}
+
+.tape_top {
+  top: -0.65rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(2deg);
+}
+
+.tape_side {
+  top: 42%;
+  right: -2.9rem;
+  transform: rotate(87deg);
+}
+
+@media (hover: hover) {
+  .character:hover .character_default,
+  .character:hover .character_blink {
+    opacity: 0;
+    animation: none;
+  }
+
+  .character:hover .character_closed {
+    opacity: 1;
+  }
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-tablet) {
+  .hero {
+    padding: 2rem 1rem 6rem;
+  }
+
+  .poster {
+    min-height: 35rem;
+    padding: 4rem 19rem 5rem 4rem;
+  }
+
+  .wanted {
+    font-size: clamp(4rem, 9vw, 5.25rem);
+  }
+
+  .character {
+    right: -1.5rem;
+    bottom: -3.5rem;
+    width: 20rem;
+  }
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-pc) {
+  .hero {
+    padding: 0 1rem 4rem;
+  }
+
+  .poster {
+    height: min(42rem, calc(100svh - var(--header-height) - 3rem));
+    min-height: 32rem;
+    padding: 2.5rem 21rem 2.5rem 3.25rem;
+  }
+
+  .copy {
+    max-width: 40rem;
+  }
+
+  .wanted {
+    font-size: clamp(4.75rem, 7vw, 6.5rem);
+  }
+
+  .title {
+    margin-top: 1.25rem;
+    font-size: clamp(2.5rem, 3.5vw, 3.5rem);
+  }
+
+  .title_line {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .description {
+    margin-top: 1.4rem;
+    line-height: 1.7;
+  }
+
+  .note {
+    margin-top: 1.2rem;
+  }
+
+  .character {
+    right: 0;
+    bottom: -1.75rem;
+    width: 20rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .character_blink {
+    animation: none;
+  }
+
+  .character_image {
+    transition: none;
+  }
+}
+
+@keyframes double-blink {
+  0%, 89%, 92%, 95%, 98%, 100% { opacity: 0; }
+  90%, 91%, 96%, 97% { opacity: 1; }
+}

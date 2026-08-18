@@ -21,7 +21,8 @@
 │       └── tests/               # src/の構成に対応する仕様テスト
 ├── components/           # Reactコンポーネント
 │   ├── feature/          # ページや機能単位のコンポーネント
-│   │   └── contact/      # Contactページの機能コンポーネント
+│   │   ├── contact/      # Contactページの機能コンポーネント
+│   │   └── play-with-jk/ # Play With J.K.ページの機能コンポーネント
 │   ├── primitives/       # Propsを広く公開した、細かく調整可能な低レベル部品
 │   ├── providers/        # アプリ全体へ状態や機能を提供するProvider
 │   └── ui/               # 呼び出すだけで再利用できる汎用UI
@@ -34,7 +35,8 @@
 │       └── character/    # キャラクター画像
 ├── styles/               # コンポーネントに対応するSCSS Modules
 │   ├── feature/          # components/feature/に対応
-│   │   └── contact/      # components/feature/contact/に対応
+│   │   ├── contact/      # components/feature/contact/に対応
+│   │   └── play-with-jk/ # components/feature/play-with-jk/に対応
 │   ├── primitives/       # components/primitives/に対応
 │   ├── ui/               # components/ui/に対応
 │   └── variables/        # ブレークポイントなどの共通SCSS変数

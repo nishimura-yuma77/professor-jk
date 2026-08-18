@@ -1,0 +1,4 @@
+.main {
+  min-height: calc(100dvh - var(--header-height));
+  border-bottom: 1px solid var(--color-border);
+}
