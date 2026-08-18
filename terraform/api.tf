@@ -8,7 +8,15 @@ resource "aws_apigatewayv2_api" "api" {
 
   cors_configuration {
     allow_headers = ["content-type"]
-    allow_methods = ["POST", "OPTIONS"]
+    allow_methods = [
+      "GET",
+      "HEAD",
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE",
+      "OPTIONS",
+    ]
     allow_origins = ["https://professor-jk.net"]
     max_age       = 86400
   }
