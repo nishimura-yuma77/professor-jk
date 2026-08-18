@@ -1,0 +1,100 @@
+.observer {
+  min-width: 0;
+  display: flow-root;
+}
+
+.reveal {
+  --reveal-duration: 580ms;
+  --reveal-easing: cubic-bezier(0.22, 1, 0.36, 1);
+
+  display: flow-root;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(2rem);
+  transition:
+    opacity var(--reveal-duration) ease-out,
+    transform var(--reveal-duration) var(--reveal-easing),
+    clip-path var(--reveal-duration) var(--reveal-easing),
+    visibility 0s linear var(--reveal-duration);
+  will-change: opacity, transform, clip-path;
+}
+
+.hero {
+  --reveal-duration: 680ms;
+
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(-1.75rem);
+}
+
+.stamp {
+  --reveal-duration: 520ms;
+  --reveal-easing: cubic-bezier(0.18, 1.35, 0.4, 1);
+
+  transform: translateY(1.5rem) scale(0.9) rotate(-1.5deg);
+}
+
+.from_left {
+  --reveal-duration: 620ms;
+
+  transform: translateX(-3.5rem) rotate(-1.2deg);
+}
+
+.from_right {
+  --reveal-duration: 560ms;
+  --reveal-easing: cubic-bezier(0.16, 1, 0.3, 1);
+
+  transform: translateX(3.5rem) rotate(1.4deg);
+}
+
+.lift {
+  --reveal-duration: 700ms;
+
+  transform: translateY(4rem) scale(0.97);
+}
+
+.tilt {
+  --reveal-duration: 640ms;
+  --reveal-easing: cubic-bezier(0.2, 1.2, 0.35, 1);
+
+  transform: translate(-2.5rem, 2.5rem) rotate(-2.2deg);
+}
+
+.wipe {
+  --reveal-duration: 600ms;
+
+  clip-path: inset(0 100% 0 0);
+  transform: translateX(2rem);
+}
+
+.zoom {
+  --reveal-duration: 660ms;
+
+  transform: translateY(2.5rem) scale(0.88);
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+  will-change: auto;
+}
+
+.hero.visible {
+  clip-path: inset(-4rem);
+}
+
+.wipe.visible {
+  clip-path: inset(-2rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    visibility: visible;
+    clip-path: none;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}

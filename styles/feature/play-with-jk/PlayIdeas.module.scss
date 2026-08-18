@@ -1,0 +1,116 @@
+@use "@/styles/variables/_breakpoint.scss" as breakpoint;
+@use "@/styles/feature/play-with-jk/paper";
+
+.tape {
+  @include paper.tape;
+
+  top: -0.6rem;
+  left: -2rem;
+  transform: rotate(-34deg);
+}
+
+.kicker {
+  @include paper.kicker;
+}
+
+.note {
+  @include paper.pencil-note;
+
+  margin-top: 0.8rem;
+  line-height: 1.7;
+}
+
+.notes {
+  margin-top: 2rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.card {
+  position: relative;
+  min-height: 10.5rem;
+  padding: 1.35rem 1.2rem;
+  background: var(--paper);
+  box-shadow: 0.4rem 0.45rem 0 rgba(47, 38, 27, 0.16);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.card:nth-child(1) { transform: rotate(-1.4deg); }
+.card:nth-child(2) { transform: rotate(1deg) translateY(0.35rem); }
+.card:nth-child(3) { transform: rotate(0.8deg); }
+.card:nth-child(4) { transform: rotate(-0.9deg) translateY(0.2rem); }
+
+.card > span {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.9rem;
+  color: color-mix(in srgb, var(--color-accent) 75%, var(--paper-ink));
+  font-family: var(--font-family-mono);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.card h3 {
+  max-width: calc(100% - 2.4rem);
+  font-size: 1.1rem;
+  line-height: 1.45;
+}
+
+.card p {
+  margin-top: 0.8rem;
+  color: var(--paper-muted);
+  line-height: 1.7;
+}
+
+@media (hover: hover) {
+  .card:hover {
+    box-shadow: 0.65rem 0.7rem 0 rgba(47, 38, 27, 0.18);
+    transform: rotate(0) translateY(-0.2rem);
+  }
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-tablet) {
+  .notes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-pc) {
+  .notes {
+    margin-top: clamp(1.25rem, 3svh, 2rem);
+    gap: clamp(0.7rem, 1.8svh, 1rem);
+  }
+
+  .card {
+    min-height: clamp(7.75rem, 19svh, 9rem);
+    padding: clamp(0.9rem, 2svh, 1.2rem);
+  }
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-pc) and (max-height: 800px) {
+  .note {
+    margin-top: 0.5rem;
+    line-height: 1.55;
+  }
+
+  .notes {
+    margin-top: 1rem;
+    gap: 0.7rem;
+  }
+
+  .card {
+    min-height: 7.5rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .card p {
+    margin-top: 0.5rem;
+    line-height: 1.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}

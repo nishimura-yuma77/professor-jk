@@ -1,0 +1,101 @@
+@use "@/styles/variables/_breakpoint.scss" as breakpoint;
+@use "@/styles/feature/play-with-jk/paper";
+
+.contact {
+  @include paper.surface;
+
+  width: min(100%, 50rem);
+  margin: 7rem auto 0;
+  padding: clamp(2.25rem, 7vw, 4rem);
+  clip-path: polygon(0 2%, 18% 0, 39% 1.2%, 60% 0, 81% 1%, 100% 0, 99% 25%, 100% 51%, 99% 76%, 100% 98%, 76% 100%, 52% 98.8%, 25% 100%, 0 98%, 1% 68%, 0 35%);
+  text-align: center;
+  transform: rotate(0.4deg);
+}
+
+.contact::after {
+  content: "";
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  border-bottom: 2px dashed color-mix(in srgb, var(--paper-ink) 34%, transparent);
+}
+
+.tape {
+  @include paper.tape;
+
+  top: -0.65rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+}
+
+.kicker {
+  @include paper.kicker;
+}
+
+.status {
+  margin: 1rem auto 0;
+}
+
+.contact h2 {
+  margin-top: 0.45rem;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  line-height: 1.25;
+}
+
+.description {
+  max-width: 36rem;
+  margin: 1rem auto 0;
+  color: var(--paper-muted);
+  line-height: 1.8;
+}
+
+.link {
+  width: min(100%, 24rem);
+  min-height: var(--interactive-min-size);
+  margin: 2rem auto 0;
+  padding: 0.95rem 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  border: 2px solid var(--paper-ink);
+  color: var(--paper-light);
+  background: var(--paper-ink);
+  box-shadow: 0.45rem 0.45rem 0 color-mix(in srgb, var(--color-accent) 72%, var(--paper-ink));
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.link:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 0.25rem;
+}
+
+@media (hover: hover) {
+  .link:hover {
+    box-shadow: 0.65rem 0.65rem 0 color-mix(in srgb, var(--color-accent) 72%, var(--paper-ink));
+    transform: translate(-0.12rem, -0.12rem) rotate(-0.5deg);
+  }
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-pc) {
+  .contact h2 {
+    font-size: clamp(1.8rem, 4.2svh, 2.5rem);
+  }
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-pc) and (max-height: 800px) {
+  .contact h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition: none;
+  }
+}

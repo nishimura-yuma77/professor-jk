@@ -1,0 +1,50 @@
+@use "@/styles/variables/_breakpoint.scss" as breakpoint;
+@use "@/styles/feature/play-with-jk/paper";
+
+.kicker {
+  @include paper.kicker;
+}
+
+.steps {
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1.7rem;
+  list-style: none;
+}
+
+.steps li {
+  position: relative;
+  padding: 0.8rem;
+  border: 2px solid var(--paper-ink);
+  font-size: 1.2rem;
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+}
+
+.steps li:not(:last-child)::after {
+  content: "↓";
+  position: absolute;
+  bottom: -1.65rem;
+  left: 50%;
+  color: color-mix(in srgb, var(--color-accent) 78%, var(--paper-ink));
+  font-family: var(--font-family-mono);
+  transform: translateX(-50%);
+}
+
+.note {
+  @include paper.pencil-note;
+
+  margin-top: 2rem;
+  text-align: right;
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-pc) and (max-height: 800px) {
+  .steps {
+    margin-top: 1rem;
+  }
+
+  .note {
+    margin-top: 1.25rem;
+  }
+}

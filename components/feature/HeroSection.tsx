@@ -8,24 +8,24 @@ import TachieImage from "@/components/ui/TachieImage";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import TypewriterText from "@/components/primitives/TypewriterText";
 import { useEffect, useRef, useState } from "react";
+import { PROFILE_FLAVOR_TEXT, PROFILE_TEXT } from "@/const/profile"
 
 const HERO_TITLE = "SUBJECT_000"
 const TRANSFER_TEXT = "START TRANSFER PROTOCOL..."
-const PROFILE_TEXT = "イカれたエンジニア。\nシャーロック・ホームズのモリアーティ教授に憧れ、教授（Professor）を自称している。\n目の下のクマは恋人に振られた時に泣きすぎて取れなくなった。睡眠時間は8時間。"
 
 const HERO_PHASE_DURATION = {
   observer: 600,
   protocol: 800,
   transferring: 800,
-  posing: 200
+  posing: 250
 } as const
 
 const HERO_PHASE_INTERVAL = {
   titleToObserver: 200,
   observerToProtocol: 400,
   protocolToTransferring: 500,
-  transferringToPosing: 800,
-  posingToCompleted: 200
+  transferringToPosing: 500,
+  posingToCompleted: 100
 } as const
 
 // アニメーションのフェーズ制御。この6フェーズにあわせてアニメーションを発生させる。
@@ -41,6 +41,7 @@ export default function HeroSection() {
     isVisible
   } = useIntersectionObserver<HTMLDivElement>({ once: true })
   const [phase, setPhase] = useState<HeroPhase>("title")
+  const [isProfileTextComplete, setIsProfileTextComplete] = useState(false)
   const transitionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
@@ -178,7 +179,13 @@ export default function HeroSection() {
               text={PROFILE_TEXT}
               isVisible={phase === "completed"}
               animationDelay={1}
+              onAnimationEnd={() => setIsProfileTextComplete(true)}
             />
+          </p>
+          <p className={`${style.flavor_text} ${
+            isProfileTextComplete ? style.flavor_text_visible : ""
+          }`}>
+            {PROFILE_FLAVOR_TEXT}
           </p>
         </div>
       </div>

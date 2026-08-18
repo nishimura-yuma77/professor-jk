@@ -1,0 +1,84 @@
+@use "@/styles/variables/_breakpoint.scss" as breakpoint;
+@use "@/styles/feature/play-with-jk/paper";
+
+.tape {
+  @include paper.tape;
+
+  top: -0.65rem;
+  right: 16%;
+  width: 5.5rem;
+  transform: rotate(5deg);
+}
+
+.kicker {
+  @include paper.kicker;
+}
+
+.description {
+  margin-top: 1.25rem;
+  line-height: 1.8;
+}
+
+.actions {
+  margin: 1.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.actions li {
+  position: relative;
+  padding: 0.85rem 0.5rem;
+  border-block-end: 1px dashed color-mix(in srgb, var(--paper-ink) 32%, transparent);
+  font-size: 1.05rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.actions li:not(:last-child)::after {
+  content: "↓";
+  position: absolute;
+  z-index: 2;
+  right: 0.5rem;
+  bottom: -0.8rem;
+  color: color-mix(in srgb, var(--color-accent) 75%, var(--paper-ink));
+  font-family: var(--font-family-mono);
+}
+
+.skills {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  list-style: none;
+}
+
+.skills li {
+  padding: 0.25rem 0.45rem;
+  border: 1px solid color-mix(in srgb, var(--paper-ink) 42%, transparent);
+  font-family: var(--font-family-mono);
+  font-size: 0.68rem;
+  transform: rotate(-1deg);
+}
+
+.skills li:nth-child(even) {
+  transform: rotate(1deg);
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-pc) and (max-height: 800px) {
+  .description {
+    margin-top: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .actions {
+    margin-top: 1rem;
+  }
+
+  .actions li {
+    padding-block: 0.55rem;
+  }
+
+  .skills {
+    margin-top: 0.8rem;
+  }
+}

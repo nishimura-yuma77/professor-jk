@@ -1,0 +1,111 @@
+@use "@/styles/variables/_breakpoint.scss" as breakpoint;
+@use "@/styles/feature/play-with-jk/paper";
+
+.availability {
+  @include paper.surface;
+
+  width: min(100%, 62rem);
+  margin: 0 auto clamp(4rem, 9vw, 7rem);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  display: grid;
+  gap: 1.5rem;
+  clip-path: polygon(0.5% 1%, 21% 0, 43% 0.8%, 67% 0, 100% 1.2%, 99.2% 35%, 100% 71%, 99% 99%, 72% 100%, 48% 99%, 23% 100%, 0 98.5%, 0.8% 62%);
+  transform: rotate(0.25deg);
+}
+
+.closed {
+  box-shadow:
+    0.85rem 0.9rem 0 color-mix(in srgb, var(--color-accent) 12%, rgba(0, 0, 0, 0.34)),
+    inset 0.28rem 0 0 color-mix(in srgb, var(--color-accent-yellow) 60%, var(--color-accent));
+}
+
+.open {
+  box-shadow:
+    0.85rem 0.9rem 0 color-mix(in srgb, var(--color-accent-online) 10%, rgba(0, 0, 0, 0.34)),
+    inset 0.28rem 0 0 color-mix(in srgb, var(--color-accent-online) 65%, var(--paper-ink));
+}
+
+.tape {
+  @include paper.tape;
+
+  top: -0.65rem;
+  left: 12%;
+  width: 5.5rem;
+  transform: rotate(-3deg);
+}
+
+.copy h2 {
+  margin-top: 0.75rem;
+  font-size: clamp(1.65rem, 4.5vw, 2.5rem);
+  line-height: 1.25;
+}
+
+.description {
+  margin-top: 1rem;
+  color: var(--paper-muted);
+  line-height: 1.75;
+}
+
+.description p + p {
+  margin-top: 0.55rem;
+}
+
+.current_project {
+  padding: clamp(1.1rem, 3vw, 1.5rem);
+  border: 1px solid color-mix(in srgb, var(--paper-ink) 34%, transparent);
+  background: var(--paper-dark);
+  box-shadow: 0.4rem 0.45rem 0 color-mix(in srgb, var(--color-accent) 12%, transparent);
+  transform: rotate(-0.6deg);
+}
+
+.current_project header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: color-mix(in srgb, var(--color-accent-yellow) 66%, var(--paper-ink));
+  font-family: var(--font-family-mono);
+  font-size: 0.68rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+}
+
+.current_project h3 {
+  margin-top: 1rem;
+  color: color-mix(in srgb, var(--color-accent) 78%, var(--paper-ink));
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+}
+
+.subtitle {
+  margin-top: 0.2rem;
+  color: var(--paper-muted);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-small);
+}
+
+.project_description {
+  margin-top: 1rem;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+.current_project a {
+  width: fit-content;
+  margin-top: 1rem;
+  display: block;
+  color: var(--color-accent);
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-bold);
+  text-underline-offset: 0.25rem;
+}
+
+.current_project a:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 0.25rem;
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-tablet) {
+  .closed {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: center;
+  }
+}

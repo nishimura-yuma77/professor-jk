@@ -1,0 +1,19 @@
+.badge {
+  width: fit-content;
+  padding: 0.3rem 0.5rem;
+  border: 2px solid currentColor;
+  font-family: var(--font-family-mono);
+  font-size: 0.68rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.09em;
+  line-height: 1.2;
+  transform: rotate(-1deg);
+}
+
+.open {
+  color: color-mix(in srgb, var(--color-accent-online) 76%, var(--paper-ink));
+}
+
+.closed {
+  color: color-mix(in srgb, var(--color-accent-yellow) 70%, var(--color-accent));
+}

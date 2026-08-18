@@ -24,6 +24,7 @@ export default function TachieImage({
   onTransferEnd,
   onPoseEnd
 }: TachieImageProps) {
+  const isTransferring = phase === "transferring"
   const isPoseVisible = phase === "posing" || phase === "completed"
 
   const handleAnimationEnd = (event: AnimationEvent<HTMLDivElement>) => {
@@ -38,7 +39,9 @@ export default function TachieImage({
 
   return (
     <div
-      className={style.container}
+      className={`${style.container} ${
+        isTransferring ? style.transfer_active : ""
+      }`}
       style={{
         "--transfer-duration": `${transferDuration}ms`,
         "--pose-duration": `${poseDuration}ms`
@@ -46,11 +49,27 @@ export default function TachieImage({
     >
       <div
         className={`${style.surprised} ${
-          phase === "transferring" ? style.transferring : ""
+          isTransferring ? style.transferring : ""
         } ${isPoseVisible ? style.fade_out : ""
         }`}
         onAnimationEnd={handleAnimationEnd}
       >
+        <Image
+          src="/images/character/tachie_surprised.png"
+          alt=""
+          aria-hidden="true"
+          width={TACHIE_PROPS.width}
+          height={TACHIE_PROPS.height}
+          className={`${style.image} ${style.glitch_ghost} ${style.glitch_ghost_green}`}
+        />
+        <Image
+          src="/images/character/tachie_surprised.png"
+          alt=""
+          aria-hidden="true"
+          width={TACHIE_PROPS.width}
+          height={TACHIE_PROPS.height}
+          className={`${style.image} ${style.glitch_ghost} ${style.glitch_ghost_orange}`}
+        />
         <Image
           src="/images/character/tachie_surprised.png"
           alt="J.K. 立ち絵 驚き"
@@ -59,6 +78,10 @@ export default function TachieImage({
           loading="eager"
           className={style.image}
         />
+      </div>
+      <div className={style.transfer_effect} aria-hidden="true">
+        <span className={style.interference} />
+        <span className={style.scan_beam} />
       </div>
       <Image
         src="/images/character/tachie.png"

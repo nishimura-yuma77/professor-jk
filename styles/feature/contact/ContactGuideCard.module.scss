@@ -1,0 +1,228 @@
+.guide_area {
+  position: relative;
+  z-index: 3;
+  width: min(100%, 15rem);
+}
+
+.float_layer {
+  transform: translateY(0);
+}
+
+.float_active {
+  animation: float 3s ease-in-out infinite;
+}
+
+.card,
+.hint_card {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--color-accent);
+  border-radius: 0;
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-surface) 94%, transparent);
+  box-shadow: 0.5rem 0.5rem 0 color-mix(in srgb, var(--color-accent) 12%, transparent);
+}
+
+.card::after,
+.hint_card::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -0.45rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-top: 1px solid var(--color-accent);
+  border-right: 1px solid var(--color-accent);
+  background: var(--color-surface);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.card {
+  padding: 0.8rem 0.9rem 0;
+  display: block;
+  overflow: visible;
+  font: inherit;
+  text-align: left;
+  opacity: 0;
+  transform: translateX(2rem) scale(0.96);
+  transform-origin: right center;
+  pointer-events: none;
+  transition:
+    opacity 550ms ease-out,
+    transform 550ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.card_visible {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.card_visible:not(:disabled) {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.eyebrow,
+.action {
+  font-family: var(--font-family-mono);
+  letter-spacing: 0.08em;
+}
+
+.eyebrow {
+  display: block;
+  color: var(--color-accent-dark);
+  font-size: 0.6rem;
+}
+
+.question {
+  margin-top: 0.4rem;
+  display: block;
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.55;
+}
+
+.action {
+  margin: 0.75rem -0.9rem 0;
+  padding: 0.6rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--color-background);
+  background: var(--color-accent);
+  font-size: 0.68rem;
+  font-weight: var(--font-weight-bold);
+  opacity: 0;
+  transform: translateX(0.75rem);
+  transition:
+    opacity 300ms ease-out,
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 200ms ease,
+    background-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.action_visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.card_visible:not(:disabled):focus-visible {
+  outline: 1px solid var(--color-accent);
+  outline-offset: 0.3rem;
+  transform: translateY(-0.3rem);
+  background: var(--color-surface);
+  box-shadow: 0 0.85rem 1.5rem rgba(0, 0, 0, 0.32);
+}
+
+.card_visible:not(:disabled):focus-visible .action {
+  color: var(--color-accent);
+  background: var(--color-background);
+  box-shadow: inset 0 0 0 1px var(--color-accent);
+}
+
+.float_layer:focus-within {
+  animation-play-state: paused;
+}
+
+.hint_card {
+  padding: 0.65rem 0.8rem;
+  box-shadow: 0 0.65rem 1.25rem rgba(0, 0, 0, 0.24);
+}
+
+.hint_message {
+  margin-bottom: 0.65rem;
+  color: color-mix(in srgb, var(--color-text) 90%, transparent);
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.65;
+}
+
+.hint_card button {
+  width: 100%;
+  min-height: 2rem;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  background: transparent;
+  font: inherit;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: color 200ms ease, background-color 200ms ease;
+}
+
+.hint_card button:hover,
+.hint_card button:focus-visible {
+  color: var(--color-background);
+  background: var(--color-accent);
+}
+
+@media (hover: hover) {
+  .float_layer:hover {
+    animation-play-state: paused;
+  }
+
+  .card_visible:not(:disabled):hover {
+    transform: translateY(-0.3rem);
+    background: var(--color-surface);
+    box-shadow: 0 0.85rem 1.5rem rgba(0, 0, 0, 0.32);
+  }
+
+  .card_visible:not(:disabled):hover .action {
+    color: var(--color-accent);
+    background: var(--color-background);
+    box-shadow: inset 0 0 0 1px var(--color-accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float_active {
+    animation: none;
+  }
+
+  .card,
+  .action {
+    transition-duration: 0.01ms;
+  }
+}
+
+@media (max-width: 767px) {
+  .card {
+    padding: 0.6rem 0.65rem 0;
+  }
+
+  .question {
+    font-size: 0.72rem;
+  }
+
+  .action {
+    margin-inline: -0.65rem;
+    padding: 0.5rem 0.55rem;
+    font-size: 0.6rem;
+  }
+
+  .hint_card {
+    padding: 0.55rem 0.65rem;
+  }
+
+  .hint_message,
+  .hint_card button {
+    font-size: 0.7rem;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}

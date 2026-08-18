@@ -1,0 +1,156 @@
+@use "@/styles/variables/_breakpoint.scss" as breakpoint;
+@use "@/styles/feature/play-with-jk/paper";
+
+.page_content {
+  --paper: #24211c;
+  --paper-light: #2d2922;
+  --paper-dark: #181715;
+  --paper-ink: #d8c2a3;
+  --paper-muted: #9b8266;
+  --tape: rgba(91, 72, 50, 0.86);
+
+  width: min(calc(100% - 2rem), var(--content-width-wide));
+  margin-inline: auto;
+  padding: clamp(2rem, 7vw, 5rem) 0 7rem;
+}
+
+.collage {
+  display: grid;
+  gap: 4.5rem;
+}
+
+.paper {
+  @include paper.surface;
+
+  padding: clamp(1.5rem, 4.5vw, 2.75rem);
+  clip-path: polygon(0 1%, 24% 0, 46% 0.7%, 70% 0, 100% 1.2%, 99.3% 31%, 100% 59%, 99.1% 100%, 72% 99%, 48% 100%, 23% 99.2%, 0.5% 100%, 1% 66%);
+}
+
+.paper h2 {
+  margin-top: 0.45rem;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  line-height: 1.25;
+}
+
+.wanted {
+  background-color: var(--paper-light);
+  transform: rotate(0.45deg);
+}
+
+.toolkit {
+  background-color: #29241e;
+  transform: rotate(-1deg);
+}
+
+.experiments {
+  background-color: #201e1a;
+  transform: rotate(-0.3deg);
+}
+
+.rules {
+  padding-bottom: 3.5rem;
+  background-color: var(--paper-light);
+  transform: rotate(0.55deg);
+}
+
+.start {
+  background-color: #2a251e;
+  transform: rotate(-1.2deg);
+}
+
+.toolkit_slot,
+.start_slot {
+  align-self: start;
+}
+
+.start_slot {
+  margin-top: 1.5rem;
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-tablet) {
+  .page_content {
+    width: min(calc(100% - 3rem), var(--content-width-wide));
+  }
+
+  .collage {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6rem 2rem;
+  }
+
+  .wanted_slot {
+    grid-column: 1;
+  }
+
+  .toolkit_slot {
+    grid-column: 2;
+    margin-top: 0;
+  }
+
+  .experiments_slot {
+    grid-column: 1 / -1;
+    margin-inline: 2rem;
+  }
+
+  .rules_slot {
+    grid-column: 1;
+  }
+
+  .start_slot {
+    grid-column: 2;
+    margin-top: 0;
+  }
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-pc) {
+  .page_content {
+    padding-top: 1.5rem;
+  }
+
+  .collage {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: clamp(4rem, 9svh, 7rem) 1.25rem;
+  }
+
+  .paper {
+    padding: clamp(1.5rem, 3svh, 2.25rem);
+  }
+
+  .paper h2 {
+    font-size: clamp(1.8rem, 4.2svh, 2.5rem);
+  }
+
+  .wanted_slot {
+    grid-column: 1 / span 8;
+  }
+
+  .toolkit_slot {
+    grid-column: 9 / -1;
+  }
+
+  .experiments_slot {
+    grid-column: 2 / span 10;
+    margin-inline: 0;
+  }
+
+  .rules_slot {
+    grid-column: 1 / span 8;
+  }
+
+  .rules {
+    padding-bottom: clamp(1.5rem, 3svh, 2.25rem);
+  }
+
+  .start_slot {
+    grid-column: 9 / -1;
+  }
+}
+
+@media screen and (min-width: breakpoint.$breakpoint-pc) and (max-height: 800px) {
+  .paper {
+    padding: 1.5rem;
+  }
+
+  .paper h2 {
+    font-size: 2rem;
+  }
+}

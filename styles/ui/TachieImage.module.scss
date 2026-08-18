@@ -1,79 +1,231 @@
+$transfer-easing: cubic-bezier(0.16, 1, 0.3, 1);
+
 .container {
   position: relative;
   isolation: isolate;
   width: 100%;
   aspect-ratio: 832 / 1216;
   overflow: hidden;
-
-  .surprised {
-    position: relative;
-    width: 100%;
-    clip-path: inset(0 0 100% 0);
-
-    .image {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-
-      width: 100%;
-      height: 1px;
-
-      background-color: var(--color-accent-online);
-      z-index: 2;
-
-      opacity: 0;
-    }
-  }
-
-  .transferring {
-    animation: appear var(--transfer-duration) linear forwards;
-
-    &::after {
-      opacity: 1;
-      animation: scan var(--transfer-duration) linear forwards;
-    }
-  }
-
-  .thumbs_up {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    width: 100%;
-    height: auto;
-  }
-  .fade_in {
-    animation: fade-in var(--pose-duration) linear forwards;
-  }
-  .fade_out {
-    clip-path: inset(0);
-    animation: fade-out var(--pose-duration) linear forwards;
-  }
 }
 
-@keyframes appear {
+.surprised {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  clip-path: inset(0 0 100% 0);
+}
+
+.image {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.glitch_ghost {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.glitch_ghost_green {
+  filter: sepia(1) saturate(8) hue-rotate(70deg) brightness(1.5);
+}
+
+.glitch_ghost_orange {
+  filter: sepia(1) saturate(8) hue-rotate(330deg) brightness(1.6);
+}
+
+.transferring {
+  animation: materialize var(--transfer-duration) $transfer-easing forwards;
+}
+
+.transfer_effect {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.interference {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.interference {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 0.55rem,
+    color-mix(in srgb, var(--color-accent-online) 18%, transparent) 0.55rem 0.65rem,
+    transparent 0.65rem 1.2rem
+  );
+  mix-blend-mode: screen;
+}
+
+.scan_beam {
+  position: absolute;
+  top: 0;
+  left: -5%;
+  width: 110%;
+  height: 0.2rem;
+  background: var(--color-accent-white);
+  box-shadow:
+    0 0 0.6rem var(--color-accent-online),
+    0 0 1.5rem var(--color-accent-online),
+    0 0 3rem color-mix(in srgb, var(--color-accent) 60%, transparent);
+  opacity: 0;
+}
+
+.transfer_active .glitch_ghost_green {
+  animation: glitch-green var(--transfer-duration) steps(1, end) both;
+}
+
+.transfer_active .glitch_ghost_orange {
+  animation: glitch-orange var(--transfer-duration) steps(1, end) both;
+}
+
+.transfer_active .interference {
+  animation: interference var(--transfer-duration) steps(6, end) both;
+}
+
+.transfer_active .scan_beam {
+  animation: scan var(--transfer-duration) $transfer-easing both;
+}
+
+.thumbs_up {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  opacity: 0;
+}
+
+.fade_in {
+  animation: fade-in var(--pose-duration) linear forwards;
+}
+
+.fade_out {
+  clip-path: inset(0);
+  animation: fade-out var(--pose-duration) linear forwards;
+}
+
+@keyframes materialize {
   from {
     clip-path: inset(0 0 100% 0);
+    filter: brightness(3) contrast(1.4) drop-shadow(0 0 1rem var(--color-accent-online));
+    opacity: 0;
   }
 
   to {
     clip-path: inset(0);
+    filter: none;
+    opacity: 1;
+  }
+}
+
+@keyframes glitch-green {
+  0%,
+  14%,
+  32%,
+  56%,
+  78% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+
+  8%,
+  26%,
+  50%,
+  72% {
+    clip-path: inset(12% 0 58% 0);
+    opacity: 0.7;
+    transform: translateX(-0.75rem);
+  }
+
+  38%,
+  84% {
+    clip-path: inset(52% 0 18% 0);
+    opacity: 0.55;
+    transform: translateX(-0.4rem);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes glitch-orange {
+  0%,
+  20%,
+  42%,
+  64%,
+  88% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+
+  12%,
+  34%,
+  58%,
+  80% {
+    clip-path: inset(38% 0 30% 0);
+    opacity: 0.65;
+    transform: translateX(0.7rem);
+  }
+
+  48%,
+  94% {
+    clip-path: inset(8% 0 72% 0);
+    opacity: 0.5;
+    transform: translateX(0.35rem);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes interference {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  15%,
+  45%,
+  75% {
+    opacity: 0.65;
+    transform: translateY(-0.4rem);
+  }
+
+  30%,
+  60%,
+  90% {
+    opacity: 0.25;
+    transform: translateY(0.35rem);
   }
 }
 
 @keyframes scan {
-  from {
+  0% {
     top: 0;
+    opacity: 0;
   }
 
-  to {
+  8%,
+  88% {
+    opacity: 1;
+  }
+
+  100% {
     top: 100%;
+    opacity: 0;
   }
 }
 
@@ -81,6 +233,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -90,18 +243,21 @@
   from {
     opacity: 1;
   }
+
   to {
     opacity: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .container {
-    .transferring,
-    .transferring::after,
-    .fade_in,
-    .fade_out {
-      animation-duration: 0.01ms;
-    }
+  .transferring,
+  .fade_in,
+  .fade_out {
+    animation-duration: 0.01ms;
+  }
+
+  .glitch_ghost,
+  .transfer_effect {
+    display: none;
   }
 }

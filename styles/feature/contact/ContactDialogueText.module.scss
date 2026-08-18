@@ -1,0 +1,74 @@
+.container {
+  width: 100%;
+  min-height: 5.5rem;
+  padding: 0;
+  display: block;
+  border: 0;
+  outline: none;
+  color: var(--color-text);
+  background: transparent;
+  font: inherit;
+  line-height: 1.85;
+  text-align: left;
+  white-space: pre-wrap;
+  cursor: pointer;
+}
+
+.container:focus-visible {
+  outline: 1px solid var(--color-accent);
+  outline-offset: 0.35rem;
+}
+
+.container:disabled {
+  color: var(--color-text);
+  cursor: default;
+}
+
+.cursor {
+  width: 0.5rem;
+  height: 1.15rem;
+  margin-left: 0.15rem;
+  display: inline-block;
+  background: var(--color-accent);
+  vertical-align: -0.15em;
+  animation: blink 800ms step-end infinite;
+}
+
+.next {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.75rem;
+  color: var(--color-accent);
+  font-family: var(--font-family-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  animation: prompt 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor,
+  .next {
+    animation: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .next {
+    right: 0.7rem;
+    bottom: 0.55rem;
+    font-size: 0.55rem;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes prompt {
+  50% {
+    opacity: 0.45;
+  }
+}

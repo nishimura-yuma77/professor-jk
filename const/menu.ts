@@ -1,0 +1,30 @@
+import { XTWITTER_LINK, YOUTUBE_LINK } from "@/const/constants"
+
+export const MENU = {
+  home: {
+    label: "HOME",
+    subLabel: null,
+    href: "/",
+  },
+  play: {
+    label: "PLAY",
+    subLabel: "with J.K.",
+    href: "/play-with-jk",
+  },
+  contact: {
+    label: "CONTACT",
+    subLabel: "or FAN LETTER",
+    href: "/contact",
+  },
+} as const
+
+export const EXTERNAL_MENU = {
+  youtube: {
+    label: "YOUTUBE",
+    href: YOUTUBE_LINK,
+  },
+  xTwitter: {
+    label: "X / TWITTER",
+    href: XTWITTER_LINK,
+  },
+} as const
