@@ -225,7 +225,8 @@ export default function ContactPage() {
                 <div ref={titleRef} className={style.introduction}>
                   <h1 className={style.visually_hidden}>お問い合わせ・ファンレター</h1>
                   <SectionTitle
-                    title="CONTACT / FAN LETTER"
+                    title="CONTACT"
+                    subtitle="or FAN LETTER"
                     isVisible={isTitleVisible}
                     onAnimationEnd={() => {
                       schedulePhaseTransition(

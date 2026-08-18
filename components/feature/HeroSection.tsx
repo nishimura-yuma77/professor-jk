@@ -17,15 +17,15 @@ const HERO_PHASE_DURATION = {
   observer: 600,
   protocol: 800,
   transferring: 800,
-  posing: 200
+  posing: 250
 } as const
 
 const HERO_PHASE_INTERVAL = {
   titleToObserver: 200,
   observerToProtocol: 400,
   protocolToTransferring: 500,
-  transferringToPosing: 800,
-  posingToCompleted: 200
+  transferringToPosing: 500,
+  posingToCompleted: 100
 } as const
 
 // アニメーションのフェーズ制御。この6フェーズにあわせてアニメーションを発生させる。

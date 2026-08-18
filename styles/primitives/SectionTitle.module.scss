@@ -1,4 +1,7 @@
 .container {
+  display: flex;
+  align-items: flex-start;
+
   .prompt_symbol {
     padding-right: 0.5rem;
     font-weight: var(--font-weight-bold);
@@ -6,17 +9,44 @@
     color: var(--color-accent-online);
     animation: pulse 2s linear infinite;
   }
+  .title_group {
+    min-width: 0;
+    display: grid;
+    gap: 0.1rem;
+  }
   .title {
     text-align: center;
     font-family: var(--font-family-mono);
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-title);
     color: var(--color-accent);
+    white-space: nowrap;
+  }
+  .subtitle {
+    color: var(--color-accent-dark);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(0.2rem);
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+  .subtitle_visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 @keyframes pulse {
   50% {
     opacity: 0.8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container .subtitle {
+    transition: none;
   }
 }

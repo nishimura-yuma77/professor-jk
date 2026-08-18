@@ -20,12 +20,13 @@ export const EXPERIMENTS: Experiment[] = [
     code: "EXP_001",
     title: "J.K. Lab",
     subtitle: "Character Brand Website",
-    description: "J.K.教授の世界観を表現するキャラクターサイト。キャラクターデザイン・設計・実装・インフラ構築・CI/CDまで一貫して構築。",
+    description: "J.K.教授の世界観を表現するキャラクターサイト。キャラクターデザイン・設計・実装・インフラ構築・CI/CDまで一貫して担当。",
     status: "ACTIVE",
     published: true,
     stacks: [
       "Next.js",
       "TypeScript",
+      "Python",
       "SCSS",
       "Terraform",
       "AWS"
