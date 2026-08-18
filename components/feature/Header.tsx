@@ -190,7 +190,9 @@ export default function Header() {
             </div>
             <ul className={style.menu_list}>
               {menuItems.map((item) => {
-                const isCurrent = pathname === item.href
+                const isCurrent = item.href === "/"
+                  ? pathname === item.href
+                  : pathname === item.href || pathname.startsWith(`${item.href}/`)
 
                 return (
                   <li key={item.href}>
