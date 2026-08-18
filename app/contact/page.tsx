@@ -20,6 +20,7 @@ import type {
 import Header from "@/components/feature/Header"
 import Footer from "@/components/feature/Footer"
 import SectionTitle from "@/components/primitives/SectionTitle"
+import PageBackground from "@/components/ui/PageBackground"
 import useContactMutation, {
   isContactMutationError,
   type ContactMutationPayload,
@@ -216,8 +217,7 @@ export default function ContactPage() {
   return (
     <>
       <Header />
-      <main className={style.main}>
-        <div className={style.glow} aria-hidden="true" />
+      <PageBackground className={style.main}>
         <section className={style.container}>
           <div className={style.form_panel_wrapper}>
             <div className={style.top_content}>
@@ -377,7 +377,7 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
-      </main>
+      </PageBackground>
       <Footer />
 
       <dialog
