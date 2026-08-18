@@ -208,9 +208,11 @@
 .menu_link {
   min-height: 5rem;
   padding: 0 clamp(1.5rem, 6vw, 4rem);
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: center;
+  align-items: start;
+  column-gap: 0.75rem;
   border-bottom: 1px solid var(--color-border);
   color: var(--color-text);
   font-family: var(--font-family-mono);
@@ -221,8 +223,8 @@
 }
 
 .menu_prompt {
-  flex: 0 0 auto;
   color: var(--color-accent-online);
+  line-height: 1.2;
   opacity: 0;
 }
 
@@ -240,6 +242,10 @@
 .menu_label,
 .menu_sublabel {
   white-space: nowrap;
+}
+
+.menu_label {
+  line-height: 1.2;
 }
 
 .menu_sublabel {
