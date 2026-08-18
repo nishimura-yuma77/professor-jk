@@ -231,8 +231,42 @@
   animation: prompt-appear 80ms steps(1, end) both;
 }
 
-.menu_label {
+.menu_text {
   min-width: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.menu_label,
+.menu_sublabel {
+  white-space: nowrap;
+}
+
+.menu_sublabel {
+  color: var(--color-accent-dark);
+  font-size: clamp(0.65rem, 0.45em, 0.8rem);
+  letter-spacing: 0.08em;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.25rem);
+  transition:
+    color 160ms ease,
+    opacity 160ms ease,
+    visibility 0s 160ms,
+    transform 160ms ease;
+}
+
+.menu_sublabel_visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+.menu_link:hover .menu_sublabel,
+.menu_link:focus-visible .menu_sublabel,
+.menu_link_current .menu_sublabel {
+  color: color-mix(in srgb, var(--color-accent) 72%, var(--color-text));
 }
 
 .menu_link:hover,
@@ -373,7 +407,8 @@
   .terminal_panel,
   .menu_button,
   .menu_command_cursor,
-  .external_menu {
+  .external_menu,
+  .menu_sublabel {
     animation: none;
     transition: none;
   }

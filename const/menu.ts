@@ -3,10 +3,12 @@ import { XTWITTER_LINK, YOUTUBE_LINK } from "@/const/constants"
 export const MENU = {
   home: {
     label: "HOME",
+    subLabel: null,
     href: "/",
   },
   contact: {
     label: "CONTACT",
+    subLabel: "or FAN LETTER",
     href: "/contact",
   },
 } as const

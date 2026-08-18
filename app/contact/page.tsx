@@ -223,9 +223,9 @@ export default function ContactPage() {
             <div className={style.top_content}>
               <div className={style.assistant_column}>
                 <div ref={titleRef} className={style.introduction}>
-                  <h1 className={style.visually_hidden}>お問い合わせ</h1>
+                  <h1 className={style.visually_hidden}>お問い合わせ・ファンレター</h1>
                   <SectionTitle
-                    title="CONTACT"
+                    title="CONTACT / FAN LETTER"
                     isVisible={isTitleVisible}
                     onAnimationEnd={() => {
                       schedulePhaseTransition(

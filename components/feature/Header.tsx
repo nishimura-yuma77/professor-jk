@@ -220,15 +220,24 @@ export default function Header() {
                       >
                         &gt;
                       </span>
-                      <span className={style.menu_label}>
-                        <TypewriterText
-                          text={item.label}
-                          isVisible={isTypingVisible}
-                          animationDelay={MENU_CHARACTER_DELAY_MS}
-                          displayCursor={menuPhase === "typing"
-                            || (isMenuInteractive && hoveredMenuHref === item.href)}
-                          onAnimationEnd={() => handleMenuItemTypeEnd(item.href)}
-                        />
+                      <span className={style.menu_text}>
+                        <span className={style.menu_label}>
+                          <TypewriterText
+                            text={item.label}
+                            isVisible={isTypingVisible}
+                            animationDelay={MENU_CHARACTER_DELAY_MS}
+                            displayCursor={menuPhase === "typing"
+                              || (isMenuInteractive && hoveredMenuHref === item.href)}
+                            onAnimationEnd={() => handleMenuItemTypeEnd(item.href)}
+                          />
+                        </span>
+                        {item.subLabel && (
+                          <span className={`${style.menu_sublabel} ${
+                            isMenuInteractive ? style.menu_sublabel_visible : ""
+                          }`}>
+                            {item.subLabel}
+                          </span>
+                        )}
                       </span>
                     </Link>
                   </li>

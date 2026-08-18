@@ -46,7 +46,7 @@ export const CONTACT_GUIDES: ContactGuide[] = [
   },
   {
     id: "work-request",
-    label: "開発・出演依頼",
+    label: "掲載・出演・開発依頼",
     guidance:
       "仕事の依頼だな。依頼したい内容、希望時期、予算の目安が分かると判断しやすい。まだ決まっていない項目は、未定と書いてくれれば構わないぞ。",
     hints: [
@@ -55,7 +55,7 @@ export const CONTACT_GUIDES: ContactGuide[] = [
       "予算の目安・未定事項",
     ],
     template: {
-      subject: "[開発・出演依頼] ○○について",
+      subject: "[掲載・出演・開発依頼] ○○について",
       message:
         "会社・団体名：\n[ここに入力]\n\n依頼内容と期待する役割：\n[ここに入力]\n\n希望時期・スケジュール：\n[ここに入力]\n\n予算の目安：\n[ここに入力／未定]\n\n補足資料・URL：\n[ここに入力]",
     },
