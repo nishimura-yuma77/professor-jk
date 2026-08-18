@@ -22,6 +22,14 @@ resource "aws_cloudfront_origin_access_control" "site" {
   signing_protocol = "sigv4" // AWS　Signature Version 4での署名(現状署名方式はこれひとつのみ)
 }
 
+resource "aws_cloudfront_function" "rewrite_uri" {
+  name    = "professor-jk-rewrite-uri"
+  runtime = "cloudfront-js-2.0"
+  comment = "Rewrite extensionless paths to static HTML objects"
+  publish = true
+  code    = file("${path.module}/cloudfront-functions/rewrite-uri.js")
+}
+
 // CloudFrontのディストリビューション
 resource "aws_cloudfront_distribution" "site" {
   enabled = true
@@ -46,6 +54,11 @@ resource "aws_cloudfront_distribution" "site" {
       cookies {
         forward = "none"
       }
+    }
+
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.rewrite_uri.arn
     }
   }
 

@@ -11,7 +11,13 @@ def route(event: dict[str, Any]):
 
     if path != "/contact":
         return json_response(404, {"message": "Not found."})
+    if method == "OPTIONS":
+        return {"statusCode": 204}
     if method != "POST":
-        return json_response(405, {"message": "Method not allowed."}, {"allow": "POST"})
+        return json_response(
+            405,
+            {"message": "Method not allowed."},
+            {"allow": "OPTIONS, POST"},
+        )
 
     return contact_controller.handle_contact(event)
