@@ -9,7 +9,7 @@ export default function MediaSection() {
   const {
     ref,
     isVisible
-  } = useIntersectionObserver<HTMLDivElement>({})
+  } = useIntersectionObserver<HTMLDivElement>({ once: true })
   return (
     <SectionContainer ref={ref}>
       <SectionTitle title={"002_MEDIA"} isVisible={isVisible} />
