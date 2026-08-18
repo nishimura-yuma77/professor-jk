@@ -21,8 +21,8 @@
   --z-effect: 9999;
 
   // font-family
-  --font-family-base: var(--font-family-base), sans-serif;
-  --font-family-mono: var(--font-ibm-plex-mono);
+  --font-family-base: var(--font-zen-kaku), sans-serif;
+  --font-family-mono: var(--font-ibm-plex-mono), var(--font-zen-kaku), ui-monospace, monospace;
   // font-size
   --font-size-absolute-base: 16px;
   --font-size-exsmall: 0.5rem; // 8px
