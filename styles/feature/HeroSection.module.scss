@@ -112,6 +112,24 @@
       padding: var(--padding-large);
       white-space: pre-line;
     }
+    .flavor_text {
+      max-width: 26rem;
+      margin: 0 0 0 auto;
+      padding: 0 var(--padding-large) var(--padding-large);
+      color: var(--color-accent-dark);
+      font-family: var(--font-family-mono);
+      font-size: var(--font-size-small);
+      font-style: italic;
+      line-height: 1.6;
+      text-align: right;
+      opacity: 0;
+      transform: translateY(0.35rem);
+      transition: opacity 300ms ease, transform 300ms ease;
+    }
+    .flavor_text_visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
@@ -194,7 +212,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .profile_content .transfer_console,
-  .profile_content .transfer_console_hidden {
+  .profile_content .transfer_console_hidden,
+  .profile_content .flavor_text {
     transition: none;
   }
 }

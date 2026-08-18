@@ -4,33 +4,8 @@ import SectionContainer from "@/components/primitives/SectionContainer"
 import SectionTitle from "@/components/primitives/SectionTitle"
 import style from "@/styles/feature/DataSection.module.scss"
 import TypewriterText from "../primitives/TypewriterText"
+import { PROFILE_DATA } from "@/const/profile"
 
-const PROFILE_DATA = [
-  {
-    header: "BIRTHDAY",
-    content: "7月7日"
-  },
-  {
-    header: "CODE",
-    content: "PROFESSOR. J.K."
-  },
-  {
-    header: "HEIGHT",
-    content: "167cm"
-  },
-  {
-    header: "LIKES",
-    content: "ゲーム / 開発"
-  },
-  {
-    header: "DISLIKES",
-    content: "野菜 / 片づけ"
-  },
-  {
-    header: "MOTTO",
-    content: "チビじゃない。器がデカい。"
-  }
-]
 export default function DataSection() {
   const {
     ref,
