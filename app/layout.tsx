@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 import { Zen_Kaku_Gothic_New, IBM_Plex_Mono } from "next/font/google"
 import "@/app/globals.scss"
-import "@/components/providers/ErrorProvider"
 import ErrorProvider from "@/components/providers/ErrorProvider"
+import QueryProvider from "@/components/providers/QueryProvider"
 
 const SITE_TITLE = "J.K.教授の開発ラボ | J.K. Lab"
 const SITE_DESCRIPTION = "エンジニアとして活動するJ.K.教授のキャラクター紹介と、開発実験・プロジェクトを掲載するポートフォリオサイトです。"
@@ -62,9 +62,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${zenKakuGothicNew.variable} ${ibmPlexMono.variable}`}
     >
       <body className="">
-        <ErrorProvider>
-          {children}
-        </ErrorProvider>
+        <QueryProvider>
+          <ErrorProvider>
+            {children}
+          </ErrorProvider>
+        </QueryProvider>
       </body>
     </html>
   );
