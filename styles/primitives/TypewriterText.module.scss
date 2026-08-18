@@ -8,12 +8,12 @@
   }
   .cursor {
     display: inline-block;
-    width: 0.5rem;
-    height: 1.25rem;
-    margin-left: 0.15rem;
+    width: 0.45em;
+    height: 1em;
+    margin-left: 0.15em;
 
     background-color: currentColor;
-    vertical-align: -0.15em;
+    vertical-align: -0.1em;
 
     animation: blink 1s step-end infinite;
   }

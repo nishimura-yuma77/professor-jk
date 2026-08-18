@@ -40,7 +40,7 @@ function TypewriterAnimation({
   const [currentIndex, setCurrentIndex] = useState(-1)
 
   return (
-    <span className={style.text}>
+    <span className={`${style.text} ${className ?? ""}`}>
       {currentIndex === -1 && isVisible && displayCursor && (
         <span className={style.cursor} />
       )}
@@ -56,7 +56,7 @@ function TypewriterAnimation({
               }}
               className={`${style.char} ${
                 isVisible ? style.char_active : ""
-              } ${className ?? ""}`}
+              }`}
               onAnimationEnd={() => {
                 setCurrentIndex(index)
 
