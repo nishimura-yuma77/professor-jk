@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next"
+import { getBlogArticles } from "@/const/blog"
 
 export const dynamic = "force-static"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: "https://professor-jk.net/"
     },
@@ -12,6 +13,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: "https://professor-jk.net/contact"
+    },
+    {
+      url: "https://professor-jk.net/blog"
     }
+  ]
+
+  return [
+    ...staticPages,
+    ...getBlogArticles().map((article) => ({
+      url: `https://professor-jk.net/blog/${article.slug}`,
+      lastModified: article.updatedAt ?? article.publishedAt,
+    })),
   ]
 }
