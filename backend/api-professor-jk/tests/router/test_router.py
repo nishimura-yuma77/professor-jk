@@ -30,8 +30,19 @@ def test_route_未定義のパスには404を返す():
     assert json.loads(response["body"]) == {"message": "Not found."}
 
 
+def test_route_お問い合わせへのOPTIONSには204を返す(monkeypatch):
+    def fail_if_called(_event):
+        raise AssertionError("contact controller must not be called")
+
+    monkeypatch.setattr(router.contact_controller, "handle_contact", fail_if_called)
+
+    response = router.route(make_event(method="OPTIONS"))
+
+    assert response == {"statusCode": 204}
+
+
 def test_route_お問い合わせへのPOST以外には405を返す():
     response = router.route(make_event(method="GET"))
 
     assert response["statusCode"] == 405
-    assert response["headers"]["allow"] == "POST"
+    assert response["headers"]["allow"] == "OPTIONS, POST"
