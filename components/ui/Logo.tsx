@@ -3,6 +3,8 @@ import Link from "next/link"
 
 export default function Logo(){
   return (
-    <span className={style.text}>PROF.J.K.</span>
+    <Link href="/" className={style.text} aria-label="ホームへ戻る">
+      PROF.J.K.
+    </Link>
   )
 }
