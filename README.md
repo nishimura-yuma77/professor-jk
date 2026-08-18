@@ -2,7 +2,7 @@
 
 J.K.教授のキャラクター紹介と、彼が担当したプロジェクト・メディアなどを掲載するポートフォリオサイトです。
 
-フロントエンドはNext.jsの静的サイト、バックエンドはPythonのLambdaで構築し、インフラの構成管理からデプロイまでをTerraformとAWSで行っています。
+フロントエンドはNext.jsで静的出力し、バックエンドはPythonのLambdaで構築しています。お問い合わせ送信時は、静的配信されたフロントエンドからブラウザ経由でバックエンドAPIを呼び出します。インフラの構成管理からデプロイまではTerraformとAWSで行っています。
 
 ## 本番サイト
 
@@ -16,6 +16,7 @@ https://professor-jk.net
 - React 19
 - TypeScript
 - SCSS
+- TanStack Query
 
 ### バックエンド
 
@@ -48,7 +49,7 @@ https://professor-jk.net
 - uv
 - Git
 
-フロントエンドの起動に環境変数は必要ありません。バックエンドの環境変数はTerraformでLambdaへ設定します。
+フロントエンドの起動に必須の環境変数はありません。Contact APIを呼び出さず成功レスポンスを返す任意の開発用モックは、[`.env.local.example`](./.env.local.example)の`NEXT_PUBLIC_USE_CONTACT_API_MOCK`で切り替えます。バックエンドの環境変数はTerraformでLambdaへ設定します。
 
 ## 環境構築
 
@@ -88,18 +89,44 @@ npm run dev
 
 ```text
 .
-├── app/          # URLに対応して表示するページ
+├── api/          # ブラウザからバックエンドを呼び出すAPIクライアント
+├── app/          # ページ、レイアウト、メタデータ、ページ固有スタイル
 ├── backend/      # Lambdaで動作するバックエンドAPI
 ├── components/   # UIコンポーネント
-├── const/        # サイト内で使用するデータと定数
+├── const/        # サイト内で使用するデータ、型、定数
 ├── contexts/     # React Context
-├── hooks/        # カスタムフック
+├── hooks/        # UIロジックとデータアクセス用カスタムフック
 ├── public/       # 画像などの静的ファイル
-├── styles/       # 共通スタイル
+├── styles/       # コンポーネント対応SCSS Modulesと共通SCSS変数
 └── terraform/    # AWSインフラのTerraform定義
 ```
 
 サブディレクトリの構成と各ディレクトリの設計意図は、[DIRMAP.md](./DIRMAP.md)を参照してください。
+
+## フロントエンド設計
+
+### ページ固有コンポーネント
+
+`app/`にはNext.jsのページ、レイアウト、メタデータと、ページ全体の外枠を担当するスタイルを配置します。ページから抽出したコンポーネントは、そのページでしか使用しない場合でも`components/feature/`へ配置します。複数のコンポーネントで1つの機能を構成する場合は、`components/feature/contact/`のように機能名のディレクトリへまとめます。
+
+コンポーネント固有のSCSS Moduleは`components/`の構成に対応させて`styles/`へ配置します。たとえば、`components/feature/contact/ContactGuide.tsx`のスタイルは`styles/feature/contact/ContactGuide.module.scss`で管理します。
+
+### APIアクセス
+
+フロントエンドのデータアクセスは、以下の依存方向に統一します。
+
+```text
+app/components -> hooks/query・hooks/mutation -> api -> const
+```
+
+- `app/`と`components/`から`api/`を直接参照したり、`fetch`を直接実行したりしません。
+- 読み取り処理はTanStack Queryの`useQuery`、作成・更新・削除・送信などの副作用は`useMutation`を使用します。
+- UIは`useQuery`や`useMutation`を直接組み立てず、`hooks/query/`または`hooks/mutation/`の機能別カスタムフックを利用します。
+- `api/`はHTTP通信、DTO、レスポンス解析、API固有エラーを担当し、ReactやTanStack Queryには依存しません。
+- UIで必要な入力型やエラー判定は、カスタムフックの公開インターフェースを通して利用します。
+- フロントエンドの入力検証は即時フィードバックのために行い、バックエンドの入力検証を正式な判定とします。
+
+現在は読み取りAPIがないため`hooks/query/`は未作成です。読み取り処理を追加する際に、この規則に従って作成します。
 
 ## バックエンド設計
 

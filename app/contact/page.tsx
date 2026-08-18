@@ -20,11 +20,13 @@ import type {
 import Header from "@/components/feature/Header"
 import Footer from "@/components/feature/Footer"
 import SectionTitle from "@/components/primitives/SectionTitle"
-import useContactMutation from "@/hooks/mutation/useContactMutation"
+import useContactMutation, {
+  isContactMutationError,
+  type ContactMutationPayload,
+} from "@/hooks/mutation/useContactMutation"
 import useBodyScrollLock from "@/hooks/useBodyScrollLock"
 import useError from "@/hooks/useError"
 import useIntersectionObserver from "@/hooks/useIntersectionObserver"
-import { ContactApiError, type ContactPayload } from "@/api/contact"
 import { CONTACT_PHASE_INTERVAL_MS } from "@/const/animation"
 import style from "@/app/contact/page.module.scss"
 
@@ -43,7 +45,7 @@ export default function ContactPage() {
     useIntersectionObserver<HTMLDivElement>({ once: true })
   const [dialogPhase, setDialogPhase] = useState<DialogPhase>("confirm")
   const [contactPhase, setContactPhase] = useState<ContactPhase>("contact")
-  const [contactPayload, setContactPayload] = useState<ContactPayload | null>(null)
+  const [contactPayload, setContactPayload] = useState<ContactMutationPayload | null>(null)
   const [hintGuide, setHintGuide] = useState<ContactGuideData | null>(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
@@ -58,7 +60,7 @@ export default function ContactPage() {
     setFocus,
     setValue,
     formState: { errors },
-  } = useForm<ContactPayload>({ mode: "onBlur" })
+  } = useForm<ContactMutationPayload>({ mode: "onBlur" })
 
   useEffect(() => {
     return () => {
@@ -176,9 +178,9 @@ export default function ContactPage() {
         setDialogPhase("complete")
       },
       onError: (error) => {
-        if (error instanceof ContactApiError) {
+        if (isContactMutationError(error)) {
           const fieldErrors = Object.entries(error.fieldErrors) as [
-            keyof ContactPayload,
+            keyof ContactMutationPayload,
             string,
           ][]
 
