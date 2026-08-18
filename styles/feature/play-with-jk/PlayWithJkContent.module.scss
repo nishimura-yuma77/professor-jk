@@ -38,7 +38,6 @@
 }
 
 .toolkit {
-  align-self: start;
   background-color: #29241e;
   transform: rotate(-1deg);
 }
@@ -55,10 +54,17 @@
 }
 
 .start {
-  margin-top: 1.5rem;
-  align-self: start;
   background-color: #2a251e;
   transform: rotate(-1.2deg);
+}
+
+.toolkit_slot,
+.start_slot {
+  align-self: start;
+}
+
+.start_slot {
+  margin-top: 1.5rem;
 }
 
 @media screen and (min-width: breakpoint.$breakpoint-tablet) {
@@ -71,25 +77,25 @@
     gap: 6rem 2rem;
   }
 
-  .wanted {
+  .wanted_slot {
     grid-column: 1;
   }
 
-  .toolkit {
+  .toolkit_slot {
     grid-column: 2;
     margin-top: 0;
   }
 
-  .experiments {
+  .experiments_slot {
     grid-column: 1 / -1;
     margin-inline: 2rem;
   }
 
-  .rules {
+  .rules_slot {
     grid-column: 1;
   }
 
-  .start {
+  .start_slot {
     grid-column: 2;
     margin-top: 0;
   }
@@ -113,25 +119,28 @@
     font-size: clamp(1.8rem, 4.2svh, 2.5rem);
   }
 
-  .wanted {
+  .wanted_slot {
     grid-column: 1 / span 8;
   }
 
-  .toolkit {
+  .toolkit_slot {
     grid-column: 9 / -1;
   }
 
-  .experiments {
+  .experiments_slot {
     grid-column: 2 / span 10;
     margin-inline: 0;
   }
 
-  .rules {
+  .rules_slot {
     grid-column: 1 / span 8;
+  }
+
+  .rules {
     padding-bottom: clamp(1.5rem, 3svh, 2.25rem);
   }
 
-  .start {
+  .start_slot {
     grid-column: 9 / -1;
   }
 }
