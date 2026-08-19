@@ -1,4 +1,5 @@
 import type { ArticleBlock } from "@/const/blog"
+import { XTWITTER_LINK } from "@/const/constants"
 
 export type ExperimentDetail = {
   slug: string
@@ -13,18 +14,18 @@ export const EXPERIMENT_DETAILS = [
         id: "overview",
         type: "heading",
         level: 2,
-        text: "活動をつなぐキャラクターサイト",
+        text: "秘密基地のような活動拠点",
         anchor: "overview",
       },
       {
         id: "overview-description",
         type: "paragraph",
-        text: "J.K. Labは、J.K.教授の世界観を表現するキャラクターサイトです。キャラクターデザイン、Webデザイン、設計、実装、インフラ構築、CI/CDまでを一貫して担当しています。",
+        text: "J.K. Labは、J.K.教授の活動と世界観を一つにまとめた、秘密基地のような公式サイトです。プロフィール、実験、Blog、Contact、YouTube、Xを一つの場所につなぎ、何を目指し、何を作り、現在は何に取り組んでいるのかを確認できる活動拠点として運用しています。",
       },
       {
         id: "activity-base-description",
         type: "paragraph",
-        text: "プロフィール、実験、Blog、Contact、YouTube、Xを一つの場所につなぎ、何を目指し、何を作り、現在は何に取り組んでいるのかを確認できる公式な活動拠点として運用しています。",
+        text: "訪れた人が、誰かの隠れ家や秘密基地へ足を踏み入れ、そこでエンジニアなのか、ただの変な奴なのか分からない人物と出会うような体験をイメージしました。研究施設を思わせる画面や演出、J.K.教授というキャラクターを通して、制作物だけでなく、その人物や活動の空気まで感じられる場所を目指しています。",
       },
       {
         id: "scope",
@@ -110,25 +111,33 @@ export const EXPERIMENT_DETAILS = [
         id: "overview",
         type: "heading",
         level: 2,
-        text: "PNG Tuberの表情を扱う実験",
+        text: "PNG Tuberにしかできない表現",
         anchor: "overview",
       },
       {
         id: "overview-description",
         type: "paragraph",
-        text: "Emotion Mikeは、PNG Tuber向けのフェイストラッキングアプリを探る実験です。現実の顔の動きを読み取り、キャラクターのアニメ表現へどのように対応させるかをテーマにしています。",
+        text: "Emotion Mikeは、PNG Tuber向けのフェイストラッキングアプリを探る実験です。現実の表情筋の動きを読み取り、キャラクターのアニメ表現へどのように対応させるかをテーマにしています。",
       },
       {
-        id: "approach",
-        type: "heading",
-        level: 2,
-        text: "最初に試した構成",
-        anchor: "approach",
-      },
-      {
-        id: "approach-description",
+        id: "discrete-expression-description",
         type: "paragraph",
-        text: "Python、MediaPipe、PySide6を使い、フェイストラッキングの情報をデスクトップアプリケーションで扱う構成を検討しました。",
+        text: "現実の表情筋の動きとキャラクターの表情をただ紐づけるのではなく、トラッキングで得た動きを連続的な値としてそのまま反映せず、離散的な値として扱うことで、ジト目や白目といったアニメ的な表現を取り込める可能性を考えました。実写的な変形を再現するのではなく、決められた絵を切り替えられるPNG Tuberだからこそ試せる表現です。",
+      },
+      {
+        id: "jitome-example",
+        type: "imageGallery",
+        label: "Emotion Mikeで扱うジト目の表現",
+        images: [
+          {
+            id: "jitome-open-mouth",
+            src: "/images/character/jitome_open_mouth.png",
+            alt: "緑色の背景でジト目をしている、紫色の長髪とスーツ姿のJ.K.教授",
+            width: 832,
+            height: 1216,
+            caption: "ジト目がかわいくて好き",
+          },
+        ],
       },
       {
         id: "finding",
@@ -140,43 +149,79 @@ export const EXPERIMENT_DETAILS = [
       {
         id: "finding-description",
         type: "paragraph",
-        text: "検討を進める中で、現実の表情とアニメ表現を直接対応させる方法には限界があると感じました。現実の顔の動きだけを入力にしても、キャラクターとして意図した表情を十分に選べるとは限りません。",
+        text: "ジト目や白目を候補として用意できても、現実の顔の動きだけでは、いつその表現を選ぶべきか判断できません。表情の形を増やすことと、キャラクターとして意図した表情を選ぶことは別の課題だと分かりました。",
       },
       {
         id: "next-hypothesis",
         type: "heading",
         level: 2,
-        text: "表情以外の情報を加える",
+        text: "表情とは、顔面の筋肉の動作だけではない",
         anchor: "next-hypothesis",
       },
       {
         id: "next-hypothesis-description",
         type: "paragraph",
-        text: "現在は、表情だけを入力として扱うのではなく、表情以外の情報から表示する表情を調整する方向を検討しています。何を追加情報として扱うか、その情報をどのようにアニメ表現へ反映するかは、次に検証する課題です。",
+        text: "ジト目のようなアニメ表現は、顔の形だけで成立するものではなく、ジト目をするのに適した状況で再現されます。つまり、どの表情を選ぶべきか判断するには、顔面の筋肉の動作だけでは情報が足りません。状況や文脈も入力として扱い、キャラクターの表情を決める必要があると考えました。",
       },
       {
-        id: "paused",
+        id: "context-signals-introduction",
+        type: "paragraph",
+        text: "今後、表情を選ぶための状況や文脈として、次のような情報を扱える可能性を考えています。",
+      },
+      {
+        id: "context-signals",
+        type: "list",
+        style: "unordered",
+        items: [
+          {
+            id: "game-state",
+            text: "ゲーム画面の状態：HPバーや敵との距離を自動判定し、危機、緊張、余裕などの状況を推定する",
+          },
+          {
+            id: "voice-analysis",
+            text: "LLMによる音声解析と感情推定：発話内容や声の調子から、喜び、困惑、苛立ちなどを推定する",
+          },
+          {
+            id: "play-behavior",
+            text: "操作状況やプレイ傾向：ボタン入力の増加、同じ場面での連続失敗、操作が止まった時間などから、集中、焦り、苛立ちを推定する",
+          },
+        ],
+      },
+      {
+        id: "open-research",
         type: "heading",
         level: 2,
-        text: "PAUSEDとして残す",
-        anchor: "paused",
+        text: "良い方法がないか模索中",
+        anchor: "open-research",
       },
       {
-        id: "paused-description",
+        id: "open-research-limitations",
         type: "paragraph",
-        text: "現在のステータスはPAUSEDです。単純な対応付けをそのまま作り込むのではなく、前提とする表情の扱いを見直すために一度停止しています。完成していない状態も、次の判断につながる実験記録として残します。",
+        text: "こうした案は浮かんでいるものの、AIを扱ったプロダクト開発の知見と、表情の選択に寄与する環境情報をモデル化・分析した経験はまだ浅く、どの方法が実用的かを判断し、実現方法を絞り込める段階にはありません。",
       },
       {
-        id: "visibility",
-        type: "heading",
-        level: 2,
-        text: "公開範囲",
-        anchor: "visibility",
-      },
-      {
-        id: "visibility-description",
+        id: "open-research-description",
         type: "paragraph",
-        text: "この詳細記録は公開していますが、アプリ本体とソースコードの公開範囲はPRIVATEです。利用できる完成品の案内ではなく、検討中の仮説と現在地を共有するためのページです。",
+        text: "そのため、まずは候補となる情報が本当に表情の選択に寄与するのか、どのようなデータと評価方法が必要なのかを整理するところから進めたいと考えています。実装を急ぐのではなく、AIや環境情報の扱いに関する知見を得ながら、小さく検証できる方法を探しています。",
+      },
+      {
+        id: "open-research-invitation",
+        type: "paragraph",
+        text: "環境情報の選び方、感情推定の方法、検証の進め方について意見や知見があれば、ContactまたはXのDMから教えてください。AIを扱うプロダクト、表情認識、ゲーム情報の解析、キャラクター表現に詳しく、一緒に仮説を検証してくれる共同研究者も待っています。",
+      },
+      {
+        id: "contact-link",
+        type: "externalLink",
+        label: "Contactから意見を送る",
+        description: "環境情報、感情推定、検証方法に関する意見や共同研究の相談はこちらから。",
+        href: "/contact",
+      },
+      {
+        id: "x-dm-link",
+        type: "externalLink",
+        label: "XのDMで連絡する",
+        description: "短い意見や、まず話してみたい場合はこちらから。",
+        href: XTWITTER_LINK,
       },
     ],
   },
