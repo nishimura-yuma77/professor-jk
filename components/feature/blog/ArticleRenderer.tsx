@@ -1,4 +1,5 @@
 import type { ArticleBlock } from "@/const/blog"
+import ArticleCodeBlock from "@/components/feature/blog/ArticleCodeBlock"
 import ArticleImageGallery from "@/components/feature/blog/ArticleImageGallery"
 import style from "@/styles/feature/blog/ArticleRenderer.module.scss"
 
@@ -46,6 +47,14 @@ function renderBlock(block: ArticleBlock) {
           </span>
           <span className={style.external_link_description}>{block.description}</span>
         </a>
+      )
+    case "code":
+      return (
+        <ArticleCodeBlock
+          code={block.code}
+          language={block.language}
+          filename={block.filename}
+        />
       )
     default:
       return assertNever(block)
