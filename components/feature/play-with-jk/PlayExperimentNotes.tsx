@@ -8,7 +8,7 @@ type PlayExperimentNotesProps = {
 
 const featuredExperiments = PLAY_EXPERIMENT_CODES
   .map((code) => EXPERIMENTS.find((experiment) => experiment.code === code))
-  .filter((experiment): experiment is Experiment => Boolean(experiment))
+  .filter((experiment) => experiment !== undefined)
 
 function ExperimentNote({ experiment }: { experiment: Experiment }) {
   const isActive = experiment.status === "ACTIVE"

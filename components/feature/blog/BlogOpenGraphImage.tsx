@@ -1,38 +1,10 @@
 import { ImageResponse } from "next/og"
-import { BLOG_ARTICLES, getBlogArticle } from "@/const/blog"
+import { getBlogArticle, getBlogArticleLogNumber } from "@/const/blog"
+import loadJapaneseFont from "@/components/feature/open-graph/loadJapaneseFont"
 
 export const BLOG_OPEN_GRAPH_SIZE = {
   width: 1200,
   height: 630,
-}
-
-const FONT_USER_AGENT =
-  "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko"
-
-async function loadJapaneseFont(text: string) {
-  const cssUrl = new URL("https://fonts.googleapis.com/css2")
-  cssUrl.searchParams.set("family", "Noto Sans JP:wght@700")
-  cssUrl.searchParams.set("text", text)
-
-  const cssResponse = await fetch(cssUrl, {
-    headers: { "User-Agent": FONT_USER_AGENT },
-  })
-  if (!cssResponse.ok) {
-    throw new Error(`Failed to fetch OGP font CSS: ${cssResponse.status}`)
-  }
-
-  const css = await cssResponse.text()
-  const fontUrl = css.match(/src: url\(([^)]+)\) format\('woff'\)/)?.[1]
-  if (!fontUrl) {
-    throw new Error("OGP font URL was not found in Google Fonts CSS")
-  }
-
-  const fontResponse = await fetch(fontUrl)
-  if (!fontResponse.ok) {
-    throw new Error(`Failed to fetch OGP font: ${fontResponse.status}`)
-  }
-
-  return fontResponse.arrayBuffer()
 }
 
 function getTitleFontSize(title: string) {
@@ -48,8 +20,7 @@ export async function createBlogOpenGraphImage(slug: string) {
     throw new Error(`Blog article not found: ${slug}`)
   }
 
-  const articleIndex = BLOG_ARTICLES.findIndex((item) => item.slug === article.slug)
-  const logNumber = String(articleIndex + 1).padStart(3, "0")
+  const logNumber = String(getBlogArticleLogNumber(article.slug)).padStart(3, "0")
   const publishedAt = article.publishedAt.replaceAll("-", ".")
   const fontText = `${article.title}${publishedAt}PROF.J.K.RESEARCH LOGJK LABSTATIC ARCHIVELOG_${logNumber}`
   const fontData = await loadJapaneseFont(fontText)
