@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import BlogArticleCard from "@/components/feature/blog/BlogArticleCard"
 import PageBackground from "@/components/ui/PageBackground"
-import { getBlogArticles } from "@/const/blog"
+import { getBlogArticleLogNumber, getBlogArticles } from "@/const/blog"
 import style from "@/app/blog/page.module.scss"
 
 const description = "J.K.教授の開発、実験、失敗と発見を保存する研究ログ。"
@@ -45,8 +45,12 @@ export default function BlogPage() {
 
         {articles.length > 0 ? (
           <div className={style.grid}>
-            {articles.map((article, index) => (
-              <BlogArticleCard key={article.slug} article={article} index={index} />
+            {articles.map((article) => (
+              <BlogArticleCard
+                key={article.slug}
+                article={article}
+                logNumber={getBlogArticleLogNumber(article.slug)}
+              />
             ))}
           </div>
         ) : (

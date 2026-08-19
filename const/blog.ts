@@ -658,3 +658,12 @@ export function getBlogArticles(): readonly BlogArticle[] {
 export function getBlogArticle(slug: string): BlogArticle | undefined {
   return BLOG_ARTICLES.find((article) => article.slug === slug)
 }
+
+export function getBlogArticleLogNumber(slug: string): number {
+  const articleIndex = BLOG_ARTICLES.findIndex((article) => article.slug === slug)
+  if (articleIndex === -1) {
+    throw new Error(`Blog article not found: ${slug}`)
+  }
+
+  return articleIndex + 1
+}
