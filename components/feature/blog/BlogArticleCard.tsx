@@ -3,16 +3,21 @@ import Link from "next/link"
 import type { BlogArticle } from "@/const/blog"
 import style from "@/styles/feature/blog/BlogArticleCard.module.scss"
 
+export type BlogArticleCardArticle = Pick<
+  BlogArticle,
+  "slug" | "title" | "publishedAt" | "coverImage"
+>
+
 type BlogArticleCardProps = {
-  article: BlogArticle
-  index: number
+  article: BlogArticleCardArticle
+  logNumber: number
 }
 
 function formatDate(date: string) {
   return date.replaceAll("-", ".")
 }
 
-export default function BlogArticleCard({ article, index }: BlogArticleCardProps) {
+export default function BlogArticleCard({ article, logNumber }: BlogArticleCardProps) {
   return (
     <article className={style.card}>
       <Link href={`/blog/${article.slug}`} className={style.link}>
@@ -30,11 +35,11 @@ export default function BlogArticleCard({ article, index }: BlogArticleCardProps
             <span className={style.placeholder} aria-hidden="true">NO IMAGE</span>
           )}
           <span className={style.index} aria-hidden="true">
-            LOG_{String(index + 1).padStart(3, "0")}
+            LOG_{String(logNumber).padStart(3, "0")}
           </span>
         </div>
         <div className={style.body}>
-          <h2>{article.title}</h2>
+          <h3 className={style.title}>{article.title}</h3>
           <time dateTime={article.publishedAt} className={style.date}>
             {formatDate(article.publishedAt)}
           </time>

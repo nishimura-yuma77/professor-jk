@@ -22,6 +22,8 @@
 ├── components/           # Reactコンポーネント
 │   ├── feature/          # ページや機能単位のコンポーネント
 │   │   ├── contact/      # Contactページの機能コンポーネント
+│   │   ├── experiments/  # Experimentページの機能コンポーネント
+│   │   ├── open-graph/   # OGP生成で共有する処理
 │   │   └── play-with-jk/ # Play With J.K.ページの機能コンポーネント
 │   ├── primitives/       # Propsを広く公開した、細かく調整可能な低レベル部品
 │   ├── providers/        # アプリ全体へ状態や機能を提供するProvider

@@ -6,6 +6,11 @@ export const MENU = {
     subLabel: null,
     href: "/",
   },
+  experiments: {
+    label: "EXPERIMENTS",
+    subLabel: "PROJECT ARCHIVE",
+    href: "/experiments",
+  },
   blog: {
     label: "BLOG",
     subLabel: "RESEARCH LOG",
