@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1330" height="433" viewBox="0 0 1330 433" role="img" aria-labelledby="title description">
+  <title id="title">Search Consoleに表示されたリダイレクトURL</title>
+  <desc id="description">例としてhttp://professor-jk.net/が表示され、前回のクロールが2026年8月18日となっている</desc>
+  <rect width="1330" height="433" fill="#f1f4f9"/>
+  <rect x="16" y="16" width="1294" height="403" rx="40" fill="#ffffff"/>
+  <g fill="#202124" font-family="Arial, 'Noto Sans JP', sans-serif">
+    <text x="48" y="112" font-size="31">例</text>
+    <circle cx="101" cy="104" r="10" fill="none" stroke="#7a7d81" stroke-width="3"/>
+    <text x="97" y="110" fill="#7a7d81" font-size="16" font-weight="700">?</text>
+    <path d="M1243 89h26v3h-26zm5 7h16v3h-16zm5 7h6v3h-6z" fill="#3c4043"/>
+    <text x="51" y="226" fill="#6f7378" font-size="18" font-weight="700">URL</text>
+    <text x="1146" y="227" font-size="19" font-weight="700">↓  前回のクロール</text>
+  </g>
+  <path d="M16 262h1294M16 335h1294" stroke="#dadce0"/>
+  <g fill="#202124" font-family="Arial, 'Noto Sans JP', sans-serif" font-size="20">
+    <text x="51" y="306">http://professor-jk.net/</text>
+    <text x="1170" y="306">2026/08/18</text>
+  </g>
+  <g fill="#6f7378" font-family="Arial, 'Noto Sans JP', sans-serif" font-size="18">
+    <text x="727" y="385">1 ページあたりの行数:</text>
+    <text x="953" y="385">10</text>
+    <path d="M997 373l9 10 9-10z" fill="#aeb1b5"/>
+    <text x="1068" y="385">1〜1/1</text>
+    <text x="1186" y="385" fill="#b8bbc0">‹</text>
+    <text x="1253" y="385" fill="#b8bbc0">›</text>
+  </g>
+</svg>

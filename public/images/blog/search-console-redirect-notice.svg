@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="889" height="567" viewBox="0 0 889 567" role="img" aria-labelledby="title description">
+  <title id="title">Search Consoleのインデックス登録に関する通知</title>
+  <desc id="description">ページがインデックスに登録されない新しい要因として、ページにリダイレクトがありますと表示されている</desc>
+  <rect width="889" height="567" fill="#ffffff"/>
+  <g fill="#202124" font-family="Arial, 'Noto Sans JP', sans-serif">
+    <text x="59" y="61" font-size="38">ページがインデックスに登録されない新しい要</text>
+    <text x="59" y="108" font-size="38">因</text>
+    <text x="59" y="173" font-size="22">Search Console で、貴サイトのいくつかのページがインデックスに登録されてい</text>
+    <text x="59" y="204" font-size="22">ないことが検出されました。以下がその要因となっています。</text>
+  </g>
+  <rect x="59" y="232" width="781" height="105" rx="12" fill="#f1f4f9"/>
+  <text x="84" y="290" fill="#202124" font-family="Arial, 'Noto Sans JP', sans-serif" font-size="21">ページにリダイレクトがあります</text>
+  <g fill="#202124" font-family="Arial, 'Noto Sans JP', sans-serif" font-size="22">
+    <text x="59" y="376">これが意図したものでない場合は、修正することをおすすめします。それにより、</text>
+    <text x="59" y="407">影響を受けていたページがインデックスに登録され、Google に表示されるように</text>
+    <text x="59" y="438">なる可能性があります。</text>
+  </g>
+  <rect x="59" y="484" width="364" height="60" rx="18" fill="#0b57d0"/>
+  <text x="86" y="522" fill="#ffffff" font-family="Arial, 'Noto Sans JP', sans-serif" font-size="21" font-weight="700">インデックス登録レポートを開く</text>
+</svg>
