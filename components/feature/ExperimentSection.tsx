@@ -1,4 +1,5 @@
 "use client"
+import Link from "next/link"
 import SectionContainer from "@/components/primitives/SectionContainer";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import SectionTitle from "@/components/primitives/SectionTitle";
@@ -9,6 +10,11 @@ import { useState } from "react";
 
 const CARD_REVEAL_INTERVAL = 200
 const CARD_CONTENT_DELAY = 100
+const FEATURED_EXPERIMENT_LIMIT = 4
+
+const featuredExperiments = EXPERIMENTS
+  .filter((experiment) => experiment.featured)
+  .slice(0, FEATURED_EXPERIMENT_LIMIT)
 
 export default function ExperimentSection() {
   const {
@@ -25,7 +31,7 @@ export default function ExperimentSection() {
         onAnimationEnd={() => setAreCardsVisible(true)}
       />
       <div className={style.experiment_area}>
-        {EXPERIMENTS.map((ex, index) => {
+        {featuredExperiments.map((ex, index) => {
           return (
             <ExperimentCard
               key={ex.code}
@@ -37,6 +43,13 @@ export default function ExperimentSection() {
           )
         })}
       </div>
+      <Link
+        href="/experiments"
+        className={`${style.archive_link} ${areCardsVisible ? style.archive_link_visible : ""}`}
+      >
+        <span>EXPERIMENT ARCHIVE</span>
+        <span>すべての実験記録を見る -&gt;</span>
+      </Link>
     </SectionContainer>
   )
 }

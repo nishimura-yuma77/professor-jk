@@ -11,13 +11,11 @@ const dotColor = {
 
 type ExperimentStatusBadgeProps = {
   status: ExperimentStatus
-  isVisible?: boolean
   className?: string
   animationDelay?: string
 }
 export default function ExperimentStatusBadge({
   status,
-  isVisible = true,
   className = undefined,
   animationDelay = undefined
 }: ExperimentStatusBadgeProps) {

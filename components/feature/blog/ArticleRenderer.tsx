@@ -34,12 +34,13 @@ function renderBlock(block: ArticleBlock) {
     case "imageGallery":
       return <ArticleImageGallery label={block.label} images={block.images} />
     case "externalLink":
+      const isExternal = /^https?:\/\//.test(block.href)
       return (
         <a
           href={block.href}
           className={style.external_link}
-          target="_blank"
-          rel="noopener noreferrer"
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noopener noreferrer" : undefined}
         >
           <span className={style.external_link_label}>
             {block.label}

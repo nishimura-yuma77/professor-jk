@@ -1,10 +1,11 @@
+"use client"
+
+import Link from "next/link"
 import type { Experiment } from "@/const/experiments";
 import style from "@/styles/ui/ExperimentCard.module.scss"
 import ExperimentStatusBadge from "../primitives/ExperimentStatusBadge";
 import StackChip from "../primitives/StackChip";
 import MediaLinkIcon from "./MediaLInkIcon";
-import useError from "@/hooks/useError";
-import { EXPERIMENT_DETAIL_NOT_IMPLEMENTED_ERROR } from "@/const/error";
 import TypewriterText from "../primitives/TypewriterText";
 import { useState } from "react";
 import type { CSSProperties, TransitionEvent } from "react";
@@ -23,17 +24,18 @@ export default function ExperimentCard({
 }: ExperimentCardProps) {
   const {
     code,
+    slug,
     status,
+    visibility,
     title,
     subtitle,
     description,
     stacks,
     media
   } = experiment
-  const { showError } = useError();
-  const [isCardAnimationEnd, setIsCardAnimationEnd] = useState<boolean>(false)
+  const [isCardAnimationEnd, setIsCardAnimationEnd] = useState(isVisible)
 
-  const handleCardAnimationEnd = (event: TransitionEvent<HTMLDivElement>) =>{
+  const handleCardAnimationEnd = (event: TransitionEvent<HTMLElement>) =>{
     if (
       !isVisible
       || event.target !== event.currentTarget
@@ -43,12 +45,8 @@ export default function ExperimentCard({
     setIsCardAnimationEnd(true)
   }
 
-  // TODO: 今後クリックしたらプロジェクト詳細ページに遷移するようにするが、今はエラーとしてメッセージを表示するのみ
-  const handleClick = () => {
-    showError({ message: EXPERIMENT_DETAIL_NOT_IMPLEMENTED_ERROR})
-  }
   return (
-    <div
+    <article
       className={`${style.card} ${isVisible ? style.visible : ""} ${
         isCardAnimationEnd ? style.reveal_complete : ""
       }`}
@@ -56,27 +54,35 @@ export default function ExperimentCard({
         "--card-reveal-delay": `${revealDelay}ms`
       } as CSSProperties}
       onTransitionEnd={handleCardAnimationEnd}
-      onClick={handleClick}
     >
       <div className={style.code_and_status}>
         <p className={style.code}>{code}</p>
-        <ExperimentStatusBadge
-          status={status}
-          className={style.status}
-          animationDelay={`${-((revealDelay * 7) % 3000)}ms`}
-        />
+        <div className={style.badges}>
+          <span className={`${style.visibility} ${
+            visibility === "PUBLIC" ? style.public : style.private
+          }`}>
+            {visibility}
+          </span>
+          <ExperimentStatusBadge
+            status={status}
+            className={style.status}
+            animationDelay={`${-((revealDelay * 7) % 3000)}ms`}
+          />
+        </div>
       </div>
       <div className={style.title_area}>
         <div className={style.title_and_media}>
           <h3 className={style.title}>
-            <TypewriterText
-              text={title}
-              isVisible={isVisible}
-              animationDelay={20}
-              startDelay={contentDelay}
-            />
+            <Link href={`/experiments/${slug}`} className={style.detail_link}>
+              <TypewriterText
+                text={title}
+                isVisible={isVisible}
+                animationDelay={20}
+                startDelay={contentDelay}
+              />
+            </Link>
           </h3>
-          <div>
+          <div className={style.media_links}>
             {media?.map((m, index) => {
               return (
                 <MediaLinkIcon key={index} mediaLink={m} className={style.media_icon} />
@@ -114,6 +120,9 @@ export default function ExperimentCard({
           })}
         </p>
       </div>
-    </div>
+      <span className={style.detail_hint} aria-hidden="true">
+        OPEN FILE -&gt;
+      </span>
+    </article>
   )
 }

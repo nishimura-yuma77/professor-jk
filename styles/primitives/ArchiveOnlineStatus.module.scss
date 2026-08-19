@@ -1,8 +1,16 @@
 .container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: var(--color-accent);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-small);
+  letter-spacing: 0.12em;
   animation: dying-flicker 2.2s infinite;
 
-  .dot {
-    transform: translate(-4px, -1px);
+  span {
+    font-size: 0.55rem;
+    text-shadow: 0 0 8px var(--color-accent);
   }
 }
 

@@ -1,0 +1,12 @@
+@use "@/styles/variables/breakpoint" as bp;
+
+.grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: bp.$breakpoint-tablet) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

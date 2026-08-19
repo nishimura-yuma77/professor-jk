@@ -1,5 +1,8 @@
 import type { Metadata } from "next"
-import BlogArticleCard from "@/components/feature/blog/BlogArticleCard"
+import BlogArchiveGrid, {
+  type BlogArchiveEntry,
+} from "@/components/feature/blog/BlogArchiveGrid"
+import ArchiveOnlineStatus from "@/components/primitives/ArchiveOnlineStatus"
 import PageBackground from "@/components/ui/PageBackground"
 import { getBlogArticleLogNumber, getBlogArticles } from "@/const/blog"
 import style from "@/app/blog/page.module.scss"
@@ -21,14 +24,20 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   const articles = getBlogArticles()
+  const archiveEntries: BlogArchiveEntry[] = articles.map((article) => ({
+    article: {
+      slug: article.slug,
+      title: article.title,
+      publishedAt: article.publishedAt,
+      coverImage: article.coverImage,
+    },
+    logNumber: getBlogArticleLogNumber(article.slug),
+  }))
 
   return (
     <PageBackground className={style.main}>
       <section className={style.hero} aria-labelledby="blog-title">
-        <div className={style.eyebrow}>
-          <span aria-hidden="true">●</span>
-          ARCHIVE ONLINE
-        </div>
+        <ArchiveOnlineStatus label="ARCHIVE ONLINE" />
         <h1 id="blog-title">BLOG</h1>
         <p>実験、実装、考えごと。J.K. Labから回収された研究ログ。</p>
         <div className={style.status} aria-hidden="true">
@@ -44,15 +53,7 @@ export default function BlogPage() {
         </div>
 
         {articles.length > 0 ? (
-          <div className={style.grid}>
-            {articles.map((article) => (
-              <BlogArticleCard
-                key={article.slug}
-                article={article}
-                logNumber={getBlogArticleLogNumber(article.slug)}
-              />
-            ))}
-          </div>
+          <BlogArchiveGrid entries={archiveEntries} />
         ) : (
           <div className={style.empty}>
             <p>NO LOGS FOUND</p>
