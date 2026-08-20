@@ -6,10 +6,18 @@ export type BlogArticleMeta = {
   description: string
   publishedAt: string
   updatedAt?: string
+  draft?: boolean
   coverImage?: ArticleImage
   logNumber: number
 }
 
-export type BlogArticle = BlogArticleMeta & {
+export type BlogArticle = Omit<BlogArticleMeta, "coverImage"> & {
+  coverImage: ArticleImage
   blocks: readonly ArticleBlock[]
+}
+
+export type BlogArticleRegistryEntry = {
+  directorySlug: string
+  meta: BlogArticleMeta
+  content: readonly ArticleBlock[]
 }

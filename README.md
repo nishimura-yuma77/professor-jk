@@ -82,6 +82,7 @@ npm run dev
 | `npm run dev` | 開発サーバーを起動します |
 | `npm run build` | 静的サイトをビルドし、`out/`へ出力します |
 | `npm run lint` | ESLintによる静的解析を実行します |
+| `npm run typecheck` | TypeScriptの型検査を実行します |
 | `uv run --directory backend/api-professor-jk ruff check src tests` | バックエンドを静的解析します |
 | `uv run --directory backend/api-professor-jk pytest` | バックエンドの仕様テストを実行します |
 
@@ -97,6 +98,7 @@ npm run dev
 ├── contexts/     # React Context
 ├── hooks/        # UIロジックとデータアクセス用カスタムフック
 ├── public/       # 画像などの静的ファイル
+├── scripts/      # 開発・コンテンツ管理用スクリプト
 ├── styles/       # コンポーネント対応SCSS Modulesと共通SCSS変数
 └── terraform/    # AWSインフラのTerraform定義
 ```
@@ -110,6 +112,10 @@ npm run dev
 `app/`にはNext.jsのページ、レイアウト、メタデータと、ページ全体の外枠を担当するスタイルを配置します。ページから抽出したコンポーネントは、そのページでしか使用しない場合でも`components/feature/`へ配置します。複数のコンポーネントで1つの機能を構成する場合は、`components/feature/contact/`のように機能名のディレクトリへまとめます。
 
 コンポーネント固有のSCSS Moduleは`components/`の構成に対応させて`styles/`へ配置します。たとえば、`components/feature/contact/ContactGuide.tsx`のスタイルは`styles/feature/contact/ContactGuide.module.scss`で管理します。
+
+### ブログ記事管理
+
+記事の追加、編集、公開、削除方法は[BLOG.md](./BLOG.md)を参照してください。
 
 ### APIアクセス
 

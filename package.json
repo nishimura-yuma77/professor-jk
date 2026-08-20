@@ -3,10 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "blog:generate": "node scripts/generate-blog-registry.mjs",
+    "blog:new": "node scripts/create-blog-article.mjs",
+    "predev": "npm run blog:generate",
     "dev": "next dev",
+    "prebuild": "npm run blog:generate",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "prelint": "npm run blog:generate",
+    "lint": "eslint",
+    "pretypecheck": "npm run blog:generate",
+    "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.101.4",

@@ -40,6 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+/const/blog/registry.generated.ts
+/const/.blog-article-*
+/const/.blog-registry-*
 
 # python
 __pycache__/

@@ -5,6 +5,7 @@ import { EXPERIMENTS } from "@/const/experiments"
 export const dynamic = "force-static"
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const articles = getBlogArticles()
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: "https://professor-jk.net/"
@@ -25,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticPages,
-    ...getBlogArticles().map((article) => ({
+    ...articles.map((article) => ({
       url: `https://professor-jk.net/blog/${article.slug}`,
       lastModified: article.updatedAt ?? article.publishedAt,
     })),

@@ -22,18 +22,14 @@ export default function BlogArticleCard({ article, logNumber }: BlogArticleCardP
     <article className={style.card}>
       <Link href={`/blog/${article.slug}`} className={style.link}>
         <div className={style.visual}>
-          {article.coverImage ? (
-            <Image
-              src={article.coverImage.src}
-              alt={article.coverImage.alt}
-              width={article.coverImage.width}
-              height={article.coverImage.height}
-              sizes="(min-width: 941px) 19.25rem, (min-width: 768px) 33vw, 6rem"
-              className={style.image}
-            />
-          ) : (
-            <span className={style.placeholder} aria-hidden="true">NO IMAGE</span>
-          )}
+          <Image
+            src={article.coverImage.src}
+            alt={article.coverImage.alt}
+            width={article.coverImage.width}
+            height={article.coverImage.height}
+            sizes="(min-width: 941px) 19.25rem, (min-width: 768px) 33vw, 6rem"
+            className={style.image}
+          />
           <span className={style.index} aria-hidden="true">
             LOG_{String(logNumber).padStart(3, "0")}
           </span>

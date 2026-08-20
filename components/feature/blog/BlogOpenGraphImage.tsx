@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og"
-import { getBlogArticle, getBlogArticleLogNumber } from "@/const/blog"
+import { getBlogArticle } from "@/const/blog"
 import loadJapaneseFont from "@/components/feature/open-graph/loadJapaneseFont"
 
 export const BLOG_OPEN_GRAPH_SIZE = {
@@ -20,7 +20,7 @@ export async function createBlogOpenGraphImage(slug: string) {
     throw new Error(`Blog article not found: ${slug}`)
   }
 
-  const logNumber = String(getBlogArticleLogNumber(article.slug)).padStart(3, "0")
+  const logNumber = String(article.logNumber).padStart(3, "0")
   const publishedAt = article.publishedAt.replaceAll("-", ".")
   const fontText = `${article.title}${publishedAt}PROF.J.K.RESEARCH LOGJK LABSTATIC ARCHIVELOG_${logNumber}`
   const fontData = await loadJapaneseFont(fontText)
