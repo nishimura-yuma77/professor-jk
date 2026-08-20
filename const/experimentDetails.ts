@@ -1,4 +1,4 @@
-import type { ArticleBlock } from "@/const/blog"
+import type { ArticleBlock } from "@/const/article"
 import { XTWITTER_LINK } from "@/const/constants"
 
 export type ExperimentDetail = {

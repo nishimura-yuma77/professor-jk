@@ -78,18 +78,16 @@ export default async function BlogArticlePage({ params }: PageProps<"/blog/[slug
           <p>{article.description}</p>
         </header>
 
-        {article.coverImage && (
-          <figure className={style.cover}>
-            <Image
-              src={article.coverImage.src}
-              alt={article.coverImage.alt}
-              width={article.coverImage.width}
-              height={article.coverImage.height}
-              sizes="(min-width: 768px) 48rem, calc(100vw - 3rem)"
-              priority
-            />
-          </figure>
-        )}
+        <figure className={style.cover}>
+          <Image
+            src={article.coverImage.src}
+            alt={article.coverImage.alt}
+            width={article.coverImage.width}
+            height={article.coverImage.height}
+            sizes="(min-width: 768px) 48rem, calc(100vw - 3rem)"
+            priority
+          />
+        </figure>
 
         <ArticleRenderer blocks={article.blocks} />
 

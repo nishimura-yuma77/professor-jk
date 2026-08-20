@@ -9,7 +9,7 @@ import {
   type FocusEvent,
   type UIEvent,
 } from "react"
-import type { ArticleImage } from "@/const/blog"
+import type { ArticleImage } from "@/const/article"
 import style from "@/styles/feature/blog/ArticleImageCarousel.module.scss"
 
 const AUTOPLAY_INTERVAL_MS = 5000

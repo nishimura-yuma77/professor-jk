@@ -8,6 +8,7 @@ import useIntersectionObserver from "@/hooks/useIntersectionObserver"
 import style from "@/styles/feature/blog/BlogArchiveGrid.module.scss"
 
 const ARTICLE_REVEAL_INTERVAL_MS = 160
+const EAGER_IMAGE_COUNT = 3
 
 export type BlogArchiveEntry = {
   article: BlogArticleCardArticle
@@ -36,7 +37,11 @@ export default function BlogArchiveGrid({ entries }: BlogArchiveGridProps) {
             "--article-reveal-delay": `${index * ARTICLE_REVEAL_INTERVAL_MS}ms`,
           } as CSSProperties}
         >
-          <BlogArticleCard article={article} logNumber={logNumber} />
+          <BlogArticleCard
+            article={article}
+            logNumber={logNumber}
+            loading={index < EAGER_IMAGE_COUNT ? "eager" : undefined}
+          />
         </div>
       ))}
     </div>
