@@ -11,13 +11,18 @@ export type BlogArticleCardArticle = Pick<
 type BlogArticleCardProps = {
   article: BlogArticleCardArticle
   logNumber: number
+  loading?: "eager" | "lazy"
 }
 
 function formatDate(date: string) {
   return date.replaceAll("-", ".")
 }
 
-export default function BlogArticleCard({ article, logNumber }: BlogArticleCardProps) {
+export default function BlogArticleCard({
+  article,
+  logNumber,
+  loading,
+}: BlogArticleCardProps) {
   return (
     <article className={style.card}>
       <Link href={`/blog/${article.slug}`} className={style.link}>
@@ -28,6 +33,7 @@ export default function BlogArticleCard({ article, logNumber }: BlogArticleCardP
             width={article.coverImage.width}
             height={article.coverImage.height}
             sizes="(min-width: 941px) 19.25rem, (min-width: 768px) 33vw, 6rem"
+            loading={loading}
             className={style.image}
           />
           <span className={style.index} aria-hidden="true">
