@@ -1,7 +1,6 @@
 import { access, mkdtemp, readdir, readFile, rename, rm, writeFile } from "node:fs/promises"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
-import { generateBlogRegistry } from "./generate-blog-registry.mjs"
 
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 const slug = process.argv[2]
@@ -124,6 +123,5 @@ export const content = [
 
   console.log(`Created const/blog/${slug}/meta.ts`)
   console.log(`Created const/blog/${slug}/content.ts`)
-  console.log("Replace the template metadata and content before publishing.")
-  await generateBlogRegistry()
+  console.log("Replace the template metadata and content, then run npm run blog:generate.")
 }

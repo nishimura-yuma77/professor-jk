@@ -22,8 +22,9 @@ const/blog/
 
 | コマンド | 用途 |
 | --- | --- |
-| `npm run blog:new -- <slug>` | 新しい記事のmetaとcontentを作成し、registryを更新します |
-| `npm run blog:generate` | 記事ディレクトリの追加・削除をregistryへ反映します |
+| `/blog-new <テーマ・要件>` | OpenCodeで新しいdraft記事を執筆し、検証します |
+| `npm run blog:new -- <slug>` | 新しい記事のmetaとcontentだけを作成します |
+| `npm run blog:generate` | 完成した記事ディレクトリの追加・削除をregistryへ反映します |
 | `npm run dev` | draftを含む記事をローカルで確認します |
 | `npm run typecheck` | Next.jsのルート型と記事データを型検査します |
 | `npm run build` | 公開記事を静的生成します |
@@ -39,11 +40,26 @@ npm run blog:new -- example-article
 1. `npm run blog:new -- <slug>`を実行します。
 2. 生成された`meta.ts`のタイトルとdescriptionを編集します。
 3. `content.ts`のサンプルBlockを記事本文へ置き換えます。
-4. `npm run dev`で記事ページ、一覧カード、OGPを確認します。
-5. 公開時に`draft: true`を`draft: false`へ変更します。
-6. `npm run typecheck`と`npm run build`を実行します。
+4. `npm run blog:generate`で完成した記事をregistryへ反映します。
+5. `npm run dev`で記事ページ、一覧カード、OGPを確認します。
+6. 公開時に`draft: true`を`draft: false`へ変更します。
+7. `npm run typecheck`と`npm run build`を実行します。
 
-`blog:new`は、既存記事の最大値に続くLOG番号と日本標準時（JST）の作成日を設定します。記事ファイルの作成後にregistryも更新するため、devサーバー起動中でも再起動は不要です。
+`blog:new`は、既存記事の最大値に続くLOG番号と日本標準時（JST）の作成日を設定します。この時点ではregistryを更新しないため、slugやサンプル本文がdevサーバーへ表示されることはありません。metaとcontentを完成させてから`blog:generate`を実行すると、起動中のTurbopackへ再起動なしで反映されます。
+
+## OpenCodeで新規記事を作る
+
+プロジェクトには新規記事作成用の`create-blog-article` Skillがあります。「新しいブログ記事を作って」のように依頼すると、テーマや資料からslug、meta、Block本文を作成し、検証まで実行します。
+
+明示的に開始する場合は、テーマ、含めたい内容、参考資料などを`/blog-new`へ渡します。
+
+```text
+/blog-new Search Consoleのリダイレクト警告について、確認した内容を記事にする
+```
+
+Skillは内部で`npm run blog:new -- <slug>`を実行し、生成された`meta.ts`と`content.ts`を編集してから`npm run blog:generate`でregistryへ反映します。情報が不足している場合はファイル作成前に確認し、個人的な体験、計測結果、引用などの不明な事実は補完しません。
+
+作成した記事は常に`draft: true`です。OpenCodeへ公開を明示的に依頼するか、内容を確認して手動で`draft: false`へ変更するまで本番へ公開されません。Skillとslash commandを追加・変更した後は、OpenCodeを終了して再起動すると反映されます。
 
 ## metaを編集する
 
@@ -206,7 +222,8 @@ registryが更新されるまでは、削除済みのmetaまたはcontentに対�
 
 - `registry.generated.ts`は直接編集しません。
 - `registry.generated.ts`はGitへ追加しません。
-- `blog:new`は記事作成後にregistryを更新します。
+- `blog:new`はmetaとcontentだけを作成し、registryは更新しません。
+- 新規記事のmeta/contentを完成させてから`npm run blog:generate`を実行します。
 - 既存記事のmeta/content編集ではregistry更新は不要です。
 - 記事ディレクトリの手動追加・削除後は`npm run blog:generate`を実行します。
 - `dev`、`build`、`lint`、`typecheck`の開始前にもregistryは自動生成されます。
@@ -215,7 +232,7 @@ registryが更新されるまでは、削除済みのmetaまたはcontentに対�
 
 ### 追加した記事が一覧に表示されない
 
-記事を手動追加した場合は、registryを更新します。
+`blog:new`または手動操作で記事を追加した場合は、metaとcontentを完成させてからregistryを更新します。
 
 ```bash
 npm run blog:generate
