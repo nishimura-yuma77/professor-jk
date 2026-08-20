@@ -4,7 +4,7 @@ import BlogArchiveGrid, {
 } from "@/components/feature/blog/BlogArchiveGrid"
 import ArchiveOnlineStatus from "@/components/primitives/ArchiveOnlineStatus"
 import PageBackground from "@/components/ui/PageBackground"
-import { getBlogArticleLogNumber, getBlogArticles } from "@/const/blog"
+import { getBlogArticles } from "@/const/blog"
 import style from "@/app/blog/page.module.scss"
 
 const description = "J.K.教授の開発、実験、失敗と発見を保存する研究ログ。"
@@ -31,7 +31,7 @@ export default function BlogPage() {
       publishedAt: article.publishedAt,
       coverImage: article.coverImage,
     },
-    logNumber: getBlogArticleLogNumber(article.slug),
+    logNumber: article.logNumber,
   }))
 
   return (
