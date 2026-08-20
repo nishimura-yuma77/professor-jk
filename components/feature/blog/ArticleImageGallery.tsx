@@ -1,5 +1,5 @@
 import Image from "next/image"
-import type { ArticleImage } from "@/const/blog"
+import type { ArticleImage } from "@/const/article"
 import ArticleImageCarousel from "@/components/feature/blog/ArticleImageCarousel"
 import style from "@/styles/feature/blog/ArticleImageGallery.module.scss"
 

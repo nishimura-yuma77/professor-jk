@@ -1,10 +1,10 @@
 import type { ReactNode } from "react"
-import { BLOG_ARTICLES } from "@/const/blog"
+import { getBlogArticleSlugs } from "@/const/blog"
 
 export const dynamicParams = false
 
 export function generateStaticParams() {
-  return BLOG_ARTICLES.map((article) => ({ slug: article.slug }))
+  return getBlogArticleSlugs().map((slug) => ({ slug }))
 }
 
 export default function BlogArticleLayout({ children }: { children: ReactNode }) {

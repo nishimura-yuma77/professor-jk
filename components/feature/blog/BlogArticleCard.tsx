@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import type { BlogArticle } from "@/const/blog"
+import type { BlogArticle } from "@/const/blog/types"
 import style from "@/styles/feature/blog/BlogArticleCard.module.scss"
 
 export type BlogArticleCardArticle = Pick<

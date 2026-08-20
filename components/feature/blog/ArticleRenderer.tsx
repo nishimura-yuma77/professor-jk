@@ -1,4 +1,4 @@
-import type { ArticleBlock } from "@/const/blog"
+import type { ArticleBlock } from "@/const/article"
 import ArticleCodeBlock from "@/components/feature/blog/ArticleCodeBlock"
 import ArticleImageGallery from "@/components/feature/blog/ArticleImageGallery"
 import style from "@/styles/feature/blog/ArticleRenderer.module.scss"
