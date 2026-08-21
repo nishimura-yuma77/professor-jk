@@ -6,6 +6,6 @@ export const meta = {
   description:
     "TanStack StartとCloudflare Workers + D1でCMS基盤を作り、実行境界、環境切り替え、認証、GitHub Actionsで苦戦した点をまとめた作業ログです。",
   publishedAt: "2026-08-22",
-  draft: true,
+  draft: false,
   logNumber: 5,
 } as const satisfies BlogArticleMeta
