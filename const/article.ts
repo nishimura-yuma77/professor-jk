@@ -1,5 +1,7 @@
 import type { BundledLanguage } from "shiki"
 
+export type ArticleCodeLanguage = BundledLanguage | "text"
+
 export type ArticleImage = {
   id: string
   src: string
@@ -47,7 +49,7 @@ export type ArticleBlock =
   | {
       id: string
       type: "code"
-      language: BundledLanguage
+      language: ArticleCodeLanguage
       filename?: string
       code: string
     }

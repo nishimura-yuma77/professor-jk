@@ -1,10 +1,11 @@
-import { codeToHtml, type BundledLanguage } from "shiki"
+import { codeToHtml } from "shiki"
+import type { ArticleCodeLanguage } from "@/const/article"
 import ArticleCodeCopyButton from "@/components/feature/blog/ArticleCodeCopyButton"
 import style from "@/styles/feature/blog/ArticleCodeBlock.module.scss"
 
 type ArticleCodeBlockProps = {
   code: string
-  language: BundledLanguage
+  language: ArticleCodeLanguage
   filename?: string
 }
 
