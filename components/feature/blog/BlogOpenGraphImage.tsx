@@ -22,8 +22,7 @@ export async function createBlogOpenGraphImage(slug: string) {
 
   const logNumber = String(article.logNumber).padStart(3, "0")
   const publishedAt = article.publishedAt.replaceAll("-", ".")
-  const fontText = `${article.title}${publishedAt}PROF.J.K.RESEARCH LOGJK LABSTATIC ARCHIVELOG_${logNumber}`
-  const fontData = await loadJapaneseFont(fontText)
+  const fontData = await loadJapaneseFont()
 
   return new ImageResponse(
     (
