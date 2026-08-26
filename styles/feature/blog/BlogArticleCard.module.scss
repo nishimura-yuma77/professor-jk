@@ -45,17 +45,6 @@
   }
 }
 
-.index {
-  position: absolute;
-  top: 0.25rem;
-  left: 0.25rem;
-  padding: 0.15rem 0.25rem;
-  color: var(--color-accent);
-  background: color-mix(in srgb, var(--color-background) 88%, transparent);
-  font-family: var(--font-family-mono);
-  font-size: var(--font-size-small);
-}
-
 .body {
   display: grid;
   min-width: 0;
@@ -96,12 +85,6 @@
   .visual {
     width: 100%;
     border-bottom: 1px solid var(--color-border);
-  }
-
-  .index {
-    top: 0.65rem;
-    left: 0.65rem;
-    padding: 0.3rem 0.5rem;
   }
 
   .body {
