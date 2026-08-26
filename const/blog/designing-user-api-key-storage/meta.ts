@@ -6,6 +6,6 @@ export const meta = {
   description:
     "外部サービスのAPIキーをユーザーごとに預かるために、ハッシュではなく暗号化を選び、復号済みCredentialをServer Function内部へ閉じ込めた設計をまとめます。",
   publishedAt: "2026-08-26",
-  draft: true,
+  draft: false,
   logNumber: 6,
 } as const satisfies BlogArticleMeta
