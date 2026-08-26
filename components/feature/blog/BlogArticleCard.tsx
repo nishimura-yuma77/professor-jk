@@ -20,7 +20,6 @@ function formatDate(date: string) {
 
 export default function BlogArticleCard({
   article,
-  logNumber,
   loading,
 }: BlogArticleCardProps) {
   return (
@@ -36,9 +35,6 @@ export default function BlogArticleCard({
             loading={loading}
             className={style.image}
           />
-          <span className={style.index} aria-hidden="true">
-            LOG_{String(logNumber).padStart(3, "0")}
-          </span>
         </div>
         <div className={style.body}>
           <h3 className={style.title}>{article.title}</h3>
