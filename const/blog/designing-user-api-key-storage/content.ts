@@ -66,7 +66,7 @@ export const content = [
   {
     id: "hash-comparison-code",
     type: "code",
-    language: "text",
+    language: "plaintext",
     filename: "PasswordとAPI Keyの違い",
     code: `Password
   -> Hash
@@ -99,7 +99,7 @@ API Key
   {
     id: "storage-schema-code",
     type: "code",
-    language: "text",
+    language: "plaintext",
     filename: "schema.dbml",
     code: `table novelai_credentials {
   id integer [pk, increment]
@@ -117,7 +117,7 @@ API Key
   {
     id: "storage-flow-code",
     type: "code",
-    language: "text",
+    language: "plaintext",
     filename: "APIキー登録時の流れ",
     code: `NovelAI API Key
         |
@@ -188,7 +188,7 @@ return {
   {
     id: "usage-flow-code",
     type: "code",
-    language: "text",
+    language: "plaintext",
     filename: "画像生成時のCredential境界",
     code: `Browser
   |
