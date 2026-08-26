@@ -1,9 +1,12 @@
 import { readFile } from "node:fs/promises"
-import { createRequire } from "node:module"
+import path from "node:path"
 
-const localRequire = createRequire(import.meta.url)
-const fontPath = localRequire.resolve(
-  "noto-sans-japanese/fonts/NotoSansJP-Bold.woff",
+const fontPath = path.join(
+  process.cwd(),
+  "node_modules",
+  "noto-sans-japanese",
+  "fonts",
+  "NotoSansJP-Bold.woff",
 )
 const fontDataPromise = readFile(fontPath).then(
   (fontData) => Uint8Array.from(fontData).buffer,
