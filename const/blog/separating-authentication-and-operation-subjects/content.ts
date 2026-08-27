@@ -4,18 +4,18 @@ export const content = [
   {
     id: "opening",
     type: "paragraph",
-    text: "Webアプリのユーザーテーブルを考えるとき、最初はusersにメールアドレス、パスワード、roleを持たせれば十分に見えます。今回作っているCMSでも、ログインする人には管理者とコンテンツを操作するactorがいるため、当初は1つのusersで表現することも考えられました。",
+    text: "Webアプリのユーザーテーブルでは、usersにメールアドレス、パスワード、roleを持たせる構成がよくあります。今回作っているCMSには、ログインする人として管理者とコンテンツを操作するactorがいます。",
   },
   {
     id: "opening-problem",
     type: "paragraph",
-    text: "ただ、設計を進めるうちに「ログインできる人」と「システム上で何かを操作・所有する主体」は同じ概念ではないと感じました。そこでseijinbuでは、emailやpassword_hashを持つusersを認証主体に限定し、adminsとactorsを操作主体として別テーブルへ切り出しています。この記事では、その分離をDB設計だけでなく、actorログインとセッションの実装まで含めてまとめます。",
+    text: "seijinbuでは、「ログインできるアカウント」と「システム上で何かを操作・所有する主体」を別の概念として扱うことにしました。emailやpassword_hashを持つusersを認証主体に限定し、adminsとactorsを操作主体として別テーブルへ切り出しています。この記事では、その分離をDB設計だけでなく、actorログインとセッションの実装まで含めてまとめます。",
   },
   {
     id: "user-meaning-heading",
     type: "heading",
     level: 2,
-    text: "「ユーザー」が二つの意味を持ち始めた",
+    text: "「ユーザー」が二つの意味を持ち始める",
     anchor: "user-has-two-meanings",
   },
   {
@@ -67,7 +67,7 @@ export const content = [
   {
     id: "auth-subject-boundary",
     type: "paragraph",
-    text: "このusers.idが表すのは、あくまで認証アカウントです。ログイン後の各機能で「このデータは誰のものか」を表すIDとしてusers.idをそのまま使わないことが、今回の設計で決めた境界です。",
+    text: "このusers.idが表すのは認証アカウントです。actor固有の所有データではusers.idをそのまま外部キーにせず、操作主体であるactors.idを参照する構成にしています。",
   },
   {
     id: "operation-subject-heading",
@@ -106,7 +106,7 @@ export const actors = sqliteTable('actors', {
   {
     id: "operation-subject-cardinality",
     type: "paragraph",
-    text: "ここでadminsやactorsを単なるroleマスタとして扱っていない点が重要です。それぞれが自分のidを持つため、他のテーブルは「roleがactorのuser」ではなく、明示的にactorそのものを参照できます。なお現在の制約では、1つのuserがadminとactorの両方を持つこと自体は禁止していません。両者を排他的にしたい要件が出た場合は、別途その制約を設計する必要があります。",
+    text: "adminsやactorsはrole名を持つだけの区分ではなく、それぞれが独立したidを持つ主体です。そのため、他のテーブルは「roleがactorのuser」ではなく、明示的にactorそのものを参照できます。なお現在の制約では、1つのuserがadminとactorの両方を持つこと自体は禁止していません。両者を排他的にしたい要件が出た場合は、別途その制約を設計する必要があります。",
   },
   {
     id: "operation-subject-flow",
@@ -136,7 +136,7 @@ export const actors = sqliteTable('actors', {
   {
     id: "role-intro",
     type: "paragraph",
-    text: "もしactorとadminの違いが「画面Aを見られるか」のような権限差だけなら、users.roleやRBACで十分だったと思います。しかし今回のactorは、権限を表すラベルではなく、実際にドメインデータを所有する主体です。",
+    text: "actorとadminの違いが「画面Aを見られるか」のような権限差だけなら、users.roleやRBACでも表現できます。しかし今回のactorは、権限を表すラベルではなく、実際にドメインデータを所有する主体です。",
   },
   {
     id: "role-domain-ref",
@@ -173,7 +173,7 @@ export const actorPrivateAssets = sqliteTable('actor_private_assets', {
   {
     id: "role-domain-explanation",
     type: "paragraph",
-    text: "NovelAI Credential、prompt chunk、private assetはいずれもuser_idではなくactor_idを参照します。これによってDBを見るだけでも「このデータは認証アカウントに属する」のではなく「actorとしての作業領域に属する」と読み取れます。認証方式やusersの属性が変わっても、actorを中心にしたドメイン側の所有関係はそのまま保てます。",
+    text: "NovelAI Credential、prompt chunk、private assetはいずれもuser_idではなくactor_idを参照します。これによってDBを見るだけでも「このデータは認証アカウントに属する」のではなく「actorとしての作業領域に属する」と読み取れます。認証方式やusersの属性を変更するときも、actorを中心にしたドメイン側の所有関係への影響を分離しやすくなります。",
   },
   {
     id: "login-heading",
@@ -263,7 +263,7 @@ Credential / Prompt Chunk / Private Asset`,
   {
     id: "join-intro",
     type: "paragraph",
-    text: "もちろん画面によっては、現在のactorに紐づくemailなど、認証アカウント側の情報も必要です。その場合はactorIdからactorsを起点にusersをJOINし、必要な形へ組み立て直します。",
+    text: "画面によっては、現在のactorに紐づくemailなど、認証アカウント側の情報も必要です。その場合はactorIdからactorsを起点にusersをJOINし、必要な形へ組み立て直します。",
   },
   {
     id: "join-code",
@@ -287,19 +287,19 @@ Credential / Prompt Chunk / Private Asset`,
   {
     id: "join-explanation",
     type: "paragraph",
-    text: "ここではuserとactorを無理に1つのモデルへ潰さず、返却値でも分けたまま扱っています。認証情報が必要な処理と、actorの所有データを操作する処理で、どちらのIDを使うべきかがコード上でも曖昧になりにくくなりました。",
+    text: "ここではuserとactorを無理に1つのモデルへ潰さず、返却値でも分けたまま扱っています。認証情報が必要な処理と、actorの所有データを操作する処理で、どちらのIDを使うべきかがコード上でも曖昧になりにくい構成です。",
   },
   {
     id: "benefits-heading",
     type: "heading",
     level: 2,
-    text: "分離して得られたのは、責務が名前に出ることだった",
+    text: "分離すると、責務が名前に出る",
     anchor: "benefits",
   },
   {
     id: "benefits-intro",
     type: "paragraph",
-    text: "この設計はテーブル数を減らす方向ではありません。むしろJOINも増えます。それでも採用したのは、DBとアプリケーションの両方で「今どの主体を扱っているのか」を明示できる利点が大きかったからです。",
+    text: "この設計はテーブル数を減らす方向ではなく、認証情報と操作主体を同時に使う場面ではJOINも必要です。その代わり、DBとアプリケーションの両方で「今どの主体を扱っているのか」を明示できます。",
   },
   {
     id: "benefits-list",
@@ -338,7 +338,7 @@ Credential / Prompt Chunk / Private Asset`,
   {
     id: "tradeoffs-intro",
     type: "paragraph",
-    text: "一方で、usersへroleを1カラム追加する設計より考えることは増えます。今回の分離が常に正解というわけではなく、操作主体が独立したドメイン概念として必要かどうかで判断すべきだと思います。",
+    text: "一方で、usersへroleを1カラム追加する設計より考えることは増えます。判断基準になるのは、操作主体が単なる権限区分なのか、それとも独立したドメイン概念としてデータを所有するのかです。",
   },
   {
     id: "tradeoffs-list",
@@ -377,11 +377,11 @@ Credential / Prompt Chunk / Private Asset`,
   {
     id: "conclusion",
     type: "paragraph",
-    text: "今回の設計で整理できたのは、usersは人そのものを表す万能テーブルではなく、認証アカウントという責務を持つテーブルだということでした。認証後に何として振る舞うのかはactorsやadminsが受け持ち、actor固有のデータはactor_idへ紐づける。認証主体から操作主体へ境界を一度越える形にしたことで、各テーブルと各IDの意味がかなり明確になりました。",
+    text: "この設計では、usersを人そのものを表す万能テーブルにはせず、認証アカウントという責務へ限定しています。認証後に何として振る舞うのかはactorsやadminsが受け持ち、actor固有のデータはactor_idへ紐づける。認証主体から操作主体へ境界を一度越える形にすることで、各テーブルと各IDの意味を明示できます。",
   },
   {
     id: "conclusion-guide",
     type: "paragraph",
-    text: "権限差しかない小さなシステムならusers.roleで十分です。一方で、ログイン後の主体が独自のデータを所有し、別のライフサイクルを持ち始めるなら、認証主体と操作主体を分ける価値があります。ユーザーテーブルを設計するときは、まず「このIDは本人確認のためのIDなのか、それともドメイン上で何かを所有するIDなのか」を分けて考えると整理しやすいと感じました。",
+    text: "権限差しかない小さなシステムならusers.roleで表現できます。一方で、ログイン後の主体が独自のデータを所有し、別のライフサイクルを持ち始めるなら、認証主体と操作主体を分ける価値があります。ユーザーテーブルを設計するときは、まず「このIDは本人確認のためのIDなのか、それともドメイン上で何かを所有するIDなのか」を分けて考えると整理しやすくなります。",
   },
 ] as const satisfies readonly ArticleBlock[]
