@@ -13,8 +13,7 @@ export async function createExperimentOpenGraphImage(slug: string) {
     throw new Error(`Experiment not found: ${slug}`)
   }
 
-  const fontText = `${experiment.code}${experiment.status}${experiment.visibility}${experiment.title}${experiment.subtitle ?? ""}JK LABEXPERIMENT ARCHIVE`
-  const fontData = await loadJapaneseFont(fontText)
+  const fontData = await loadJapaneseFont()
 
   return new ImageResponse(
     (

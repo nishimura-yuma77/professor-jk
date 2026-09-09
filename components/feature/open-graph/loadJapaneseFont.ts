@@ -1,28 +1,17 @@
-const FONT_USER_AGENT =
-  "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko"
+import { readFile } from "node:fs/promises"
+import path from "node:path"
 
-export default async function loadJapaneseFont(text: string) {
-  const cssUrl = new URL("https://fonts.googleapis.com/css2")
-  cssUrl.searchParams.set("family", "Noto Sans JP:wght@700")
-  cssUrl.searchParams.set("text", text)
+const fontPath = path.join(
+  process.cwd(),
+  "node_modules",
+  "noto-sans-japanese",
+  "fonts",
+  "NotoSansJP-Bold.woff",
+)
+const fontDataPromise = readFile(fontPath).then(
+  (fontData) => Uint8Array.from(fontData).buffer,
+)
 
-  const cssResponse = await fetch(cssUrl, {
-    headers: { "User-Agent": FONT_USER_AGENT },
-  })
-  if (!cssResponse.ok) {
-    throw new Error(`Failed to fetch OGP font CSS: ${cssResponse.status}`)
-  }
-
-  const css = await cssResponse.text()
-  const fontUrl = css.match(/src: url\(([^)]+)\) format\('woff'\)/)?.[1]
-  if (!fontUrl) {
-    throw new Error("OGP font URL was not found in Google Fonts CSS")
-  }
-
-  const fontResponse = await fetch(fontUrl)
-  if (!fontResponse.ok) {
-    throw new Error(`Failed to fetch OGP font: ${fontResponse.status}`)
-  }
-
-  return fontResponse.arrayBuffer()
+export default function loadJapaneseFont(): Promise<ArrayBuffer> {
+  return fontDataPromise
 }
