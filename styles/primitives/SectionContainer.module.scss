@@ -3,10 +3,7 @@
 .container {
   width: 100%;
   background-color: var(--color-surface);
-  padding: var(--padding-medium);
-  .section {
-
-  }
+  padding: clamp(4rem, 8vw, 6rem) var(--padding-medium) clamp(1.5rem, 4vw, 3rem);
 }
 
 

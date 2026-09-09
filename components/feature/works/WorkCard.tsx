@@ -1,6 +1,7 @@
 import Link from "next/link"
 import type { CSSProperties } from "react"
 import type { Work } from "@/const/works"
+import ArrowIcon from "@/components/primitives/ArrowIcon"
 import style from "@/styles/feature/works/WorkCard.module.scss"
 
 type WorkCardProps = {
@@ -34,7 +35,7 @@ export default function WorkCard({ work, index, headingLevel = 2 }: WorkCardProp
 
       <div className={style.footer}>
         <dl className={style.facts}>
-          <div>
+          <div className={style.role_fact}>
             <dt>役割</dt>
             <dd className={style.role}>{work.role}</dd>
           </div>
@@ -42,8 +43,13 @@ export default function WorkCard({ work, index, headingLevel = 2 }: WorkCardProp
             <dt>使用技術</dt>
             <dd className={style.technologies}>
               {work.technologies.map((technology) => (
-                <span key={technology.name}>{technology.name}</span>
+                <span key={technology.name} className={style.technology}>{technology.name}</span>
               ))}
+              {work.technologies.length > 3 && (
+                <span className={style.technology_more} aria-label={`ほか${work.technologies.length - 3}件`}>
+                  +{work.technologies.length - 3}
+                </span>
+              )}
             </dd>
           </div>
         </dl>
@@ -52,7 +58,7 @@ export default function WorkCard({ work, index, headingLevel = 2 }: WorkCardProp
           className={style.detail_link}
           aria-label={`${work.shortTitle}の担当内容を見る`}
         >
-          担当内容を見る <span aria-hidden="true">↗</span>
+          担当内容を見る <ArrowIcon />
         </Link>
       </div>
     </article>

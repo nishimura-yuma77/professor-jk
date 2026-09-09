@@ -1,4 +1,5 @@
 import Link from "next/link"
+import ArrowIcon from "@/components/primitives/ArrowIcon"
 import { getBlogArticles } from "@/const/blog"
 import { EXPERIMENTS } from "@/const/experiments"
 import { PLAY_AVAILABILITY } from "@/const/playWithJk"
@@ -26,7 +27,7 @@ export default function HeroActivity() {
           </span>
           <span className={style.activity_title}>
             <span>{currentExperiment.title}</span>
-            <span className={style.activity_arrow} aria-hidden="true">↗</span>
+            <ArrowIcon className={style.activity_arrow} />
           </span>
           <span className={style.activity_description}>
             {currentExperiment.description.split("\n")[0]}
@@ -43,7 +44,7 @@ export default function HeroActivity() {
           </span>
           <span className={style.activity_title}>
             <span>{latestArticle.title}</span>
-            <span className={style.activity_arrow} aria-hidden="true">↗</span>
+            <ArrowIcon className={style.activity_arrow} />
           </span>
           <span className={style.activity_description}>設計の判断と、開発の試行錯誤を読む</span>
         </Link>
