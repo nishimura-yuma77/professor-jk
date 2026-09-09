@@ -91,6 +91,7 @@
 }
 
 .role { color: var(--color-text); }
+.technology_more { display: none; }
 .technologies {
   display: flex;
   flex-wrap: wrap;
@@ -115,9 +116,8 @@
   text-decoration: none;
   transition: background-color 160ms ease, border-color 160ms ease;
 
-  span {
-    font-family: var(--font-family-mono);
-    font-size: 1.125rem;
+  svg {
+    flex-shrink: 0;
     transition: transform 160ms ease;
   }
 
@@ -125,7 +125,7 @@
     border-color: color-mix(in srgb, var(--color-accent) 80%, white);
     background: color-mix(in srgb, var(--color-accent) 80%, white);
 
-    span { transform: translate(2px, -2px); }
+    svg { transform: translate(2px, -2px); }
   }
 
   &:focus-visible {
@@ -135,16 +135,51 @@
 }
 
 @media (max-width: 767px) {
-  .footer { flex-direction: column; align-items: stretch; gap: 1.25rem; }
-  .detail_link { width: 100%; }
+  .card { padding: 1rem; }
+  .title { margin-top: 0.5rem; font-size: 1.25rem; line-height: 1.4; }
+
+  .lead {
+    display: -webkit-box;
+    overflow: hidden;
+    margin-top: 0.625rem;
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.875rem;
+    margin-top: 0.875rem;
+    padding-top: 0.75rem;
+  }
+
+  .facts {
+    > .role_fact { display: none; }
+    > div { grid-template-columns: minmax(0, 1fr); }
+
+    dt {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+
+    dd { font-size: 0.6875rem; line-height: 1.6; }
+  }
+
+  .technologies { gap: 0.375rem 0.625rem; }
+  .technology:nth-child(n + 4) { display: none; }
+  .technology_more { display: inline; color: var(--color-accent); }
+  .detail_link { width: 100%; min-height: 2.75rem; padding: 0.625rem 0.875rem; }
 }
 
 @media (max-width: 399px) {
-  .card { padding: 1rem; }
-  .title { font-size: 1.25rem; }
-  .lead { font-size: 0.8125rem; }
-  .facts > div { grid-template-columns: 3.25rem minmax(0, 1fr); gap: 0.5rem; }
-  .facts dd { font-size: 0.6875rem; }
+  .identity { gap: 0.5rem; font-size: 0.625rem; }
+  .period { padding-left: 0.5rem; }
 }
 
 @keyframes appear {
@@ -154,5 +189,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .card { animation: none; }
-  .detail_link, .detail_link span { transition: none; }
+  .detail_link, .detail_link svg { transition: none; }
 }

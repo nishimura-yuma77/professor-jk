@@ -118,6 +118,11 @@ export default function ExperimentCard({
               />
             )
           })}
+          {stacks.length > 3 && (
+            <span className={style.stack_more} aria-label={`ほか${stacks.length - 3}件`}>
+              +{stacks.length - 3}
+            </span>
+          )}
         </p>
       </div>
       <span className={style.detail_hint} aria-hidden="true">

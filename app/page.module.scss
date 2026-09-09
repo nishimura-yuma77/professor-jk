@@ -1,7 +1,7 @@
 .main {
   display: flex;
   flex-direction: column;
-  gap: var(--padding-large);
+  gap: clamp(4rem, 8vw, 7rem);
   width: 100%;
   height: auto;
   margin-bottom: 3rem;

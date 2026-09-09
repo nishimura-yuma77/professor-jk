@@ -4,6 +4,7 @@ import SectionContainer from "@/components/primitives/SectionContainer";
 import style from "@/styles/feature/HeroSection.module.scss"
 import YoutubeIcon from "@/components/primitives/YoutubeIcon";
 import XTwitterIcon from "@/components/primitives/XTwitterIcon";
+import ArrowIcon from "@/components/primitives/ArrowIcon";
 import ActiveBadge from "@/components/ui/ActiveBadge";
 import TachieImage from "@/components/ui/TachieImage";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
@@ -222,10 +223,12 @@ export default function HeroSection({ children }: { children: ReactNode }) {
           >
             <nav className={style.actions} aria-label="ラボを探索する">
               <Link href="/experiments" className={style.primary_action}>
-                実験・制作物を見る <span aria-hidden="true">↗</span>
+                <span>実験・制作物を見る</span>
+                <ArrowIcon className={style.action_icon} />
               </Link>
               <Link href="/blog" className={style.secondary_action}>
-                開発ログを読む <span aria-hidden="true">→</span>
+                <span>開発ログを読む</span>
+                <ArrowIcon direction="right" className={style.action_icon} />
               </Link>
             </nav>
           </div>
