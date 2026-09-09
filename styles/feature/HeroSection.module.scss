@@ -600,7 +600,7 @@
   .channels { display: none; }
 
   .tachie_area {
-    width: min(100%, 13rem);
+    width: min(100%, clamp(15rem, 70vw, 18rem));
     padding: 0.5rem 0 0.875rem;
   }
 
@@ -666,6 +666,7 @@
   }
 
   .identity_header { align-items: flex-start; align-self: end; }
+  .tachie_area { width: 100%; }
   .name_area { text-align: left; }
   .name_row { justify-content: flex-start; }
   .chara_name { font-size: 3rem; }
