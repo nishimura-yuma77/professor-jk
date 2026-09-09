@@ -13,7 +13,7 @@ export default function DataSection() {
   } = useIntersectionObserver<HTMLDivElement>({ once: true })
   return (
     <SectionContainer ref={ref}>
-      <SectionTitle title={"003_DATA"} isVisible={isVisible} />
+      <SectionTitle title={"004_DATA"} isVisible={isVisible} />
       <table className={style.profile_table}>
         <tbody>
           {PROFILE_DATA.map((profile) => {

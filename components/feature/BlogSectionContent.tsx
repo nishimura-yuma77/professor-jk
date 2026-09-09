@@ -1,9 +1,9 @@
 "use client"
 
-import Link from "next/link"
 import { useState, type CSSProperties } from "react"
 import SectionContainer from "@/components/primitives/SectionContainer"
 import SectionTitle from "@/components/primitives/SectionTitle"
+import ArchiveLink from "@/components/ui/ArchiveLink"
 import BlogArticleCard, {
   type BlogArticleCardArticle,
 } from "@/components/feature/blog/BlogArticleCard"
@@ -31,7 +31,7 @@ export default function BlogSectionContent({ articles }: BlogSectionContentProps
   return (
     <SectionContainer ref={ref}>
       <SectionTitle
-        title="002_BLOG"
+        title="003_BLOG"
         subtitle="LATEST LOGS"
         isVisible={isVisible}
         onAnimationEnd={() => setIsContentVisible(true)}
@@ -58,21 +58,13 @@ export default function BlogSectionContent({ articles }: BlogSectionContentProps
           <p className={style.empty}>NO LOGS FOUND</p>
         )}
 
-        <Link
+        <ArchiveLink
           href="/blog"
-          className={`${style.archive_link} ${
-            isContentVisible ? style.archive_link_visible : ""
-          }`}
-          style={{
-            "--archive-link-delay": `${archiveLinkDelay}ms`,
-          } as CSSProperties}
-        >
-          <span className={style.archive_kicker}>ARCHIVE INDEX</span>
-          <span className={style.archive_label}>すべての研究ログを見る</span>
-          <span className={style.archive_access} aria-hidden="true">
-            ACCESS <span className={style.archive_arrow}>-&gt;</span>
-          </span>
-        </Link>
+          kicker="ARCHIVE INDEX"
+          label="すべての研究ログを見る"
+          isVisible={isContentVisible}
+          revealDelay={archiveLinkDelay}
+        />
       </div>
     </SectionContainer>
   )

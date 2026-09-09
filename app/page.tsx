@@ -1,6 +1,9 @@
 import Header from "@/components/feature/Header"
 import HeroSection from "@/components/feature/HeroSection"
-import PlayWithJkFeatureSection from "@/components/feature/PlayWithJkFeatureSection"
+import HeroActivity from "@/components/feature/HeroActivity"
+import WorkSection from "@/components/feature/WorkSection"
+import WorkArchiveGrid from "@/components/feature/works/WorkArchiveGrid"
+import { WORKS } from "@/const/works"
 import style from "@/app/page.module.scss"
 import ExperimentSection from "@/components/feature/ExperimentSection";
 import BlogSection from "@/components/feature/BlogSection";
@@ -13,8 +16,12 @@ export default function Home() {
     <>
       <Header />
       <PageBackground className={style.main}>
-        <HeroSection />
-        <PlayWithJkFeatureSection />
+        <HeroSection>
+          <HeroActivity />
+        </HeroSection>
+        <WorkSection>
+          <WorkArchiveGrid works={WORKS} headingLevel={3} />
+        </WorkSection>
         <ExperimentSection />
         <BlogSection />
         <DataSection />

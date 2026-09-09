@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- CloudFront invokes this global entry point.
 function handler(event) {
   var request = event.request;
   var uri = request.uri;
