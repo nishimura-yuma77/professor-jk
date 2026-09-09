@@ -1,0 +1,29 @@
+.container {
+  --works-muted: #b1a496;
+  padding-block: 2rem;
+  background: var(--color-background);
+}
+
+.content {
+  display: grid;
+  gap: 1.25rem;
+  padding: var(--padding-large) var(--padding-small) 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.75rem);
+  transition:
+    opacity 400ms ease,
+    transform 400ms ease,
+    visibility 0s 400ms;
+}
+
+.content_visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content { transform: none; transition: none; }
+}

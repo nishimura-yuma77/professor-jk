@@ -1,5 +1,5 @@
 "use client"
-import Link from "next/link"
+import ArchiveLink from "@/components/ui/ArchiveLink"
 import SectionContainer from "@/components/primitives/SectionContainer";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import SectionTitle from "@/components/primitives/SectionTitle";
@@ -26,7 +26,7 @@ export default function ExperimentSection() {
   return (
     <SectionContainer ref={ref}>
       <SectionTitle
-        title={"001_EXPERIMENTS"}
+        title={"002_EXPERIMENTS"}
         isVisible={isVisible}
         onAnimationEnd={() => setAreCardsVisible(true)}
       />
@@ -43,13 +43,14 @@ export default function ExperimentSection() {
           )
         })}
       </div>
-      <Link
+      <ArchiveLink
         href="/experiments"
-        className={`${style.archive_link} ${areCardsVisible ? style.archive_link_visible : ""}`}
-      >
-        <span>EXPERIMENT ARCHIVE</span>
-        <span>すべての実験記録を見る -&gt;</span>
-      </Link>
+        kicker="EXPERIMENT ARCHIVE"
+        label="すべての実験記録を見る"
+        isVisible={areCardsVisible}
+        revealDelay={500}
+        className={style.archive_link}
+      />
     </SectionContainer>
   )
 }

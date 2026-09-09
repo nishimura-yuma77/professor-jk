@@ -491,3 +491,14 @@
     opacity: 1;
   }
 }
+
+@media (max-height: 44rem) {
+  .menu {
+    place-items: start center;
+    overflow-y: auto;
+  }
+
+  .menu_link {
+    min-height: 4.25rem;
+  }
+}

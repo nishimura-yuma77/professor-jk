@@ -1,16 +1,27 @@
 .card {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
   height: auto;
   padding: 2rem;
 
   border: 1px solid var(--color-accent);
   border-radius: 0.75rem;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--color-accent) 8%, transparent), transparent 60%),
+    var(--color-background);
+  box-shadow:
+    0.35rem 0.35rem 0 color-mix(in srgb, var(--color-accent) 18%, transparent),
+    0 0.75rem 1.5rem #0004,
+    inset 0 1px 0 #ffffff0d;
 
   opacity: 0;
   transform: translateY(1.5rem) scale(0.98);
   pointer-events: none;
 
   transition:
+    box-shadow 300ms ease,
     opacity 600ms ease-out var(--card-reveal-delay, 0ms),
     transform 600ms cubic-bezier(0.22, 1, 0.36, 1) var(--card-reveal-delay, 0ms);
 
@@ -22,22 +33,35 @@
   &.reveal_complete {
     pointer-events: auto;
     transition:
+      box-shadow 300ms ease,
       opacity 600ms ease-out,
       transform 300ms ease;
   }
 
-  &:hover {
-    transform: translateY(-0.5rem);
+  &:hover,
+  &:focus-within {
+    transform: translateY(-0.25rem);
+    box-shadow:
+      0.5rem 0.5rem 0 color-mix(in srgb, var(--color-accent) 25%, transparent),
+      0 1rem 2rem #0006,
+      inset 0 1px 0 #ffffff14;
     cursor: pointer;
   }
 
   .code_and_status {
     display: flex;
+    align-items: center;
     gap: 0.75rem;
     justify-content: space-between;
+    padding-bottom: 0.875rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 22%, transparent);
 
     .code {
+      flex-shrink: 0;
+      margin: 0;
+      font-family: var(--font-family-mono);
       font-size: var(--font-size-small);
+      line-height: 1.4;
     }
 
     .badges {
@@ -45,8 +69,11 @@
       z-index: 1;
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
       gap: 0.4rem 0.75rem;
       justify-content: flex-end;
+      font-family: var(--font-family-mono);
+      line-height: 1.4;
 
       .visibility {
         font-family: var(--font-family-mono);
@@ -69,7 +96,7 @@
   }
 
   .title_area {
-    margin: var(--padding-medium) var(--padding-small);
+    margin: var(--padding-medium) 0;
 
     .title_and_media {
       display: flex;
@@ -150,7 +177,8 @@
 
   .detail_hint {
     display: block;
-    margin-top: 0.75rem;
+    margin-top: auto;
+    padding-top: 1rem;
     color: var(--color-accent);
     font-family: var(--font-family-mono);
     font-size: var(--font-size-small);
@@ -164,6 +192,10 @@
   }
 }
 
+@media (max-width: 480px) {
+  .card { padding: 1.25rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card {
     transform: none;
@@ -172,6 +204,11 @@
 
     &.reveal_complete {
       transition-duration: 0.01ms;
+    }
+
+    &:hover,
+    &:focus-within {
+      transform: none;
     }
 
     .stack_area {

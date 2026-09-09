@@ -4,7 +4,7 @@ export type ProfileData = {
 }
 
 export const PROFILE_TEXT =
-  "本業はWebエンジニア。\n実力を試すため、自己プロデュースを開始。\n「表現を技術で拡張する」をモットーに企画・開発し、その試行錯誤をYouTubeやXで公開している。"
+  "本業はWebエンジニア。実力を試すため、自分自身をプロデュース。企画・開発したものと、その試行錯誤を公開している。"
 
 export const PROFILE_FLAVOR_TEXT =
   "――その実験体が、この俺、Professor. J.K.さ。"

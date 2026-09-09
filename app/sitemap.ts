@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next"
 import { getBlogArticles } from "@/const/blog"
 import { EXPERIMENTS } from "@/const/experiments"
+import { WORKS } from "@/const/works"
 
 export const dynamic = "force-static"
 
@@ -21,6 +22,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: "https://professor-jk.net/experiments"
+    },
+    {
+      url: "https://professor-jk.net/works"
     }
   ]
 
@@ -32,6 +36,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...EXPERIMENTS.map((experiment) => ({
       url: `https://professor-jk.net/experiments/${experiment.slug}`,
+    })),
+    ...WORKS.map((work) => ({
+      url: `https://professor-jk.net/works/${work.slug}`,
     })),
   ]
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
-import { Zen_Kaku_Gothic_New, IBM_Plex_Mono } from "next/font/google"
+import { Zen_Kaku_Gothic_New } from "next/font/google"
+import localFont from "next/font/local"
 import "@/app/globals.scss"
 import ErrorProvider from "@/components/providers/ErrorProvider"
 import QueryProvider from "@/components/providers/QueryProvider"
@@ -9,13 +10,29 @@ const SITE_DESCRIPTION = "エンジニアとして活動するJ.K.教授のキ�
 
 const zenKakuGothicNew = Zen_Kaku_Gothic_New({
   weight: ["400", "500", "700"],
+  subsets: ["latin"],
   display: "swap",
   variable: "--font-zen-kaku"
 })
 
-const ibmPlexMono = IBM_Plex_Mono({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
+const ibmPlexMono = localFont({
+  src: [
+    {
+      path: "../node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2",
+      weight: "400",
+      style: "normal"
+    },
+    {
+      path: "../node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2",
+      weight: "500",
+      style: "normal"
+    },
+    {
+      path: "../node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-700-normal.woff2",
+      weight: "700",
+      style: "normal"
+    }
+  ],
   display: "swap",
   variable: "--font-ibm-plex-mono"
 })

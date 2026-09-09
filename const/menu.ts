@@ -11,6 +11,11 @@ export const MENU = {
     subLabel: "PROJECT ARCHIVE",
     href: "/experiments",
   },
+  works: {
+    label: "WORKS",
+    subLabel: "CAREER ARCHIVE",
+    href: "/works",
+  },
   blog: {
     label: "BLOG",
     subLabel: "RESEARCH LOG",

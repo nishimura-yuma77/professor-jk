@@ -1,0 +1,86 @@
+:global(body):has(.main) { min-width: 0; }
+
+.main {
+  --works-muted: #b1a496;
+  min-height: calc(100svh - var(--header-height));
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-background);
+}
+
+.container {
+  width: min(calc(100% - 5rem), var(--content-width-wide));
+  margin-inline: auto;
+}
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 2.5rem 0 1.75rem;
+
+  h1 {
+    color: var(--color-accent);
+    font-family: var(--font-family-mono);
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.045em;
+  }
+
+  p {
+    padding-left: 1.25rem;
+    border-left: 1px solid var(--color-border);
+    color: var(--works-muted);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}
+
+.archive { padding-bottom: 3rem; }
+
+.experiments_link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1rem 0 4rem;
+
+  p {
+    color: var(--works-muted);
+    font-family: var(--font-family-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+  }
+
+  h2 {
+    margin-top: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 400;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2.5rem;
+    min-height: 2.75rem;
+    padding-block: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-size: 0.8125rem;
+    text-decoration: none;
+
+    &:hover { color: var(--color-accent); border-color: var(--color-accent); }
+    &:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 5px; }
+    span { font-size: 1.25rem; }
+  }
+}
+
+@media (max-width: 767px) {
+  .container { width: calc(100% - 2.5rem); }
+  .hero { gap: 1rem; padding: 1.75rem 0 1.5rem; }
+  .hero p { padding-left: 1rem; font-size: 0.8125rem; }
+  .experiments_link { flex-direction: column; align-items: stretch; gap: 1.25rem; }
+  .experiments_link a { align-self: flex-start; }
+}
