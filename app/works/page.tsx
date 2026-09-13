@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import ArrowIcon from "@/components/primitives/ArrowIcon"
 import WorkArchiveGrid from "@/components/feature/works/WorkArchiveGrid"
 import { WORKS } from "@/const/works"
 import style from "@/app/works/page.module.scss"
@@ -26,13 +27,12 @@ export default function WorksPage() {
           <WorkArchiveGrid works={WORKS} />
         </section>
 
-        <aside className={style.experiments_link}>
-          <div>
-            <p>BEYOND WORK</p>
-            <h2>個人での実験・制作も。</h2>
-          </div>
-          <Link href="/experiments">実験アーカイブへ <span aria-hidden="true">↗</span></Link>
-        </aside>
+        <nav className={style.home_navigation} aria-label="ページナビゲーション">
+          <Link href="/">
+            <ArrowIcon direction="right" />
+            トップへ戻る
+          </Link>
+        </nav>
       </div>
     </main>
   )

@@ -11,7 +11,7 @@ export type Experiment = {
   media?: readonly MediaLink[]
 }
 export type ExperimentStatus = "PAUSED" | "ACTIVE" | "COMPLETED" | "ARCHIVED"
-export type ExperimentVisibility = "PUBLIC" | "PRIVATE"
+export type ExperimentVisibility = "PUBLIC" | "PRIVATE" | "SECRET"
 export type MediaType = "GITHUB" | "X" | "YOUTUBE" | "WEBSITE"
 export type MediaLink = {
   type: MediaType
@@ -20,11 +20,22 @@ export type MediaLink = {
 
 export const EXPERIMENTS = [
   {
+    code: "EXP_003",
+    slug: "secret-project-003",
+    title: "Secret Project",
+    subtitle: "Undisclosed Project",
+    description: "NovelAIと連携してキャラクターコンテンツの制作ワークフローを自動化するプロジェクト。\n同人声優との協力も通じ、キャラクターIPを育成する拠点を目指す。",
+    status: "ACTIVE",
+    visibility: "SECRET",
+    featured: true,
+    stacks: [],
+  },
+  {
     code: "EXP_001",
     slug: "jk-lab",
     title: "J.K. Lab",
     subtitle: "Character Brand Website",
-    description: "J.K.教授の世界観を表現するキャラクターサイト。\nキャラデザ・WEBデザイン・設計・実装・インフラ構築・CI/CDまで一貫して担当。",
+    description: "J.K.教授を通して、理念・人柄・実務経験を伝えるポートフォリオサイト。\n制作物と開発過程を公開し、仕事を任せる相手として判断できる情報を提供する。",
     status: "ACTIVE",
     visibility: "PUBLIC",
     featured: true,
@@ -46,7 +57,7 @@ export const EXPERIMENTS = [
     slug: "emotion-mike",
     title: "Emotion Mike",
     subtitle: "Condition-Aware Face Tracking",
-    description: "PNG Tuber向けのフェイストラッキングアプリ。\n現在実際の表情とアニメ表現のマッピングの限界を感じ、表情以外の情報から表情を調整する実験的機能を検討中。",
+    description: "PNG Tuber向けに、状況に応じた表情制御を検討する開発プロジェクト。\nPCの音量変化を表情切り替えのトリガーに用いる方針で、現在はモデル化を進めている。",
     status: "PAUSED",
     visibility: "PRIVATE",
     featured: true,
@@ -58,6 +69,10 @@ export const EXPERIMENTS = [
   }
 ] as const satisfies readonly Experiment[]
 
+export function getExperimentsWithDetails(): readonly Experiment[] {
+  return EXPERIMENTS
+}
+
 export function getExperiment(slug: string): Experiment | undefined {
-  return EXPERIMENTS.find((experiment) => experiment.slug === slug)
+  return getExperimentsWithDetails().find((experiment) => experiment.slug === slug)
 }

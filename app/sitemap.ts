@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 import { getBlogArticles } from "@/const/blog"
-import { EXPERIMENTS } from "@/const/experiments"
+import { getExperimentsWithDetails } from "@/const/experiments"
 import { WORKS } from "@/const/works"
 
 export const dynamic = "force-static"
@@ -34,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `https://professor-jk.net/blog/${article.slug}`,
       lastModified: article.updatedAt ?? article.publishedAt,
     })),
-    ...EXPERIMENTS.map((experiment) => ({
+    ...getExperimentsWithDetails().map((experiment) => ({
       url: `https://professor-jk.net/experiments/${experiment.slug}`,
     })),
     ...WORKS.map((work) => ({

@@ -16,6 +16,17 @@
     visibility 0s 400ms;
 }
 
+.cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--padding-large);
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .cards { grid-template-columns: repeat(2, minmax(0, 350px)); }
+}
+
 .content_visible {
   opacity: 1;
   visibility: visible;

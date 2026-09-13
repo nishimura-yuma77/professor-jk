@@ -10,7 +10,7 @@ import TachieImage from "@/components/ui/TachieImage";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import TypewriterText from "@/components/primitives/TypewriterText";
 import Link from "next/link";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PROFILE_FLAVOR_TEXT, PROFILE_TEXT } from "@/const/profile"
 import { XTWITTER_LINK, YOUTUBE_LINK } from "@/const/constants"
 
@@ -38,15 +38,11 @@ const getCharacterDelay = (text: string, duration: number) => (
   duration / Math.max(text.length - 1, 1)
 )
 
-export default function HeroSection({ children }: { children: ReactNode }) {
+export default function HeroSection() {
   const {
     ref,
     isVisible
   } = useIntersectionObserver<HTMLDivElement>({ once: true, threshold: 0.1 })
-  const { ref: activityRef, isVisible: isActivityVisible } = useIntersectionObserver<HTMLDivElement>({
-    once: true,
-    threshold: 0.15,
-  })
   const [phase, setPhase] = useState<HeroPhase>("observer")
   const [contentPhase, setContentPhase] = useState<ContentPhase>("headline")
   const transitionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -233,12 +229,6 @@ export default function HeroSection({ children }: { children: ReactNode }) {
             </nav>
           </div>
         </div>
-      </div>
-      <div
-        ref={activityRef}
-        className={`${style.activity_reveal} ${isActivityVisible ? style.activity_visible : ""}`}
-      >
-        {children}
       </div>
     </SectionContainer>
   )

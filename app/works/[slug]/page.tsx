@@ -51,6 +51,7 @@ export default async function WorkDetailPage({
   const work = getWork(slug)
 
   if (!work) notFound()
+  const isCurrent = work.period === "現在"
 
   return (
     <main className={style.main}>
@@ -62,7 +63,10 @@ export default async function WorkDetailPage({
         <header className={style.header}>
           <div className={style.identity}>
             <span className={style.code}>{work.category}</span>
-            <span className={style.period}>{work.period === "現在" ? "● 現在参画中" : work.period}</span>
+            <span className={style.period}>
+              {isCurrent && <span className={style.status_dot} aria-hidden="true" />}
+              {isCurrent ? "現在参画中" : work.period}
+            </span>
           </div>
           <h1>{work.shortTitle}</h1>
           <p className={style.project_title}>{work.title}</p>
@@ -72,7 +76,7 @@ export default async function WorkDetailPage({
         <div className={style.content_layout}>
           <aside className={style.facts} aria-label="案件の基本情報">
             <dl>
-              <div><dt>ROLE / 役割</dt><dd>{work.role}</dd></div>
+              <div><dt>ROLE / 役割</dt><dd className={style.fact_primary}>{work.role}</dd></div>
               <div><dt>PERIOD / 担当時期</dt><dd>{work.period}</dd></div>
               <div>
                 <dt>TEAM / チーム</dt>

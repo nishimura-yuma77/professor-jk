@@ -55,6 +55,9 @@ export default async function ExperimentDetailPage({
 
   if (!experiment || !detail) notFound()
 
+  const hasStacks = experiment.stacks.length > 0
+  const hasMedia = Boolean(experiment.media?.length)
+
   return (
     <PageBackground className={style.main}>
       <article className={style.article}>
@@ -81,32 +84,36 @@ export default async function ExperimentDetailPage({
           <p className={style.description}>{experiment.description}</p>
         </header>
 
-        <section className={style.project_data} aria-label="実験データ">
-          <div className={`${style.data_card} ${style.stacks_card}`}>
-            <p className={style.data_label}>STACKS</p>
-            <div className={style.stacks}>
-              {experiment.stacks.map((stack) => <StackChip key={stack} text={stack} />)}
-            </div>
-          </div>
-          {experiment.media && experiment.media.length > 0 && (
-            <div className={`${style.data_card} ${style.links_card}`}>
-              <p className={style.data_label}>EXTERNAL LINKS</p>
-              <div className={style.links}>
-                {experiment.media.map((media) => media.type === "GITHUB" ? (
-                  <GithubLinkIcon
-                    key={media.href}
-                    href={media.href}
-                    className={style.external_link_icon}
-                  />
-                ) : (
-                  <a key={media.href} href={media.href} target="_blank" rel="noopener noreferrer">
-                    {media.type} <span aria-hidden="true">↗</span>
-                  </a>
-                ))}
+        {(hasStacks || hasMedia) && (
+          <section className={style.project_data} aria-label="実験データ">
+            {hasStacks && (
+              <div className={`${style.data_card} ${style.stacks_card}`}>
+                <p className={style.data_label}>STACKS</p>
+                <div className={style.stacks}>
+                  {experiment.stacks.map((stack) => <StackChip key={stack} text={stack} />)}
+                </div>
               </div>
-            </div>
-          )}
-        </section>
+            )}
+            {hasMedia && (
+              <div className={`${style.data_card} ${style.links_card}`}>
+                <p className={style.data_label}>EXTERNAL LINKS</p>
+                <div className={style.links}>
+                  {experiment.media?.map((media) => media.type === "GITHUB" ? (
+                    <GithubLinkIcon
+                      key={media.href}
+                      href={media.href}
+                      className={style.external_link_icon}
+                    />
+                  ) : (
+                    <a key={media.href} href={media.href} target="_blank" rel="noopener noreferrer">
+                      {media.type} <span aria-hidden="true">↗</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </section>
+        )}
 
         <div className={style.content}>
           <ArticleRenderer blocks={detail.blocks} />

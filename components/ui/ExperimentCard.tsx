@@ -33,7 +33,16 @@ export default function ExperimentCard({
     stacks,
     media
   } = experiment
+  const isSecret = visibility === "SECRET"
   const [isCardAnimationEnd, setIsCardAnimationEnd] = useState(isVisible)
+  const titleText = (
+    <TypewriterText
+      text={title}
+      isVisible={isVisible}
+      animationDelay={20}
+      startDelay={contentDelay}
+    />
+  )
 
   const handleCardAnimationEnd = (event: TransitionEvent<HTMLElement>) =>{
     if (
@@ -74,16 +83,11 @@ export default function ExperimentCard({
         <div className={style.title_and_media}>
           <h3 className={style.title}>
             <Link href={`/experiments/${slug}`} className={style.detail_link}>
-              <TypewriterText
-                text={title}
-                isVisible={isVisible}
-                animationDelay={20}
-                startDelay={contentDelay}
-              />
+              {titleText}
             </Link>
           </h3>
           <div className={style.media_links}>
-            {media?.map((m, index) => {
+            {!isSecret && media?.map((m, index) => {
               return (
                 <MediaLinkIcon key={index} mediaLink={m} className={style.media_icon} />
               )
@@ -107,24 +111,21 @@ export default function ExperimentCard({
           startDelay={contentDelay}
         />
       </p>
-      <div className={`${style.stack_area} ${isCardAnimationEnd ? style.visible : ""}`}>
-        <p className={style.stack_title}>STACKS</p>
-        <p className={style.stack_list}>
-          {stacks?.map((stack, index) => {
-            return (
-              <StackChip 
-                key={index}
-                text={stack}
-              />
-            )
-          })}
-          {stacks.length > 3 && (
-            <span className={style.stack_more} aria-label={`ほか${stacks.length - 3}件`}>
-              +{stacks.length - 3}
-            </span>
-          )}
-        </p>
-      </div>
+      {!isSecret && stacks.length > 0 && (
+        <div className={`${style.stack_area} ${isCardAnimationEnd ? style.visible : ""}`}>
+          <p className={style.stack_title}>STACKS</p>
+          <p className={style.stack_list}>
+            {stacks.map((stack, index) => (
+              <StackChip key={index} text={stack} />
+            ))}
+            {stacks.length > 3 && (
+              <span className={style.stack_more} aria-label={`ほか${stacks.length - 3}件`}>
+                +{stacks.length - 3}
+              </span>
+            )}
+          </p>
+        </div>
+      )}
       <span className={style.detail_hint} aria-hidden="true">
         OPEN FILE -&gt;
       </span>

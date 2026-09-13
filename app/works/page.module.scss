@@ -39,31 +39,14 @@
 
 .archive { padding-bottom: 3rem; }
 
-.experiments_link {
+.home_navigation {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
   padding: 1rem 0 4rem;
-
-  p {
-    color: var(--works-muted);
-    font-family: var(--font-family-mono);
-    font-size: 0.625rem;
-    letter-spacing: 0.08em;
-  }
-
-  h2 {
-    margin-top: 0.75rem;
-    font-size: 1.125rem;
-    font-weight: 400;
-  }
 
   a {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 2.5rem;
+    gap: 0.75rem;
     min-height: 2.75rem;
     padding-block: 0.5rem;
     border-bottom: 1px solid var(--color-border);
@@ -73,7 +56,7 @@
 
     &:hover { color: var(--color-accent); border-color: var(--color-accent); }
     &:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 5px; }
-    span { font-size: 1.25rem; }
+    svg { flex-shrink: 0; transform: rotate(180deg); }
   }
 }
 
@@ -81,6 +64,4 @@
   .container { width: calc(100% - 2.5rem); }
   .hero { gap: 1rem; padding: 1.75rem 0 1.5rem; }
   .hero p { padding-left: 1rem; font-size: 0.8125rem; }
-  .experiments_link { flex-direction: column; align-items: stretch; gap: 1.25rem; }
-  .experiments_link a { align-self: flex-start; }
 }
