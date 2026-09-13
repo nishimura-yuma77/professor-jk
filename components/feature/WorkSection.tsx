@@ -22,7 +22,7 @@ export default function WorkSection({ children }: { children: ReactNode }) {
         className={`${style.content} ${isContentVisible ? style.content_visible : ""}`}
         inert={!isContentVisible}
       >
-        {children}
+        <div className={style.cards}>{children}</div>
         <ArchiveLink
           href="/works"
           kicker="WORK ARCHIVE"

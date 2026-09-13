@@ -41,3 +41,30 @@
 .image {
   object-fit: contain;
 }
+
+.landscape {
+  max-width: 100%;
+  height: auto;
+  grid-template-rows: auto;
+
+  .image_frame {
+    height: auto;
+  }
+}
+
+.original_link {
+  display: inline-flex;
+  min-height: var(--interactive-min-size);
+  align-items: center;
+  justify-self: end;
+  gap: 0.5rem;
+  color: var(--color-accent);
+  font-family: var(--font-family-mono);
+  font-size: 0.75rem;
+  text-underline-offset: 0.25rem;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 0.25rem;
+  }
+}

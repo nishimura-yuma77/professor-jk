@@ -1,10 +1,10 @@
 import { createExperimentOpenGraphImage } from "@/components/feature/experiments/ExperimentOpenGraphImage"
-import { EXPERIMENTS } from "@/const/experiments"
+import { getExperimentsWithDetails } from "@/const/experiments"
 
 export const dynamic = "force-static"
 
 export function generateStaticParams() {
-  return EXPERIMENTS.map((experiment) => ({ slug: experiment.slug }))
+  return getExperimentsWithDetails().map((experiment) => ({ slug: experiment.slug }))
 }
 
 export async function GET(

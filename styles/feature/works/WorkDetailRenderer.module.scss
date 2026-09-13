@@ -18,6 +18,7 @@
     align-items: baseline;
     gap: 0.875rem;
     margin-bottom: 0.25rem;
+    color: var(--works-heading);
     scroll-margin-top: calc(var(--header-height) + 1.5rem);
     font-size: 1.25rem;
     font-weight: 500;
@@ -31,7 +32,7 @@
   }
 
   p, ul {
-    color: var(--works-muted);
+    color: var(--works-body);
     font-size: 0.9375rem;
     line-height: 2.1;
     overflow-wrap: anywhere;
@@ -48,6 +49,7 @@
   li::marker { color: var(--color-accent); font-size: 0.6em; }
 
   .compact_list {
+    color: var(--works-muted);
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.625rem 1.5rem;
     font-size: 0.875rem;

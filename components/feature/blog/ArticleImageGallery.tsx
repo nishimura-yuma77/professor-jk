@@ -14,10 +14,14 @@ export default function ArticleImageGallery({ label, images }: ArticleImageGalle
   }
 
   const image = images[0]
+  const isLandscape = image.width > image.height
 
   return (
-    <figure className={style.figure} aria-label={label}>
-      <div className={style.image_frame}>
+    <figure className={`${style.figure} ${isLandscape ? style.landscape : ""}`} aria-label={label}>
+      <div
+        className={style.image_frame}
+        style={isLandscape ? { aspectRatio: `${image.width} / ${image.height}` } : undefined}
+      >
         <Image
           src={image.src}
           alt={image.alt}
@@ -27,6 +31,17 @@ export default function ArticleImageGallery({ label, images }: ArticleImageGalle
         />
       </div>
       {image.caption && <figcaption>{image.caption}</figcaption>}
+      {isLandscape && (
+        <a
+          href={image.src}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={style.original_link}
+          aria-label={`${label}の原寸画像を開く（新しいタブ）`}
+        >
+          原寸画像を開く <span aria-hidden="true">↗</span>
+        </a>
+      )}
     </figure>
   )
 }

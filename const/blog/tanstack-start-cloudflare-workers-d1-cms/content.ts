@@ -314,7 +314,7 @@ function unauthorized() {
   return new Response("Unauthorized", {
     status: 401,
     headers: {
-      "WWW-Authenticate": 'Basic realm="seijinbu-dev", charset="UTF-8"',
+      "WWW-Authenticate": 'Basic realm="cms-dev", charset="UTF-8"',
     },
   })
 }
