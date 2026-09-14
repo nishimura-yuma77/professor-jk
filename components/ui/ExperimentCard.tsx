@@ -111,7 +111,7 @@ export default function ExperimentCard({
           startDelay={contentDelay}
         />
       </p>
-      {!isSecret && stacks.length > 0 && (
+      {stacks.length > 0 && (
         <div className={`${style.stack_area} ${isCardAnimationEnd ? style.visible : ""}`}>
           <p className={style.stack_title}>STACKS</p>
           <p className={style.stack_list}>
