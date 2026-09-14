@@ -28,7 +28,14 @@ export const EXPERIMENTS = [
     status: "ACTIVE",
     visibility: "SECRET",
     featured: true,
-    stacks: [],
+    stacks: [
+      "TanStack Start",
+      "TypeScript",
+      "Cloudflare Workers",
+      "Cloudflare D1",
+      "Cloudflare R2",
+      "Drizzle",
+    ],
   },
   {
     code: "EXP_001",
