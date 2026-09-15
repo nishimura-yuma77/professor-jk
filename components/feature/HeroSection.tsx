@@ -226,12 +226,12 @@ export default function HeroSection() {
             inert={!areActionsVisible}
           >
             <nav className={style.actions} aria-label="ラボを探索する">
-              <Link href="/experiments" className={style.primary_action}>
-                <span>実験・制作物を見る</span>
+              <Link href="/works" className={style.primary_action}>
+                <span>実務経験を見る</span>
                 <ArrowIcon className={style.action_icon} />
               </Link>
-              <Link href="/blog" className={style.secondary_action}>
-                <span>開発ログを読む</span>
+              <Link href="/experiments" className={style.secondary_action}>
+                <span>実験・制作物を見る</span>
                 <ArrowIcon direction="right" className={style.action_icon} />
               </Link>
             </nav>
