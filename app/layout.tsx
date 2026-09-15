@@ -3,6 +3,7 @@ import { Zen_Kaku_Gothic_New } from "next/font/google"
 import localFont from "next/font/local"
 import "@/app/globals.scss"
 import ErrorProvider from "@/components/providers/ErrorProvider"
+import PageTransitionProvider from "@/components/providers/PageTransitionProvider"
 import QueryProvider from "@/components/providers/QueryProvider"
 
 const SITE_TITLE = "J.K.教授の開発ラボ | J.K. Lab"
@@ -81,7 +82,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="">
         <QueryProvider>
           <ErrorProvider>
-            {children}
+            <PageTransitionProvider>
+              {children}
+            </PageTransitionProvider>
           </ErrorProvider>
         </QueryProvider>
       </body>
