@@ -17,22 +17,22 @@ import { XTWITTER_LINK, YOUTUBE_LINK } from "@/const/constants"
 const TRANSFER_TEXT = "START TRANSFER PROTOCOL..."
 
 const HERO_PHASE_DURATION = {
-  observer: 600,
-  protocol: 800,
-  transferring: 800,
-  posing: 250
+  observer: 350,
+  protocol: 650,
+  transferring: 700,
+  posing: 220
 } as const
 
 const HERO_PHASE_INTERVAL = {
-  observerToProtocol: 400,
-  protocolToTransferring: 500,
-  transferringToPosing: 500,
-  posingToCompleted: 100
+  observerToProtocol: 150,
+  protocolToTransferring: 160,
+  transferringToPosing: 140,
+  posingToCompleted: 80
 } as const
 
 // 表示領域に入ったら、観測から転送・ポーズまでの5フェーズを進める。
 type HeroPhase = "observer" | "protocol" | "transferring" | "posing" | "completed"
-type ContentPhase = "headline" | "description"
+type ContentPhase = "headline" | "description" | "actions"
 
 const getCharacterDelay = (text: string, duration: number) => (
   duration / Math.max(text.length - 1, 1)
@@ -48,7 +48,7 @@ export default function HeroSection() {
   const transitionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const isHeadlineVisible = phase === "completed"
   const isDescriptionVisible = isHeadlineVisible && contentPhase !== "headline"
-  const areActionsVisible = isVisible
+  const areActionsVisible = contentPhase === "actions"
 
   useEffect(() => {
     return () => {
@@ -104,7 +104,9 @@ export default function HeroSection() {
       className={style.hero_container}
       sectionClassName={style.hero_section}
     >
-      <div className={style.profile_content}>
+      <div className={`${style.profile_content} ${
+        phase === "completed" ? style.encounter_complete : ""
+      }`}>
         <div className={style.tachie_area}>
           <div className={style.subject_frame} aria-hidden="true">
             <span className={style.subject_label}>PROF. J.K.</span>
@@ -164,9 +166,11 @@ export default function HeroSection() {
             }}
           />
         </div>
-        <div className={style.profile_copy}>
+        <div className={style.profile_copy} inert={phase !== "completed"}>
           <div className={style.intro_area}>
-            <div className={style.identity_header}>
+            <div className={`${style.identity_header} ${
+              isHeadlineVisible ? style.identity_visible : ""
+            }`}>
               <div className={style.name_area}>
                 <div className={style.name_row}>
                   <p className={style.chara_name}>J.K.</p>
@@ -209,6 +213,10 @@ export default function HeroSection() {
           </div>
           <div
             className={`${style.description_area} ${isDescriptionVisible ? style.slide_in : ""}`}
+            onAnimationEnd={(event) => {
+              if (event.target !== event.currentTarget || event.pseudoElement) return
+              setContentPhase((current) => current === "description" ? "actions" : current)
+            }}
           >
             <p className={style.profile_text}>{PROFILE_TEXT}</p>
             <p className={style.flavor_text}>{PROFILE_FLAVOR_TEXT}</p>
