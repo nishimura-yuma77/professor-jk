@@ -32,7 +32,7 @@ const HERO_PHASE_INTERVAL = {
 
 // 表示領域に入ったら、観測から転送・ポーズまでの5フェーズを進める。
 type HeroPhase = "observer" | "protocol" | "transferring" | "posing" | "completed"
-type ContentPhase = "headline" | "description" | "actions"
+type ContentPhase = "headline" | "description"
 
 const getCharacterDelay = (text: string, duration: number) => (
   duration / Math.max(text.length - 1, 1)
@@ -48,7 +48,7 @@ export default function HeroSection() {
   const transitionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const isHeadlineVisible = phase === "completed"
   const isDescriptionVisible = isHeadlineVisible && contentPhase !== "headline"
-  const areActionsVisible = contentPhase === "actions"
+  const areActionsVisible = phase === "completed"
 
   useEffect(() => {
     return () => {
@@ -167,38 +167,38 @@ export default function HeroSection() {
           />
         </div>
         <div className={style.profile_copy} inert={phase !== "completed"}>
-          <div className={style.intro_area}>
-            <div className={`${style.identity_header} ${
-              isHeadlineVisible ? style.identity_visible : ""
-            }`}>
-              <div className={style.name_area}>
-                <div className={style.name_row}>
-                  <p className={style.chara_name}>J.K.</p>
-                  <ActiveBadge isOnline={phase === "completed"} />
-                </div>
-                <p className={style.chara_title}>WEB ENGINEER / CREATOR</p>
+          <div className={`${style.identity_header} ${
+            isHeadlineVisible ? style.identity_visible : ""
+          }`}>
+            <div className={style.name_area}>
+              <div className={style.name_row}>
+                <p className={style.chara_name}>J.K.</p>
+                <ActiveBadge isOnline={phase === "completed"} />
               </div>
-              <nav className={style.channels} aria-label="J.K.のSNS">
-                <a
-                  href={YOUTUBE_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="YouTubeで活動を見る（新しいタブで開く）"
-                  title="YouTube"
-                >
-                  <YoutubeIcon aria-hidden="true" />
-                </a>
-                <a
-                  href={XTWITTER_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Xで活動を見る（新しいタブで開く）"
-                  title="X"
-                >
-                  <XTwitterIcon aria-hidden="true" />
-                </a>
-              </nav>
+              <p className={style.chara_title}>WEB ENGINEER / CREATOR</p>
             </div>
+            <nav className={style.channels} aria-label="J.K.のSNS">
+              <a
+                href={YOUTUBE_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTubeで活動を見る（新しいタブで開く）"
+                title="YouTube"
+              >
+                <YoutubeIcon aria-hidden="true" />
+              </a>
+              <a
+                href={XTWITTER_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Xで活動を見る（新しいタブで開く）"
+                title="X"
+              >
+                <XTwitterIcon aria-hidden="true" />
+              </a>
+            </nav>
+          </div>
+          <div className={style.message_area}>
             <h1
               className={`${style.headline} ${isHeadlineVisible ? style.slide_in : ""}`}
               onAnimationEnd={(event) => {
@@ -210,16 +210,12 @@ export default function HeroSection() {
               <span>挑戦を、</span>
               <span><em>設計で拡張する。</em></span>
             </h1>
-          </div>
-          <div
-            className={`${style.description_area} ${isDescriptionVisible ? style.slide_in : ""}`}
-            onAnimationEnd={(event) => {
-              if (event.target !== event.currentTarget || event.pseudoElement) return
-              setContentPhase((current) => current === "description" ? "actions" : current)
-            }}
-          >
-            <p className={style.profile_text}>{PROFILE_TEXT}</p>
-            <p className={style.flavor_text}>{PROFILE_FLAVOR_TEXT}</p>
+            <div
+              className={`${style.description_area} ${isDescriptionVisible ? style.slide_in : ""}`}
+            >
+              <p className={style.profile_text}>{PROFILE_TEXT}</p>
+              <p className={style.flavor_text}>{PROFILE_FLAVOR_TEXT}</p>
+            </div>
           </div>
           <div
             className={`${style.visitor_guide} ${areActionsVisible ? style.actions_visible : ""}`}
