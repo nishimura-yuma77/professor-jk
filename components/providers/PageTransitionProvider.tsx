@@ -14,11 +14,14 @@ import {
 } from "react"
 import style from "@/styles/providers/PageTransitionProvider.module.scss"
 
-type TransitionPhase = "idle" | "covering" | "covered" | "revealing"
+type TransitionPhase = "idle" | "intro" | "covering" | "covered" | "revealing"
 type Navigate = (href: string) => void
 
+const INTRO_DURATION_MS = 1500
+const INCOMING_REVEAL_DELAY_MS = 80
 const NAVIGATION_TIMEOUT_MS = 8000
 const PageTransitionContext = createContext<Navigate | null>(null)
+const PageTransitionReadyContext = createContext<boolean | null>(null)
 
 export function usePageTransition() {
   const navigate = useContext(PageTransitionContext)
@@ -30,13 +33,25 @@ export function usePageTransition() {
   return navigate
 }
 
+export function usePageTransitionReady() {
+  const isReady = useContext(PageTransitionReadyContext)
+
+  if (isReady === null) {
+    throw new Error("usePageTransitionReady must be used within PageTransitionProvider")
+  }
+
+  return isReady
+}
+
 export default function PageTransitionProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
-  const [phase, setPhase] = useState<TransitionPhase>("idle")
-  const phaseRef = useRef<TransitionPhase>("idle")
+  const [phase, setPhase] = useState<TransitionPhase>("covered")
+  const [isIntroVisible, setIsIntroVisible] = useState(true)
+  const phaseRef = useRef<TransitionPhase>("covered")
   const pendingHrefRef = useRef<string | null>(null)
   const sourcePathnameRef = useRef<string | null>(null)
+  const introTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const navigationTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const revealFrameRef = useRef<number | null>(null)
 
@@ -46,7 +61,7 @@ export default function PageTransitionProvider({ children }: { children: ReactNo
   }
 
   const revealPage = useCallback(() => {
-    if (phaseRef.current !== "covered") return
+    if (phaseRef.current !== "covered" && phaseRef.current !== "intro") return
 
     if (navigationTimerRef.current !== null) {
       clearTimeout(navigationTimerRef.current)
@@ -58,6 +73,39 @@ export default function PageTransitionProvider({ children }: { children: ReactNo
       revealFrameRef.current = null
     })
   }, [])
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+
+    revealFrameRef.current = requestAnimationFrame(() => {
+      if (prefersReducedMotion) {
+        setIsIntroVisible(false)
+        updatePhase("idle")
+        revealFrameRef.current = null
+        return
+      }
+
+      updatePhase("intro")
+      revealFrameRef.current = null
+      introTimerRef.current = setTimeout(() => {
+        introTimerRef.current = null
+        revealPage()
+      }, INTRO_DURATION_MS)
+    })
+
+    return () => {
+      if (introTimerRef.current !== null) {
+        clearTimeout(introTimerRef.current)
+        introTimerRef.current = null
+      }
+      if (revealFrameRef.current !== null) {
+        cancelAnimationFrame(revealFrameRef.current)
+        revealFrameRef.current = null
+      }
+    }
+  }, [revealPage])
 
   const navigate = useCallback<Navigate>((href) => {
     if (phaseRef.current !== "idle") return
@@ -120,6 +168,41 @@ export default function PageTransitionProvider({ children }: { children: ReactNo
   }, [navigate])
 
   useEffect(() => {
+    const revealIncomingPage = () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+
+      if (introTimerRef.current !== null) {
+        clearTimeout(introTimerRef.current)
+        introTimerRef.current = null
+      }
+      if (navigationTimerRef.current !== null) {
+        clearTimeout(navigationTimerRef.current)
+      }
+
+      setIsIntroVisible(false)
+      pendingHrefRef.current = null
+      sourcePathnameRef.current = pathname
+      updatePhase("covered")
+      navigationTimerRef.current = setTimeout(
+        revealPage,
+        INCOMING_REVEAL_DELAY_MS
+      )
+    }
+
+    const handlePopState = () => revealIncomingPage()
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) revealIncomingPage()
+    }
+
+    window.addEventListener("popstate", handlePopState)
+    window.addEventListener("pageshow", handlePageShow)
+    return () => {
+      window.removeEventListener("popstate", handlePopState)
+      window.removeEventListener("pageshow", handlePageShow)
+    }
+  }, [pathname, revealPage])
+
+  useEffect(() => {
     if (
       phaseRef.current === "covered"
       && sourcePathnameRef.current !== null
@@ -130,6 +213,9 @@ export default function PageTransitionProvider({ children }: { children: ReactNo
   }, [pathname, revealPage])
 
   useEffect(() => () => {
+    if (introTimerRef.current !== null) {
+      clearTimeout(introTimerRef.current)
+    }
     if (navigationTimerRef.current !== null) {
       clearTimeout(navigationTimerRef.current)
     }
@@ -157,19 +243,33 @@ export default function PageTransitionProvider({ children }: { children: ReactNo
 
     pendingHrefRef.current = null
     sourcePathnameRef.current = null
+    setIsIntroVisible(false)
     updatePhase("idle")
   }
 
   return (
     <PageTransitionContext value={navigate}>
-      {children}
-      <div
-        className={`${style.overlay} ${phase !== "idle" ? style.active : ""} ${style[phase]}`}
-        aria-hidden="true"
-      >
-        <span className={style.accent} onAnimationEnd={handleRevealEnd} />
-        <span className={style.panel} onAnimationEnd={handleCoverEnd} />
-      </div>
+      <PageTransitionReadyContext value={phase === "idle"}>
+        {children}
+        <div
+          className={`${style.overlay} ${phase !== "idle" ? style.active : ""} ${style[phase]}`}
+          aria-hidden="true"
+        >
+          <span className={style.accent} onAnimationEnd={handleRevealEnd} />
+          <span className={style.panel} onAnimationEnd={handleCoverEnd}>
+            <span className={`${style.intro_copy} ${
+              isIntroVisible ? style.intro_copy_visible : ""
+            }`}>
+              <span className={style.intro_line}>
+                <span>Hello!!</span>
+              </span>
+              <span className={`${style.intro_line} ${style.intro_line_accent}`}>
+                <span>Coworkers!!</span>
+              </span>
+            </span>
+          </span>
+        </div>
+      </PageTransitionReadyContext>
     </PageTransitionContext>
   )
 }

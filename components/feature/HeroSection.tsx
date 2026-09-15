@@ -13,6 +13,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { PROFILE_FLAVOR_TEXT, PROFILE_TEXT } from "@/const/profile"
 import { XTWITTER_LINK, YOUTUBE_LINK } from "@/const/constants"
+import { usePageTransitionReady } from "@/components/providers/PageTransitionProvider"
 
 const TRANSFER_TEXT = "START TRANSFER PROTOCOL..."
 
@@ -39,6 +40,7 @@ const getCharacterDelay = (text: string, duration: number) => (
 )
 
 export default function HeroSection() {
+  const isPageTransitionReady = usePageTransitionReady()
   const {
     ref,
     isVisible
@@ -46,6 +48,7 @@ export default function HeroSection() {
   const [phase, setPhase] = useState<HeroPhase>("observer")
   const [contentPhase, setContentPhase] = useState<ContentPhase>("headline")
   const transitionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const canStartEncounter = isVisible && isPageTransitionReady
   const isHeadlineVisible = phase === "completed"
   const isDescriptionVisible = isHeadlineVisible && contentPhase !== "headline"
   const areActionsVisible = phase === "completed"
@@ -60,7 +63,7 @@ export default function HeroSection() {
 
   // observer　-> transferのフェーズだけ、タイマーで制御する必要がある。そのためのeffect
   useEffect(() => {
-    if (!isVisible || phase !== "observer") return
+    if (!canStartEncounter || phase !== "observer") return
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -77,7 +80,7 @@ export default function HeroSection() {
     return () => {
       clearTimeout(observerTimer)
     }
-  }, [isVisible, phase])
+  }, [canStartEncounter, phase])
 
   const schedulePhaseTransition = (
     from: HeroPhase,
@@ -114,7 +117,7 @@ export default function HeroSection() {
           </div>
           <div
             className={`${style.transfer_console} ${
-              isVisible && (phase === "observer" || phase === "protocol")
+               canStartEncounter && (phase === "observer" || phase === "protocol")
                 ? ""
                 : style.transfer_console_hidden
             }`}
@@ -130,7 +133,7 @@ export default function HeroSection() {
               <span className={style.prompt_symbol}>{">"}</span>
               <TypewriterText
                 text={TRANSFER_TEXT}
-                isVisible={isVisible && phase === "protocol"}
+                 isVisible={canStartEncounter && phase === "protocol"}
                 animationDelay={getCharacterDelay(
                   TRANSFER_TEXT,
                   HERO_PHASE_DURATION.protocol
