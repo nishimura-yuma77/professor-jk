@@ -1,19 +1,266 @@
 @use "@/styles/variables/_breakpoint.scss" as breakpoint;
 
+.container {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-block: 1px solid color-mix(in srgb, var(--color-accent-dark) 22%, var(--color-border));
+  background:
+    radial-gradient(
+      ellipse 42% 58% at 28% 48%,
+      color-mix(in srgb, var(--color-accent) 9%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse at center,
+      transparent 42%,
+      color-mix(in srgb, black 42%, transparent) 100%
+    ),
+    repeating-linear-gradient(
+      105deg,
+      transparent 0 4.5rem,
+      color-mix(in srgb, var(--color-border) 14%, transparent) 4.5rem calc(4.5rem + 1px)
+    ),
+    color-mix(in srgb, var(--color-surface) 24%, var(--color-background));
+}
+
+.container::before,
+.container::after {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  border-color: var(--color-accent-dark);
+  border-style: solid;
+  opacity: 0.28;
+  pointer-events: none;
+  content: "";
+}
+
+.container::before {
+  top: 24%;
+  left: clamp(1rem, 5vw, 4rem);
+  border-width: 1px 0 0 1px;
+}
+
+.container::after {
+  right: clamp(1rem, 5vw, 4rem);
+  bottom: 18%;
+  border-width: 0 1px 1px 0;
+}
+
+.container > section {
+  position: relative;
+  z-index: 1;
+}
+
 .experiment_area {
+  position: relative;
   padding: var(--padding-large) var(--padding-small);
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--padding-large);
+  gap: 1.5rem;
   justify-content: center;
 }
 
-.archive_link {
-  margin: 0 var(--padding-small) var(--padding-large);
+.experiment_area::before {
+  position: absolute;
+  right: 6%;
+  bottom: 1.75rem;
+  left: 6%;
+  z-index: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-accent-dark) 30%, var(--color-border)) 18%,
+    color-mix(in srgb, var(--color-accent-dark) 30%, var(--color-border)) 82%,
+    transparent
+  );
+  box-shadow: 0 1.25rem 2rem 0.75rem #0009;
+  pointer-events: none;
+  content: "";
+}
+
+.experiment_area > article {
+  position: relative;
+  z-index: 2;
+}
+
+.desk_documents {
+  position: absolute;
+  z-index: 1;
+  inset: 0 -2.5rem;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.desk_document {
+  position: absolute;
+  display: block;
+  width: 14rem;
+  height: 17rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-text) 13%, var(--color-border));
+  background:
+    radial-gradient(circle at 1rem 1rem, var(--color-background) 0 0.18rem, transparent 0.2rem),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 1.35rem,
+      color-mix(in srgb, var(--color-text) 8%, transparent) 1.35rem calc(1.35rem + 1px)
+    ),
+    color-mix(in srgb, var(--color-text) 8%, var(--color-surface));
+  box-shadow: 0.65rem 0.85rem 1.25rem #0008;
+  opacity: 0.72;
+}
+
+.desk_document::before {
+  position: absolute;
+  top: 2rem;
+  left: 1.25rem;
+  width: 6.5rem;
+  height: 0.4rem;
+  background: color-mix(in srgb, var(--color-background) 88%, transparent);
+  box-shadow:
+    1.1rem 1.1rem 0 -0.05rem color-mix(in srgb, var(--color-background) 82%, transparent),
+    -0.15rem 2.2rem 0 -0.08rem color-mix(in srgb, var(--color-background) 78%, transparent);
+  content: "";
+}
+
+.desk_document::after {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  width: 5rem;
+  height: 4rem;
+  border: 1px solid color-mix(in srgb, var(--color-accent-dark) 42%, var(--color-border));
+  background:
+    linear-gradient(145deg, transparent 52%, color-mix(in srgb, var(--color-accent-dark) 38%, transparent) 53% 55%, transparent 56%),
+    linear-gradient(35deg, transparent 62%, color-mix(in srgb, var(--color-accent-dark) 28%, transparent) 63% 65%, transparent 66%),
+    linear-gradient(color-mix(in srgb, var(--color-border) 35%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--color-border) 35%, transparent) 1px, transparent 1px);
+  background-size: auto, auto, 1rem 1rem, 1rem 1rem;
+  content: "";
+}
+
+.document_one {
+  top: 1.25rem;
+  left: -2.75rem;
+  transform: rotate(-7deg);
+}
+
+.document_two {
+  top: -0.75rem;
+  left: 31%;
+  width: 12rem;
+  height: 15rem;
+  transform: rotate(3.5deg);
+  opacity: 0.58;
+}
+
+.document_two::after {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background:
+    linear-gradient(90deg, transparent 49%, color-mix(in srgb, var(--color-accent-dark) 38%, transparent) 50% 51%, transparent 52%),
+    linear-gradient(transparent 49%, color-mix(in srgb, var(--color-accent-dark) 38%, transparent) 50% 51%, transparent 52%);
+}
+
+.document_three {
+  top: 1.75rem;
+  right: -2.5rem;
+  transform: rotate(7deg);
+  opacity: 0.66;
+}
+
+.document_four {
+  bottom: -3.25rem;
+  left: 22%;
+  width: 18rem;
+  height: 11rem;
+  transform: rotate(-4deg);
+  opacity: 0.62;
+}
+
+.document_four::before {
+  width: 9rem;
+  box-shadow:
+    2rem 1.15rem 0 -0.05rem color-mix(in srgb, var(--color-background) 82%, transparent),
+    0.5rem 2.3rem 0 -0.08rem color-mix(in srgb, var(--color-background) 78%, transparent);
+}
+
+.document_four::after {
+  right: 1.5rem;
+  bottom: 1rem;
+  width: 5.5rem;
+  height: 2.75rem;
+}
+
+.experiment_area + .archive_link {
+  width: fit-content;
+  min-height: auto;
+  margin: 0 var(--padding-small) var(--padding-large) auto;
+  padding: 0.5rem 0;
+  border: 0;
+  background: transparent;
+}
+
+.experiment_area + .archive_link > :first-child {
+  display: none;
 }
 
 @media screen and (min-width: breakpoint.$breakpoint_tablet) {
   .experiment_area {
-    grid-template-columns: repeat(2, minmax(0, 350px));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .container {
+    background:
+      radial-gradient(
+        ellipse 75% 34% at 50% 28%,
+        color-mix(in srgb, var(--color-accent) 8%, transparent),
+        transparent 74%
+      ),
+      radial-gradient(
+        ellipse at center,
+        transparent 36%,
+        color-mix(in srgb, black 38%, transparent) 100%
+      ),
+      repeating-linear-gradient(
+        105deg,
+        transparent 0 4rem,
+        color-mix(in srgb, var(--color-border) 12%, transparent) 4rem calc(4rem + 1px)
+      ),
+      color-mix(in srgb, var(--color-surface) 24%, var(--color-background));
+  }
+
+  .container::before,
+  .container::after {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .desk_documents {
+    inset-inline: -1.5rem;
+  }
+
+  .document_two,
+  .document_four {
+    display: none;
+  }
+
+  .document_one {
+    top: 1rem;
+    left: -4rem;
+    transform: rotate(-6deg);
+  }
+
+  .document_three {
+    top: auto;
+    right: -4rem;
+    bottom: 1.5rem;
+    transform: rotate(6deg);
   }
 }
