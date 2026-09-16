@@ -142,6 +142,7 @@
   inset: var(--header-height) 0 0;
   display: grid;
   place-items: center;
+  overflow: hidden;
   background:
     linear-gradient(rgba(58, 56, 51, 0.18) 1px, transparent 1px),
     linear-gradient(90deg, rgba(58, 56, 51, 0.18) 1px, transparent 1px),
@@ -507,10 +508,26 @@
 @media (max-height: 44rem) {
   .menu {
     place-items: start center;
-    overflow-y: auto;
+  }
+
+  .terminal_panel {
+    height: 100%;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+  }
+
+  .menu_list {
+    height: 100%;
+    min-height: 0;
+    max-height: 21.25rem;
+    align-self: center;
+    grid-auto-rows: minmax(0, 1fr);
   }
 
   .menu_link {
-    min-height: 4.25rem;
+    height: 100%;
+    min-height: 0;
+    padding-block: 0.25rem;
   }
 }

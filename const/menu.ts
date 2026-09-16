@@ -21,11 +21,6 @@ export const MENU = {
     subLabel: "RESEARCH LOG",
     href: "/blog",
   },
-  play: {
-    label: "PLAY",
-    subLabel: "with J.K.",
-    href: "/play-with-jk",
-  },
   contact: {
     label: "CONTACT",
     subLabel: "or FAN LETTER",
