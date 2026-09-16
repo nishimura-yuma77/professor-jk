@@ -5,7 +5,7 @@
 
 .content {
   display: grid;
-  gap: 1.25rem;
+  gap: 1rem;
   padding: var(--padding-large) var(--padding-small) 0;
   opacity: 0;
   visibility: hidden;
@@ -16,15 +16,74 @@
     visibility 0s 400ms;
 }
 
+.record_console {
+  position: relative;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.record_console::before,
+.record_console::after {
+  position: absolute;
+  z-index: 2;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-color: var(--color-accent);
+  border-style: solid;
+  pointer-events: none;
+  content: "";
+}
+
+.record_console::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1px 0 0 1px;
+}
+
+.record_console::after {
+  right: -1px;
+  bottom: -1px;
+  border-width: 0 1px 1px 0;
+}
+
+.console_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2.25rem;
+  padding-inline: 0.875rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-accent-dark);
+  background: var(--color-background);
+  font-family: var(--font-family-mono);
+  font-size: 0.5625rem;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+}
+
 .cards {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: var(--padding-large);
-  justify-content: center;
+}
+
+.content .archive_link {
+  width: fit-content;
+  min-height: auto;
+  justify-self: end;
+  padding: 0.5rem 0;
+  border: 0;
+  background: transparent;
+}
+
+.content .archive_link > :first-child {
+  display: none;
 }
 
 @media (min-width: 768px) {
-  .cards { grid-template-columns: repeat(2, minmax(0, 350px)); }
+  .cards {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  }
 }
 
 .content_visible {

@@ -8,8 +8,8 @@ import {
   type MouseEvent,
   type TransitionEvent,
 } from "react"
-import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
+import { usePageTransition } from "@/components/providers/PageTransitionProvider"
 import ContactCharacter from "@/components/feature/contact/ContactCharacter"
 import ContactGuide from "@/components/feature/contact/ContactGuide"
 import ContactWritingHints from "@/components/feature/contact/ContactWritingHints"
@@ -37,7 +37,7 @@ type ContactPhase = "contact" | "form" | "character" | "guide" | "completed"
 const requiredMessage = "必須項目です。"
 
 export default function ContactPage() {
-  const router = useRouter()
+  const navigate = usePageTransition()
   const dialogRef = useRef<HTMLDialogElement>(null)
   const phaseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const contactMutation = useContactMutation()
@@ -211,7 +211,7 @@ export default function ContactPage() {
     setHintGuide(null)
     setContactPayload(null)
     dialogRef.current?.close()
-    router.push("/")
+    navigate("/")
   }
 
   return (
