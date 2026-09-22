@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Zen_Kaku_Gothic_New } from "next/font/google"
 import localFont from "next/font/local"
+import Script from "next/script"
 import "@/app/globals.scss"
 import ErrorProvider from "@/components/providers/ErrorProvider"
 import PageTransitionProvider from "@/components/providers/PageTransitionProvider"
@@ -8,6 +9,7 @@ import QueryProvider from "@/components/providers/QueryProvider"
 
 const SITE_TITLE = "J.K.教授の開発ラボ | J.K. Lab"
 const SITE_DESCRIPTION = "エンジニアとして活動するJ.K.教授のキャラクター紹介と、開発実験・プロジェクトを掲載するポートフォリオサイトです。"
+const GOOGLE_ANALYTICS_ID = "G-D39NDT5TXF"
 
 const zenKakuGothicNew = Zen_Kaku_Gothic_New({
   weight: ["400", "500", "700"],
@@ -80,6 +82,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${zenKakuGothicNew.variable} ${ibmPlexMono.variable}`}
     >
       <body className="">
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GOOGLE_ANALYTICS_ID}');
+          `}
+        </Script>
         <QueryProvider>
           <ErrorProvider>
             <PageTransitionProvider>
