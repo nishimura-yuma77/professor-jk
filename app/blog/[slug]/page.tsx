@@ -16,10 +16,10 @@ export async function generateMetadata({
   if (!article) return {}
 
   const socialImage = {
-    url: `/blog/${article.slug}/og.png`,
-    width: 1200,
-    height: 630,
-    alt: `${article.title} | J.K. Lab`,
+    url: article.coverImage.src,
+    width: article.coverImage.width,
+    height: article.coverImage.height,
+    alt: article.coverImage.alt,
   }
 
   return {

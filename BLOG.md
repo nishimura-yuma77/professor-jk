@@ -216,7 +216,7 @@ registryが更新されるまでは、削除済みのmetaまたはcontentに対�
 
 記事ごとのOGPは`/blog/<slug>/og.png`へ生成されます。
 
-`coverImage`を指定しない場合は、生成OGPを一覧カードと記事HEROへ自動的に使用します。独自画像を使用する場合は、`meta.ts`へ`coverImage`を指定します。
+`coverImage`を指定しない場合は、生成OGPを一覧カード、記事HERO、SNSのOG画像へ自動的に使用します。独自画像を使用する場合は、`meta.ts`へ`coverImage`を指定すると、同じ画像がこれらすべてに使用されます。
 
 ## registryの扱い
 
