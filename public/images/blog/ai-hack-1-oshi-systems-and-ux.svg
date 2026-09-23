@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">AI HACK #1 システムを推す時代の到来とUX。</title>
+  <desc id="desc">濃紺の背景にピンク、紫、シアンの光が走り、AI執事を表す顔と通話波形を配置したブログカバー</desc>
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff2e9f" />
+      <stop offset="0.52" stop-color="#9137ff" />
+      <stop offset="1" stop-color="#00e5ff" />
+    </linearGradient>
+    <linearGradient id="warm" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffd84d" />
+      <stop offset="0.48" stop-color="#ff8a2b" />
+      <stop offset="1" stop-color="#ff2e9f" />
+    </linearGradient>
+    <radialGradient id="pinkGlow">
+      <stop offset="0" stop-color="#ff2e9f" stop-opacity="0.34" />
+      <stop offset="1" stop-color="#ff2e9f" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="cyanGlow">
+      <stop offset="0" stop-color="#00e5ff" stop-opacity="0.28" />
+      <stop offset="1" stop-color="#00e5ff" stop-opacity="0" />
+    </radialGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0V42" fill="none" stroke="#ffffff" stroke-opacity="0.045" />
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#001125" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+  <circle cx="1050" cy="80" r="340" fill="url(#pinkGlow)" />
+  <circle cx="960" cy="560" r="310" fill="url(#cyanGlow)" />
+  <path d="M0 540C245 445 386 664 635 530C836 422 958 464 1200 336" fill="none" stroke="url(#brand)" stroke-opacity="0.36" stroke-width="2" />
+  <path d="M0 562C246 467 397 681 647 548C840 445 984 476 1200 374" fill="none" stroke="#ffffff" stroke-opacity="0.1" />
+
+  <g transform="translate(72 60)">
+    <text x="0" y="25" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="27" font-weight="800" letter-spacing="1">J.K. LAB</text>
+    <text x="1" y="50" fill="#ffffff" fill-opacity="0.58" font-family="IBM Plex Mono, Consolas, monospace" font-size="11" font-weight="600" letter-spacing="3">PARTICIPANT FIELD NOTE</text>
+    <rect x="274" y="0" width="420" height="58" rx="4" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.2" />
+    <rect x="274" y="0" width="5" height="58" rx="2.5" fill="url(#brand)" />
+    <circle cx="303" cy="29" r="5" fill="#ff2e9f" />
+    <text x="320" y="35" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="1.5">AI HACK 2026</text>
+    <line x1="471" y1="17" x2="471" y2="41" stroke="#ffffff" stroke-opacity="0.24" />
+    <text x="488" y="35" fill="#ffffff" font-family="Noto Sans JP, Yu Gothic, sans-serif" font-size="15" font-weight="700" letter-spacing="1">参加者による記録</text>
+    <text x="658" y="35" fill="#00e5ff" font-family="IBM Plex Mono, Consolas, monospace" font-size="13" font-weight="700" letter-spacing="2">#01</text>
+  </g>
+
+  <g transform="translate(74 181)">
+    <text x="0" y="0" fill="#ffffff" fill-opacity="0.68" font-family="Noto Sans JP, Yu Gothic, sans-serif" font-size="15" font-weight="600" letter-spacing="2">参加者として見た、AIプロダクトのUX</text>
+    <text x="0" y="78" fill="#ffffff" font-family="Noto Sans JP, Yu Gothic, sans-serif" font-size="57" font-weight="700" letter-spacing="2">システムを<tspan fill="url(#warm)" font-weight="900">“推す”</tspan>時代の</text>
+    <text x="0" y="153" fill="#ffffff" font-family="Noto Sans JP, Yu Gothic, sans-serif" font-size="57" font-weight="700" letter-spacing="2">到来とUX。</text>
+    <rect x="2" y="186" width="88" height="5" fill="url(#brand)" />
+    <text x="0" y="239" fill="#ffffff" fill-opacity="0.72" font-family="Noto Sans JP, Yu Gothic, sans-serif" font-size="18" font-weight="500" letter-spacing="1.5">機能から、また会いたくなる存在へ。</text>
+  </g>
+
+  <g transform="translate(846 161)">
+    <circle cx="132" cy="143" r="151" fill="#00060f" fill-opacity="0.72" stroke="#ffffff" stroke-opacity="0.12" />
+    <circle cx="132" cy="143" r="116" fill="none" stroke="url(#brand)" stroke-width="2" stroke-dasharray="2 13" />
+    <circle cx="132" cy="143" r="84" fill="#071d37" stroke="#ffffff" stroke-opacity="0.28" stroke-width="2" />
+    <circle cx="132" cy="143" r="74" fill="url(#brand)" opacity="0.16" filter="url(#softGlow)" />
+
+    <path d="M99 133C108 114 156 114 165 133V166C165 183 151 197 132 197C113 197 99 183 99 166Z" fill="#001125" stroke="#ffffff" stroke-width="3" />
+    <circle cx="119" cy="151" r="5" fill="#00e5ff" />
+    <circle cx="145" cy="151" r="5" fill="#ff2e9f" />
+    <path d="M120 173C127 179 137 179 144 173" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" />
+    <path d="M113 111L132 94L151 111" fill="none" stroke="#ffd84d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M86 140C73 152 73 173 86 185M178 140C191 152 191 173 178 185" fill="none" stroke="#00e5ff" stroke-width="3" stroke-linecap="round" />
+
+    <circle cx="9" cy="143" r="6" fill="#00e5ff" />
+    <circle cx="255" cy="143" r="6" fill="#ff2e9f" />
+    <circle cx="132" cy="20" r="6" fill="#ffd84d" />
+    <path d="M15 143H46M218 143H249M132 26V56" stroke="#ffffff" stroke-opacity="0.58" stroke-width="2" />
+
+    <g transform="translate(71 250)">
+      <rect width="122" height="35" rx="17.5" fill="#ffffff" fill-opacity="0.08" stroke="#ffffff" stroke-opacity="0.18" />
+      <circle cx="20" cy="17.5" r="5" fill="#00e5ff" />
+      <path d="M38 18H45L50 9L57 27L64 13L70 22L76 18H86" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="101" cy="17.5" r="5" fill="#ff2e9f" />
+    </g>
+  </g>
+
+  <g transform="translate(72 567)">
+    <text x="0" y="0" fill="#ffffff" fill-opacity="0.5" font-family="IBM Plex Mono, Consolas, monospace" font-size="12" letter-spacing="2">J.K. LAB / PARTICIPANT REPORT / LOG 007</text>
+    <text x="889" y="0" fill="#ffffff" fill-opacity="0.5" font-family="IBM Plex Mono, Consolas, monospace" font-size="12" letter-spacing="2">2026.09.23</text>
+  </g>
+</svg>
