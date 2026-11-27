@@ -44,20 +44,23 @@
   min-width: 0;
 }
 
-.profile_content:not(.encounter_complete) {
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-areas: "character";
-  align-content: center;
+// スマホでは表示前も名前・ボタンの領域を保ち、後続セクションを動かさない。
+@media screen and (min-width: 600px) {
+  .profile_content:not(.encounter_complete) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "character";
+    align-content: center;
 
-  .profile_copy,
-  .identity_header,
-  .message_area,
-  .headline,
-  .description_area,
-  .visitor_guide {
-    position: absolute;
-    visibility: hidden;
-    pointer-events: none;
+    .profile_copy,
+    .identity_header,
+    .message_area,
+    .headline,
+    .description_area,
+    .visitor_guide {
+      position: absolute;
+      visibility: hidden;
+      pointer-events: none;
+    }
   }
 }
 
