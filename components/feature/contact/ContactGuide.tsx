@@ -1,19 +1,16 @@
 "use client"
 
-import Image from "next/image"
 import { useRef, useState, type MouseEvent } from "react"
-import ContactDialogueText from "@/components/feature/contact/ContactDialogueText"
+import DialogueScreen, { type DialogueScene } from "@/components/ui/dialogue/DialogueScreen"
 import ContactGuideCard from "@/components/feature/contact/ContactGuideCard"
-import ContactGuideChoiceButton from "@/components/feature/contact/ContactGuideChoiceButton"
 import ContactGuideHintList from "@/components/feature/contact/ContactGuideHintList"
 import useBodyScrollLock from "@/hooks/useBodyScrollLock"
 import {
-  CONTACT_GUIDE_CONVERSATION,
+  CONTACT_GUIDE_MESSAGES,
   CONTACT_GUIDE_RESULTS,
   CONTACT_GUIDES,
   type ContactFocusField,
   type ContactGuide as ContactGuideData,
-  type ContactGuideChoiceAction,
   type ContactGuideResult,
   type ContactGuideStage,
   type ContactGuideTemplate,
@@ -31,6 +28,11 @@ type ContactGuideProps = {
   onRevealEnd: () => void
 }
 
+const PROFESSOR = {
+  name: "J.K.教授",
+  image: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/images/character/tachie.png`,
+}
+
 export default function ContactGuide({
   isVisible,
   hintGuide,
@@ -43,26 +45,17 @@ export default function ContactGuide({
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [stage, setStage] = useState<ContactGuideStage>("topic")
   const [selectedGuide, setSelectedGuide] = useState<ContactGuideData | null>(null)
-  const [isMessageComplete, setIsMessageComplete] = useState(false)
   const [result, setResult] = useState<ContactGuideResult | null>(null)
   const [conversationSession, setConversationSession] = useState(0)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   useBodyScrollLock(isDialogOpen)
 
-  const currentStep = CONTACT_GUIDE_CONVERSATION[stage]
-  const currentMessage = stage === "guidance"
-    ? selectedGuide?.guidance ?? ""
-    : stage === "result" && result
-      ? CONTACT_GUIDE_RESULTS[result].message
-      : currentStep.message ?? ""
-
   const openGuide = () => {
     setConversationSession((current) => current + 1)
     setStage("topic")
     setSelectedGuide(null)
     setResult(null)
-    setIsMessageComplete(false)
     const dialog = dialogRef.current
     if (dialog) {
       dialog.showModal()
@@ -76,7 +69,6 @@ export default function ContactGuide({
 
   const moveToStage = (nextStage: ContactGuideStage) => {
     setStage(nextStage)
-    setIsMessageComplete(false)
   }
 
   const selectTopic = (guide: ContactGuideData) => {
@@ -122,34 +114,66 @@ export default function ContactGuide({
     }
   }
 
-  const handleChoice = (action: ContactGuideChoiceAction) => {
-    switch (action.type) {
-      case "select-guide": {
-        const guide = CONTACT_GUIDES.find(({ id }) => id === action.guideId)
+  const sceneContext = { speaker: PROFESSOR, caption: selectedGuide?.label }
+  const scenes: Record<ContactGuideStage, DialogueScene> = {
+    topic: {
+      ...sceneContext,
+      text: CONTACT_GUIDE_MESSAGES.topic,
+      choices: CONTACT_GUIDES.map((guide) => ({ id: guide.id, label: guide.label })),
+      onSelect: (id) => {
+        const guide = CONTACT_GUIDES.find((guide) => guide.id === id)
         if (guide) selectTopic(guide)
-        return
-      }
-      case "move-stage":
-        if (action.stage === "topic") {
+      },
+    },
+    guidance: {
+      ...sceneContext,
+      text: selectedGuide?.guidance ?? "",
+      supplement: selectedGuide && <ContactGuideHintList hints={selectedGuide.hints} />,
+      choices: [
+        { id: "select-again", label: "選び直す" },
+        { id: "next", label: "次へ", variant: "primary" },
+      ],
+      onSelect: (id) => {
+        if (id === "select-again") {
           setSelectedGuide(null)
+          moveToStage("topic")
+        } else if (id === "next") {
+          moveToStage("template")
         }
-        moveToStage(action.stage)
-        return
-      case "select-result":
-        if (action.result === "manual") {
-          writeManually()
-        } else if (action.result === "guide") {
-          writeWithGuide()
-        } else {
-          acceptTemplate()
-        }
-        return
-      case "apply-template":
-        applyTemplate()
-        return
-      case "close":
-        closeGuide()
-    }
+      },
+    },
+    template: {
+      ...sceneContext,
+      text: CONTACT_GUIDE_MESSAGES.template,
+      choices: Object.entries(CONTACT_GUIDE_RESULTS).map(([id, definition]) => ({
+        id,
+        label: definition.label,
+        variant: definition.variant,
+      })),
+      onSelect: (id) => {
+        if (id === "manual") writeManually()
+        else if (id === "guide") writeWithGuide()
+        else if (id === "template") acceptTemplate()
+      },
+    },
+    overwrite: {
+      ...sceneContext,
+      text: CONTACT_GUIDE_MESSAGES.overwrite,
+      choices: [
+        { id: "back", label: "戻る" },
+        { id: "overwrite", label: "上書きする", variant: "primary" },
+      ],
+      onSelect: (id) => {
+        if (id === "back") moveToStage("template")
+        else if (id === "overwrite") applyTemplate()
+      },
+    },
+    result: {
+      ...sceneContext,
+      text: result ? CONTACT_GUIDE_RESULTS[result].message : "",
+      choices: [{ id: "return-to-form", label: "フォームに戻る", variant: "primary" }],
+      onSelect: () => closeGuide(),
+    },
   }
 
   return (
@@ -176,7 +200,6 @@ export default function ContactGuide({
           setStage("topic")
           setSelectedGuide(null)
           setResult(null)
-          setIsMessageComplete(false)
 
           if (focusField) {
             onReturnToForm(focusField)
@@ -191,53 +214,14 @@ export default function ContactGuide({
           </button>
         </div>
 
-        <div className={style.dialog_body}>
-          <h2 id="contact-guide-title" className={style.visually_hidden}>
-            J.K.教授へのお問い合わせ相談
-          </h2>
-          <div className={style.professor_area} aria-hidden="true">
-            <Image
-              src="/images/character/tachie.png"
-              alt=""
-              width={832}
-              height={1216}
-              sizes="(max-width: 560px) 128px, 240px"
-            />
-          </div>
-
-          <div className={style.conversation}>
-            {selectedGuide && (
-              <p className={style.selected_topic}>{selectedGuide.label}</p>
-            )}
-            <div className={style.message}>
-              <p className={style.speaker}>J.K.教授</p>
-              <ContactDialogueText
-                key={`${conversationSession}-${stage}-${selectedGuide?.id ?? "none"}`}
-                text={currentMessage}
-                animationDelay={CONTACT_DIALOGUE_CHARACTER_DELAY_MS}
-                onComplete={() => setIsMessageComplete(true)}
-              />
-            </div>
-
-            {isMessageComplete && (
-              <div className={style.choices}>
-                {currentStep.supplement === "selected-guide-hints"
-                  && selectedGuide && (
-                    <ContactGuideHintList hints={selectedGuide.hints} />
-                  )}
-                {currentStep.choices.map((choice, index) => (
-                  <ContactGuideChoiceButton
-                    key={choice.id}
-                    label={choice.label}
-                    variant={choice.variant}
-                    revealDelay={index * 60}
-                    onClick={() => handleChoice(choice.action)}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
+        <h2 id="contact-guide-title" className={style.visually_hidden}>
+          J.K.教授へのお問い合わせ相談
+        </h2>
+        <DialogueScreen
+          key={`${conversationSession}-${stage}-${selectedGuide?.id ?? "none"}`}
+          scene={scenes[stage]}
+          animationDelay={CONTACT_DIALOGUE_CHARACTER_DELAY_MS}
+        />
       </dialog>
     </>
   )
