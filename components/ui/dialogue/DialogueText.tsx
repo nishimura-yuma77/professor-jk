@@ -1,19 +1,19 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import style from "@/styles/feature/contact/ContactDialogueText.module.scss"
+import style from "@/styles/ui/dialogue/DialogueText.module.scss"
 
-type ContactDialogueTextProps = {
+type DialogueTextProps = {
   text: string
   animationDelay?: number
   onComplete: () => void
 }
 
-export default function ContactDialogueText({
+export default function DialogueText({
   text,
   animationDelay = 35,
   onComplete,
-}: ContactDialogueTextProps) {
+}: DialogueTextProps) {
   const [visibleLength, setVisibleLength] = useState(0)
   const [hasAdvanced, setHasAdvanced] = useState(false)
 

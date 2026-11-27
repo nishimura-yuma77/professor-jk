@@ -1,20 +1,20 @@
 import type { CSSProperties } from "react"
-import type { ContactGuideChoiceVariant } from "@/const/contactGuide"
-import style from "@/styles/feature/contact/ContactGuideChoiceButton.module.scss"
+import type { DialogueChoice } from "@/components/ui/dialogue/DialogueScreen"
+import style from "@/styles/ui/dialogue/DialogueChoiceButton.module.scss"
 
-type ContactGuideChoiceButtonProps = {
+type DialogueChoiceButtonProps = {
   label: string
-  variant: ContactGuideChoiceVariant
+  variant?: DialogueChoice["variant"]
   revealDelay: number
   onClick: () => void
 }
 
-export default function ContactGuideChoiceButton({
+export default function DialogueChoiceButton({
   label,
   variant,
   revealDelay,
   onClick,
-}: ContactGuideChoiceButtonProps) {
+}: DialogueChoiceButtonProps) {
   return (
     <button
       type="button"
